@@ -1,0 +1,11 @@
+.spread {
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.spread footer,
+.spread header {
+  padding-block: 1rem;
+}

@@ -1,0 +1,31 @@
+a {
+  color: var(--blue);
+}
+
+a:hover,
+a:focus {
+  color: var(--blue-hover);
+}
+
+a:visited {
+  color: var(--purple);
+}
+
+a:visited:hover,
+a:visited:focus {
+  color: var(--purple-hover);
+}
+
+.nav-link,
+.nav-link:visited {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:visited:hover,
+.nav-link:visited:focus {
+  color: var(--blue-hover);
+  text-decoration: underline;
+}
