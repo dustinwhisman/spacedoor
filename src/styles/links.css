@@ -8,12 +8,12 @@ a:focus {
 }
 
 a:visited {
-  color: var(--purple);
+  color: var(--blue);
 }
 
 a:visited:hover,
 a:visited:focus {
-  color: var(--purple-hover);
+  color: var(--blue-hover);
 }
 
 .nav-link,
