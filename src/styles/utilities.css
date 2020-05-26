@@ -1,3 +1,7 @@
 .justify-content\:space-between {
   justify-content: space-between;
 }
+
+.font-style\:italic {
+  font-style: italic;
+}
