@@ -76,3 +76,7 @@ p,
 li {
   max-width: 60ch;
 }
+
+li {
+  margin-block: calc(var(--default-size) / 4);
+}
