@@ -21,6 +21,7 @@ module.exports = function(eleventyConfig) {
     ],
   });
 
+  eleventyConfig.addPassthroughCopy('src/robots.txt');
   // eleventyConfig.addPassthroughCopy('favicon.svg');
   // eleventyConfig.addPassthroughCopy('favicon.ico');
 
