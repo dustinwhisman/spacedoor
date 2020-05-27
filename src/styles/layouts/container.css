@@ -1,5 +1,5 @@
 .container {
-  width: calc(100vw - 2rem);
-  max-width: 50rem;
+  width: calc(100vw - 1rem);
+  max-width: 60ch;
   margin-inline: auto;
 }

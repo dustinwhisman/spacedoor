@@ -21,7 +21,7 @@
   color: var(--text-color);
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-weight: var(--font-weight);
-  font-size: calc(1em + 0.333vw);
+  font-size: calc(1em + 0.2vw);
   line-height: var(--ratio);
 }
 
@@ -48,27 +48,27 @@ h6 {
   max-width: 60ch;
 }
 
-h1 {
+h1, .h1 {
   font-size: calc(var(--h1));
 }
 
-h2 {
+h2, .h2 {
   font-size: calc(var(--h2));
 }
 
-h3 {
+h3, .h3 {
   font-size: calc(var(--h3));
 }
 
-h4 {
+h4, .h4 {
   font-size: calc(var(--h4));
 }
 
-h5 {
+h5, .h5 {
   font-size: calc(var(--h5));
 }
 
-h6 {
+h6, .h6 {
   font-size: calc(var(--h6));
 }
 

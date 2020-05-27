@@ -16,7 +16,9 @@ title: Spacedoor
     <div class="container spread">
       {% include 'header.njk' %}
       <main>
-        {{ content | safe }}
+        <article>
+          {{ content | safe }}
+        </article>
       </main>
       {% include 'footer.njk' %}
     </div>
