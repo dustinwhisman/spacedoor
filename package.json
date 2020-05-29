@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npx @11ty/eleventy --serve\" \"postcss src/styles/index.css -o dist/styles.css -w\"",
-    "build": "npx @11ty/eleventy && postcss src/styles/index.css -o dist/styles.css"
+    "dev": "concurrently \"postcss src/styles/index.css -o src/_includes/styles.css -w\" \"npx @11ty/eleventy --serve\"",
+    "build": "postcss src/styles/index.css -o src/_includes/styles.css && npx @11ty/eleventy"
   },
   "keywords": [],
   "author": "",
