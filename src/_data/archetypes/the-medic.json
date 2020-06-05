@@ -114,5 +114,16 @@
     "This explorer refuses to take your advice",
     "You saved this explorer's life multiple times",
     "This explorer was exposed to an alien pathogen and their physiology seems changed, somehow"
+  ],
+  "improvements": [
+    "Get +1 Cool (max +3)",
+    "Get +1 Sharp (max +2)",
+    "Get +1 Tough (max +2)",
+    "Get +1 Technobabble (max +2)",
+    "Take another Medic move",
+    "Take another Medic move",
+    "Gain an ally",
+    "Take a move from another archetype",
+    "Take a move from another archetype"
   ]
 }

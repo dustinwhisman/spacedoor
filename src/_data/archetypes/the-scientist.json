@@ -115,5 +115,16 @@
     "This explorer saved your life",
     "This explorer somehow always manages to destroy your samples or screw up your research",
     "This explorer always wants to be the first to try out new things that you develop"
+  ],
+  "improvements": [
+    "Get +1 Sharp (max +3)",
+    "Get +1 Charm (max +2)",
+    "Get +1 Cool (max +2)",
+    "Get +1 Technobabble (max +2)",
+    "Take another Scientist move",
+    "Take another Scientist move",
+    "Gain an ally",
+    "Take a move from another archetype",
+    "Take a move from another archetype"
   ]
 }

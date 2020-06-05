@@ -126,5 +126,16 @@
     "This explorer considers you a mentor and looks up to you",
     "This explorer thinks you're unqualified for your job",
     "This explorer is inexperienced with violence, and needs to be babysat during combat"
+  ],
+  "improvements": [
+    "Get +1 Cool (max +3)",
+    "Get +1 Charm (max +2)",
+    "Get +1 Sharp (max +2)",
+    "Get +1 Tough (max +2)",
+    "Take another Colonel move",
+    "Take another Colonel move",
+    "Gain a team for backup and support",
+    "Take a move from another archetype",
+    "Take a move from another archetype"
   ]
 }

@@ -113,5 +113,15 @@
     "This explorer is afraid of you",
     "This explorer is constantly trying to feel your muscles",
     "This explorer doesn't fully trust you"
+  ],
+  "improvements": [
+    "Get +1 Tough (max +3)",
+    "Get +1 Cool (max +2)",
+    "Get +1 Charm (max +2)",
+    "Take another Muscle move",
+    "Take another Muscle move",
+    "Gain an ally",
+    "Take a move from another archetype",
+    "Take a move from another archetype"
   ]
 }

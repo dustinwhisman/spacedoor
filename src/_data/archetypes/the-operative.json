@@ -125,5 +125,16 @@
     "This explorer is afraid of you",
     "This explorer is weirdly more violent than you are",
     "This explorer slows you down"
+  ],
+  "improvements": [
+    "Get +1 Cool (max +3)",
+    "Get +1 Charm (max +2)",
+    "Get +1 Sharp (max +2)",
+    "Get +1 Tough (max +2)",
+    "Take another Operative move",
+    "Take another Operative move",
+    "Gain an ally",
+    "Take a move from another archetype",
+    "Take a move from another archetype"
   ]
 }

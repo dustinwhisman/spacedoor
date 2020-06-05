@@ -120,5 +120,16 @@
     "This explorer recommended you for this job",
     "This explorer is a mentor to you",
     "This explorer saved your life"
+  ],
+  "improvements": [
+    "Get +1 Sharp (max +3)",
+    "Get +1 Charm (max +2)",
+    "Get +1 Tough (max +2)",
+    "Get +1 Technobabble (max +2)",
+    "Take another Scholar move",
+    "Take another Scholar move",
+    "Gain an ally",
+    "Take a move from another archetype",
+    "Take a move from another archetype"
   ]
 }
