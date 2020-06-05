@@ -4,7 +4,7 @@ pagination:
   data: archetypes
   size: 1
   alias: archetype
-permalink: archetypes/test/{{ archetype.permalink }}/index.html
+permalink: archetypes/{{ archetype.permalink }}/index.html
 renderData:
   title: "{{ archetype.name }}"
 ---
@@ -16,7 +16,7 @@ renderData:
   <ul>
     {% for archetype in archetypes %}
       <li>
-        <a href="/archetypes/test/{{ archetype.permalink }}">
+        <a href="/archetypes/{{ archetype.permalink }}">
           {{ archetype.name }}
         </a>
       </li>
@@ -127,8 +127,8 @@ renderData:
     introductions together.
   </p>
   <p>
-    Go around the group. On your turn, introduce your Alien by name and look,
-    and tell the group what they know about you.
+    Go around the group. On your turn, introduce your {{ archetype.shorthand }}
+    by name and look, and tell the group what they know about you.
   </p>
 
   <h4>
