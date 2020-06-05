@@ -23,7 +23,14 @@ description: Rules for playing Spacedoor, a space exploration tabletop RPG adapt
           {{ content | safe }}
         </article>
       </main>
-      {% include 'footer.njk' %}
     </div>
+
+    {% if env.environment == 'production' %}
+      <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js');
+        }
+      </script>
+    {% endif %}
   </body>
 </html>
