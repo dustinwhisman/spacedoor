@@ -97,5 +97,16 @@
         "candies and treats from home that you can use to ingratiate yourself to the locals"
       ]
     }
+  ],
+  "histories": [
+    "This explorer used to work with you before",
+    "You had to put out some fires because of this explorer's actions in the past",
+    "This explorer saved your life",
+    "You made a deal with this explorer's sworn enemy",
+    "This explorer gets frustrated with negotiations and wants to blow things up all the time",
+    "You negotiated peace, keeping this explorer out of harm's way",
+    "This explorer considers you a mentor and looks up to you ",
+    "This explorer thinks you're unqualified for your job",
+    "This explorer has a terrible poker face and needs to be kept away from negotiations"
   ]
 }

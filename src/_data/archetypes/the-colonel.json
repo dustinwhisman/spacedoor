@@ -115,5 +115,16 @@
         "plant, then detonate from a safe distance"
       ]
     }
+  ],
+  "histories": [
+    "This explorer trained under you a long time ago",
+    "This explorer questions your leadership whenever hard choices need to be made",
+    "You saved this explorer's life",
+    "You made a decision that led to the death of someone this explorer cared for",
+    "This explorer has a tendency to not follow your orders",
+    "This explorer outranks you",
+    "This explorer considers you a mentor and looks up to you",
+    "This explorer thinks you're unqualified for your job",
+    "This explorer is inexperienced with violence, and needs to be babysat during combat"
   ]
 }

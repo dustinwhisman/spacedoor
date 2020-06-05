@@ -115,5 +115,15 @@
         "plant, then detonate from a safe distance"
       ]
     }
+  ],
+  "histories": [
+    "This explorer trained under you a long time ago",
+    "This explorer disapproves of your methods",
+    "You saved this explorer's life",
+    "Someone this explorer cared for died as collateral damage from one of your operations",
+    "This explorer has a tendency to ruin your plans",
+    "This explorer is afraid of you",
+    "This explorer is weirdly more violent than you are",
+    "This explorer slows you down"
   ]
 }

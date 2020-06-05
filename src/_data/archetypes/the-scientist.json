@@ -104,5 +104,16 @@
         "take apart or repair complex equipment in the field"
       ]
     }
+  ],
+  "histories": [
+    "This explorer is intimidated by your intellect",
+    "This explorer doesn't understand half of what you say, but plays along",
+    "This explorer almost died as a result of one of your experiments",
+    "This explorer only cares about science that advances weapons and defenses",
+    "This explorer took one of your classes in college",
+    "This explorer recommended you for this job",
+    "This explorer saved your life",
+    "This explorer somehow always manages to destroy your samples or screw up your research",
+    "This explorer always wants to be the first to try out new things that you develop"
   ]
 }

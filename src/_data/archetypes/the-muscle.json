@@ -102,5 +102,16 @@
         "heal 1 more harm than normal from rest"
       ]
     }
+  ],
+  "histories": [
+    "You've done jobs with this explorer before",
+    "This explorer knows about your past, and is keeping a secret for you",
+    "You've had to rough this explorer up in the past",
+    "You trained with this explorer",
+    "You saved this explorer's life",
+    "You regularly train in some sort of martial arts with this explorer",
+    "This explorer is afraid of you",
+    "This explorer is constantly trying to feel your muscles",
+    "This explorer doesn't fully trust you"
   ]
 }

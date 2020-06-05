@@ -109,5 +109,16 @@
         "get a better look at clues, +1 investigate"
       ]
     }
+  ],
+  "histories": [
+    "You taught one of this explorer's classes in college",
+    "You were on the faculty of a university with this explorer",
+    "This explorer thinks you're useless for these kinds of missions",
+    "This explorer zones out when you talk for too long",
+    "This explorer unintentionally destroys priceless artifacts whenever they visit your office",
+    "This explorer speaks another language that you know",
+    "This explorer recommended you for this job",
+    "This explorer is a mentor to you",
+    "This explorer saved your life"
   ]
 }

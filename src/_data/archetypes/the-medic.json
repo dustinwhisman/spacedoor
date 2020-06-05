@@ -103,5 +103,16 @@
         "keep someone going even when severely injured"
       ]
     }
+  ],
+  "histories": [
+    "You were this explorer's doctor before joining the team",
+    "You are helping manage a chronic illness that this explorer has",
+    "You were unable to save someone that this explorer cared for",
+    "This explorer always wants to tough it out, which always makes things worse in the long run",
+    "This explorer is a hypochondriac, and you constantly have to convince them they aren't sick",
+    "This explorer is afraid of needles, hates going to the doctor",
+    "This explorer refuses to take your advice",
+    "You saved this explorer's life multiple times",
+    "This explorer was exposed to an alien pathogen and their physiology seems changed, somehow"
   ]
 }

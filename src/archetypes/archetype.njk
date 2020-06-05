@@ -126,4 +126,36 @@ renderData:
       </li>
     {% endfor %}
   </ul>
+
+
+  <h4>
+    Introductions
+  </h4>
+
+  <p>
+    When you get here, wait for everyone else to catch up so you can do your
+    introductions together.
+  </p>
+
+  <p>
+    Go around the group. On your turn, introduce your Alien by name and look,
+    and tell the group what they know about you.
+  </p>
+
+  <h4>
+    History
+  </h4>
+
+  <p>
+    Go around the group again. When it's your turn, pick one of each for the
+    other explorers.
+  </p>
+
+  <ul>
+    {% for history in archetype.histories %}
+      <li>
+        {{ history }}
+      </li>
+    {% endfor %}
+  </ul>
 </div>

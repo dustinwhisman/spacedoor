@@ -110,5 +110,16 @@
         "+1 act under pressure when fleeing"
       ]
     }
+  ],
+  "histories": [
+    "This explorer recommended you for this job",
+    "This explorer fought extremely hard to prevent you from getting this job",
+    "This explorer has saved your life too many times to count",
+    "This explorer is desperately trying to train you to be good at fighting",
+    "This explorer has way too much faith in your abilities",
+    "This explorer begrudgingly watches your back because the paperwork would be a pain in the ass if you died",
+    "You practically worship this explorer, and you wish you could be more like them",
+    "You somehow managed to save this explorer's life",
+    "You made a terrible mistake that almost got this explorer killed"
   ]
 }
