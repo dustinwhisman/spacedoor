@@ -9,6 +9,81 @@ renderData:
   title: "{{ archetype.name }}"
 ---
 
-<h2>
-  {{ archetype.name }}
-</h2>
+<div class="stack">
+  <h2>
+    Explorer Archetypes
+  </h2>
+
+  <ul>
+    {% for archetype in archetypes %}
+      <li>
+        <a href="/archetypes/test/{{ archetype.permalink }}">
+          {{ archetype.name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>
+    {{ archetype.name }}
+  </h3>
+
+  <p class="font-style:italic">
+    {{ archetype.description }}
+  </p>
+
+  <p>
+    To make your {{ archetype.shorthand }}, first pick a name, gender/pronouns,
+    age, and a general look. Then follow the instructions below to decide your
+    ratings, moves, and gear. Finally, introduce yourself and pick history. You
+    can build your own dossier if you have a lot of custom rules, or you can
+    print the standard version and fill in the blanks.
+  </p>
+
+  <div>
+    <a href="/dossiers/{{ archetype.permalink }}.pdf" download="{{ archetype.permalink }}.pdf">
+      {{ archetype.name }} Dossier (PDF)
+    </a>
+  </div>
+
+  <h4>
+    Ratings
+  </h4>
+
+  <p>
+    You have 5 boosts and 2 penalties that you must assign to your ratings, each
+    of which starts at 0. The maximum for any rating when making your explorer
+    is +2, and the minimum is -1.
+  </p>
+
+  <ul>
+    <li>
+      Charm
+    </li>
+    <li>
+      Cool
+    </li>
+    <li>
+      Sharp
+    </li>
+    <li>
+      Tough
+    </li>
+    <li>
+      Technobabble
+    </li>
+  </ul>
+
+  <h4>
+    Moves
+  </h4>
+
+  <p class="font-style:italic">
+    You get all the basic moves, plus three {{ archetype.shorthand }} moves.
+  </p>
+
+  <p class="font-style:italic">
+    Pick three of these:
+  </p>
+
+</div>
