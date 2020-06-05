@@ -2,5 +2,35 @@
   "name": "The Scientist",
   "permalink": "the-scientist",
   "description": "You're an expert in math, physics, chemistry, and biology. If anybody can reverse engineer advanced technologies, it's you. If there's a weird phenomenon that can be explained through scientific reasoning, you can figure it out faster than most.",
-  "shorthand": "Scientist"
+  "shorthand": "Scientist",
+  "moves": [
+    {
+      "name": "Anomalous readings",
+      "description": "Your equipment helps alert you when something isn't normal (+1 investigate, read a bad situation)"
+    },
+    {
+      "name": "Well, in theory...",
+      "description": "If someone suggest a crazy idea, you can usually figure out how to make it work (+1 reverse the polarity)"
+    },
+    {
+      "name": "Reverse engineering",
+      "description": "You can pick apart alien technology and figure out how it works (+1 investigate on technology)"
+    },
+    {
+      "name": "Scientific authority",
+      "description": "You can convince others that something good or bad will happen based on current evidence (+1 manipulate someone)"
+    },
+    {
+      "name": "Backseat driver",
+      "description": "You can walk someone through how to do technical tasks if you're not there (+1 help out)"
+    },
+    {
+      "name": "Mad scientist",
+      "description": "You've always got some crazy gadget that you cooked up in the lab that you can use in a pinch (+1 kick some ass, protect someone)"
+    },
+    {
+      "name": "Accuracy and precision",
+      "description": "When you're in the zone, you can do complicated tasks quickly and perfectly (when you successfully act under pressure, you get an automatic 12 on your next reverse the polarity roll)"
+    }
+  ]
 }

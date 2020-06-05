@@ -2,5 +2,35 @@
   "name": "The Medic",
   "permalink": "the-medic",
   "description": "Look, people are gonna get hurt. You may not be able to prevent it from happening, but you can do your best to patch them up when it does. You have decades of experience with traumatic injuries, and you are as prepared as anybody could possibly be for treating diseases caused by alien pathogens.",
-  "shorthand": "Medic"
+  "shorthand": "Medic",
+  "moves": [
+    {
+      "name": "Surgical precision",
+      "description": "You have steady hands even under great stress (+1 act under pressure)"
+    },
+    {
+      "name": "CPR Training",
+      "description": "You prevent other explorers from dying when they suffer a fatal amount of harm on a 10+ act under pressure roll"
+    },
+    {
+      "name": "Get them to the infirmary!",
+      "description": "You can protect someone by escorting them away from danger. You take no harm from successful protect someone rolls when doing this"
+    },
+    {
+      "name": "Combat medic",
+      "description": "You're not just a doctor, you've got some combat experience (+1 kick some ass)"
+    },
+    {
+      "name": "Safety net",
+      "description": "Other explorers can take bolder actions since you've got their back (+1 help out)"
+    },
+    {
+      "name": "Epidemiologist",
+      "description": "You can identify vectors of disease at a glance (+1 investigate, read a bad situation)"
+    },
+    {
+      "name": "Miracle of medicine",
+      "description": "Using what you've learned from alien technology and biology, you can create incredible medicines and treatments (+1 reverse the polarity)"
+    }
+  ]
 }

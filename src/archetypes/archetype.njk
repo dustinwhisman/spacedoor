@@ -86,4 +86,11 @@ renderData:
     Pick three of these:
   </p>
 
+  <ul>
+    {% for move in archetype.moves %}
+      <li>
+        <strong>{{ move.name }}</strong>: {{ move.description }}
+      </li>
+    {% endfor %}
+  </ul>
 </div>

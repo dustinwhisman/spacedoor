@@ -2,5 +2,35 @@
   "name": "The Scholar",
   "permalink": "the-scholar",
   "description": "You've studied ancient civilizations, religions, languages, and cultures for your whole professional career. You were made for first contact situations, and you can understand ruins, artifacts, and customs more quickly than anybody.",
-  "shorthand": "Scholar"
+  "shorthand": "Scholar",
+  "moves": [
+    {
+      "name": "Polyglot",
+      "description": "You speak dozens of languages, and you can learn new ones quickly (+1 investigate when studying alien writings)"
+    },
+    {
+      "name": "This seems familiar",
+      "description": "Your knowledge of mythology and religion helps you understand aliens masquerading as gods (+1 investigate, read a bad situation)"
+    },
+    {
+      "name": "Anthropologist",
+      "description": "You can deduce a lot about a society from its ruins (automatic 10 on investigate rolls in ruins)"
+    },
+    {
+      "name": "Archaeologist",
+      "description": "You can determine the purpose and meaning of artifacts with a bit of study (+1 investigate on tools and artifacts)"
+    },
+    {
+      "name": "Interpreter",
+      "description": "You can communicate with people that don't speak your language (+1 on all rolls when dealing with a language barrier)"
+    },
+    {
+      "name": "Capable",
+      "description": "Your work has taken you to some seedy underbellies, and you can handle yourself (+1 kick some ass, protect someone)"
+    },
+    {
+      "name": "Puzzle solver",
+      "description": "Your knowledge, combined with problem solving skills lets you figure out riddles, puzzles, and tests more easily than most (+1 act under pressure)"
+    }
+  ]
 }

@@ -2,5 +2,35 @@
   "name": "The Alien",
   "permalink": "the-alien",
   "description": "You're not from around here. For your own reasons, you've found common cause with the explorers from this world, and you will use your unique skills and physiology to help with their missions. Your knowledge of interstellar power dynamics is an invaluable asset to your team.",
-  "shorthand": "Alien"
+  "shorthand": "Alien",
+  "moves": [
+    {
+      "name": "Carapace",
+      "description": "You have a hard exoskeleton that acts as natural body armor. You always count as having 2 armor (this doesn't stack with other armor)"
+    },
+    {
+      "name": "Interstellar traveler",
+      "description": "You've been just about everywhere and know a little about most places you go (+1 to investigate)"
+    },
+    {
+      "name": "Regenerative healing",
+      "description": "You heal faster than humans. Healing actions restore 1 more harm than normal, and first aid counts as treatment for Unstable wounds"
+    },
+    {
+      "name": "Megamind",
+      "description": "Your vast intellect allows you to learn quickly and improvise with technology easily (+1 reverse the polarity)"
+    },
+    {
+      "name": "Charismatic megafauna",
+      "description": "You're incredibly cute and look as harmless as could be (+1 manipulate someone)"
+    },
+    {
+      "name": "Cybernetically enhanced",
+      "description": "You're part machine, augmenting your natural abilities or replacing damaged parts of your body (+1 act under pressure, kick some ass)"
+    },
+    {
+      "name": "Enhanced senses",
+      "description": "Your senses are much more honed than humans, due to your physiology (+1 read a bad situation)"
+    }
+  ]
 }

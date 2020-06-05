@@ -2,5 +2,35 @@
   "name": "The Diplomat",
   "permalink": "the-diplomat",
   "description": "Not every mission has to end with gunfire or a high speed getaway. You use your charm and your tact to defuse tense situations, win people over, and maintain relationships with your allies. You're a great negotiator, and you know how to get what you need through conversation.",
-  "shorthand": "Diplomat"
+  "shorthand": "Diplomat",
+  "moves": [
+    {
+      "name": "Calming touch",
+      "description": "You can diffuse tense interactions more easily than most (+1 act under pressure)"
+    },
+    {
+      "name": "Gesture of goodwill",
+      "description": "If you give something of value to someone, they are more likely to help you (a 7-9 is treated like 10+ manipulate someone)"
+    },
+    {
+      "name": "Carry a big stick",
+      "description": "If negotiations break down, you're prepared to defend yourself (+1 kick some ass, protect someone)"
+    },
+    {
+      "name": "Home field advantage",
+      "description": "If you are on your home planet, you have the upper hand in negotiations (+1 manipulate someone)"
+    },
+    {
+      "name": "Gentle approach",
+      "description": "Use empathy and compassion rather than intimidation to get information from people (+1 investigate, read a bad situation)"
+    },
+    {
+      "name": "Cooler heads",
+      "description": "Keeping calm has an effect on your allies (+1 help out)"
+    },
+    {
+      "name": "Tough negotiator",
+      "description": "Talk your way out of life or death situations (+1 act under pressure)"
+    }
+  ]
 }

@@ -2,5 +2,35 @@
   "name": "The Fish Out of Water",
   "permalink": "the-fish-out-of-water",
   "description": "You don't belong here. You may have passed the training, but you suspect there was some sort of mistake because you are so clearly not suited for this. You have some sort of expertise that is useful, but it doesn't justify your presence in an elite exploration team representing your planet.",
-  "shorthand": "Fish Out of Water"
+  "shorthand": "Fish Out of Water",
+  "moves": [
+    {
+      "name": "Lucky bastard",
+      "description": "You regain a Luck point every time you get 10+ on a roll"
+    },
+    {
+      "name": "Pitiful",
+      "description": "Bad guys feel bad attacking you, so they prefer to target your allies instead"
+    },
+    {
+      "name": "Is this important?",
+      "description": "When other explorers are investigating, you stumble into something important, but misidentify it"
+    },
+    {
+      "name": "Behind you!",
+      "description": "When an ally is protecting you, you help them by calling out the locations of bad guys (+1 help out while being protected)"
+    },
+    {
+      "name": "I've got a bad feeling about this",
+      "description": "Mark experience any time you get 10+ on read a bad situation rolls"
+    },
+    {
+      "name": "Time to shine",
+      "description": "Whenever you are separated from the group, you get +1 to all rolls"
+    },
+    {
+      "name": "Underdog",
+      "description": "Once per mission, get an automatic 12 on a kick some ass roll"
+    }
+  ]
 }
