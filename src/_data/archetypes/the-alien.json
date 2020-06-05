@@ -32,5 +32,50 @@
       "name": "Enhanced senses",
       "description": "Your senses are much more honed than humans, due to your physiology (+1 read a bad situation)"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Claws, spines, or fangs",
+      "tags": [
+        "1 harm",
+        "hand",
+        "messy"
+      ]
+    },
+    {
+      "name": "Energy sword",
+      "tags": [
+        "2 harm",
+        "close",
+        "energy",
+        "quick"
+      ]
+    },
+    {
+      "name": "Energy rifle",
+      "tags": [
+        "3 harm",
+        "far",
+        "energy",
+        "slow"
+      ]
+    },
+    {
+      "name": "Staff weapon",
+      "tags": [
+        "2 harm",
+        "close",
+        "balanced"
+      ]
+    },
+    {
+      "name": "Stun gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "quick",
+        "stun"
+      ]
+    }
   ]
 }

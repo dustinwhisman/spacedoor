@@ -32,5 +32,43 @@
       "name": "Accuracy and precision",
       "description": "When you're in the zone, you can do complicated tasks quickly and perfectly (when you successfully act under pressure, you get an automatic 12 on your next reverse the polarity roll)"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Submachine gun",
+      "tags": [
+        "3 harm",
+        "close",
+        "area",
+        "loud",
+        "reload"
+      ]
+    },
+    {
+      "name": "Stun gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun"
+      ]
+    },
+    {
+      "name": "Core sample drill",
+      "tags": [
+        "2 harm",
+        "close",
+        "slow",
+        "messy"
+      ]
+    },
+    {
+      "name": "Tranquilizer gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun",
+        "useful"
+      ]
+    }
   ]
 }

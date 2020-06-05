@@ -93,4 +93,25 @@ renderData:
       </li>
     {% endfor %}
   </ul>
+
+  <h4>
+    Gear
+  </h4>
+
+  <p class="font-style:italic">
+    You get a standard issue sidearm: 9mm handgun (2 harm, close, loud, reload).
+    Then you may pick a serious weapon and either armor or special equipment.
+  </p>
+
+  <p class="font-style:italic">
+    Serious weapons (pick one):
+  </p>
+
+  <ul>
+    {% for weapon in archetype.weapons %}
+      <li>
+        {{ weapon.name }} ({{ weapon.tags.join(', ') }})
+      </li>
+    {% endfor %}
+  </ul>
 </div>

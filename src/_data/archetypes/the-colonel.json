@@ -32,5 +32,54 @@
       "name": "Natural leader",
       "description": "Your leadership ability helps your team perform up to their potential (+1 help out)"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Submachine gun",
+      "tags": [
+        "3 harm",
+        "close",
+        "area",
+        "loud",
+        "reload"
+      ]
+    },
+    {
+      "name": "Assault rifle",
+      "tags": [
+        "3 harm",
+        "far",
+        "area",
+        "loud",
+        "reload"
+      ]
+    },
+    {
+      "name": "Grenades",
+      "tags": [
+        "2 harm",
+        "close",
+        "area",
+        "loud",
+        "many"
+      ]
+    },
+    {
+      "name": "Sniper rifle",
+      "tags": [
+        "4 harm",
+        "far",
+        "slow",
+        "reload"
+      ]
+    },
+    {
+      "name": "Tactical knife",
+      "tags": [
+        "1 harm",
+        "hand",
+        "quick"
+      ]
+    }
   ]
 }

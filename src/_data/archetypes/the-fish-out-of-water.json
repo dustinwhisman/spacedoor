@@ -32,5 +32,49 @@
       "name": "Underdog",
       "description": "Once per mission, get an automatic 12 on a kick some ass roll"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Stun gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun"
+      ]
+    },
+    {
+      "name": "Net launcher",
+      "tags": [
+        "1 harm",
+        "close",
+        "restraining"
+      ]
+    },
+    {
+      "name": "Pocket knife",
+      "tags": [
+        "1 harm",
+        "intimate",
+        "innocuous",
+        "useful"
+      ]
+    },
+    {
+      "name": "Walking stick",
+      "tags": [
+        "1 harm",
+        "close",
+        "balanced",
+        "useful"
+      ]
+    },
+    {
+      "name": "Pepper spray",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun"
+      ]
+    }
   ]
 }

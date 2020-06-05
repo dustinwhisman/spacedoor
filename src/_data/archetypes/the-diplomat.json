@@ -32,5 +32,42 @@
       "name": "Tough negotiator",
       "description": "Talk your way out of life or death situations (+1 act under pressure)"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Hidden dagger",
+      "tags": [
+        "1 harm",
+        "intimate",
+        "quick",
+        "small"
+      ]
+    },
+    {
+      "name": "Stun gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun"
+      ]
+    },
+    {
+      "name": "Cane",
+      "tags": [
+        "1 harm",
+        "close",
+        "balanced",
+        "useful"
+      ]
+    },
+    {
+      "name": "Poison drops",
+      "tags": [
+        "3 harm",
+        "intimate",
+        "innocuous",
+        "many"
+      ]
+    }
   ]
 }

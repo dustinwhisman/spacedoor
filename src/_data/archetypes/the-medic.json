@@ -32,5 +32,42 @@
       "name": "Miracle of medicine",
       "description": "Using what you've learned from alien technology and biology, you can create incredible medicines and treatments (+1 reverse the polarity)"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Stun gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun"
+      ]
+    },
+    {
+      "name": "Submachine gun",
+      "tags": [
+        "3 harm",
+        "close",
+        "area",
+        "loud",
+        "reload"
+      ]
+    },
+    {
+      "name": "Bone saw",
+      "tags": [
+        "2 harm",
+        "hand",
+        "messy"
+      ]
+    },
+    {
+      "name": "Tranquilizer gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun",
+        "useful"
+      ]
+    }
   ]
 }

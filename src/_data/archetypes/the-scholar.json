@@ -32,5 +32,48 @@
       "name": "Puzzle solver",
       "description": "Your knowledge, combined with problem solving skills lets you figure out riddles, puzzles, and tests more easily than most (+1 act under pressure)"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Ceremonial dagger",
+      "tags": [
+        "1 harm",
+        "hand",
+        "innocuous",
+        "valuable"
+      ]
+    },
+    {
+      "name": "Bull whip",
+      "tags": [
+        "2 harm",
+        "close",
+        "useful"
+      ]
+    },
+    {
+      "name": "Stun gun",
+      "tags": [
+        "1 harm",
+        "close",
+        "stun"
+      ]
+    },
+    {
+      "name": "Hammer and chisel",
+      "tags": [
+        "1 harm",
+        "hand",
+        "useful"
+      ]
+    },
+    {
+      "name": "Shovel",
+      "tags": [
+        "2 harm",
+        "close",
+        "useful"
+      ]
+    }
   ]
 }

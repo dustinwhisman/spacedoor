@@ -32,5 +32,53 @@
       "name": "Battle sense",
       "description": "You've been in enough fights to see how they're going to go (+1 read a bad situation)"
     }
+  ],
+  "weapons": [
+    {
+      "name": "Shotgun",
+      "tags": [
+        "3 harm",
+        "close",
+        "loud",
+        "reload"
+      ]
+    },
+    {
+      "name": "Submachine gun",
+      "tags": [
+        "3 harm",
+        "close",
+        "area",
+        "loud",
+        "reload"
+      ]
+    },
+    {
+      "name": "Grenades",
+      "tags": [
+        "2 harm",
+        "close",
+        "area",
+        "loud",
+        "many"
+      ]
+    },
+    {
+      "name": "Brass knuckles",
+      "tags": [
+        "2 harm",
+        "hand",
+        "quick"
+      ]
+    },
+    {
+      "name": "Throwing knives",
+      "tags": [
+        "2 harm",
+        "close",
+        "quick",
+        "many"
+      ]
+    }
   ]
 }
