@@ -188,4 +188,20 @@ renderData:
       </li>
     {% endfor %}
   </ul>
+
+  <h5>
+    Advanced Improvements
+  </h5>
+  <p>
+    Once you have leveled up 5 times, you may pick options from the Advanced
+    Improvements list.
+  </p>
+
+  <ul>
+    {% for improvement in archetype.advancedImprovements %}
+      <li>
+        {{ improvement }}
+      </li>
+    {% endfor %}
+  </ul>
 </div>

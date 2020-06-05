@@ -131,5 +131,14 @@
     "Gain an ally",
     "Take a move from another archetype",
     "Take a move from another archetype"
+  ],
+  "advancedImprovements": [
+    "Get +1 to any rating (max +3)",
+    "Get back one used Luck point",
+    "Change this explorer to a new type",
+    "Create a second explorer to play in addition to this one",
+    "Mark two of the basic moves as advanced",
+    "Mark another two of the basic moves as advanced",
+    "Retire this explorer"
   ]
 }
