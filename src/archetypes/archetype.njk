@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: archetypes
+  size: 1
+  alias: archetype
+permalink: archetypes/test/{{ archetype.permalink }}/index.html
+renderData:
+  title: "{{ archetype.name }}"
+---
+
+<h2>
+  {{ archetype.name }}
+</h2>

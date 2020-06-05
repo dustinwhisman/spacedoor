@@ -7,6 +7,11 @@ layout: layouts/base.njk
   <h2>
     Explorer Archetypes
   </h2>
+
+  {% for archetype in archetypes %}
+    <p>{{ archetype.name }}</p>
+  {% endfor %}
+
   <p>
     There are a handful of explorer archetypes that players can choose to play
     as, although the options are not limited to this list. If you have an
