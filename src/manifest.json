@@ -1,0 +1,10 @@
+{
+  "short_name": "Spacedoor",
+  "name": "Spacedoor",
+  "description": "Rules for playing Spacedoor, a space exploration tabletop RPG adapted from Monster of the week",
+  "start_url": "/",
+  "background_color": "#202020",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#202020"
+}

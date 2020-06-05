@@ -25,6 +25,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/favicon.ico');
   eleventyConfig.addPassthroughCopy('src/dossiers/*');
   eleventyConfig.addPassthroughCopy('src/service-worker.js');
+  eleventyConfig.addPassthroughCopy('src/manifest.json');
 
   return {
     dir: {
