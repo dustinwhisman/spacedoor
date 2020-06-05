@@ -77,5 +77,39 @@
         "stun"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Long range communicators",
+      "tags": [
+        "send messages across vast distances"
+      ]
+    },
+    {
+      "name": "Cloaking device",
+      "tags": [
+        "appear invisible while stationary, can be detected while moving"
+      ]
+    },
+    {
+      "name": "Force shield",
+      "tags": [
+        "put up a barrier that can absorb 3 harm before deactivating"
+      ]
+    }
   ]
 }

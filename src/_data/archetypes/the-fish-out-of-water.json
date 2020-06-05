@@ -76,5 +76,39 @@
         "stun"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Camouflage",
+      "tags": [
+        "hide in the woods if things get too real"
+      ]
+    },
+    {
+      "name": "Camera",
+      "tags": [
+        "document things that you discover"
+      ]
+    },
+    {
+      "name": "Orthopedic shoes",
+      "tags": [
+        "+1 act under pressure when fleeing"
+      ]
+    }
   ]
 }

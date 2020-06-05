@@ -69,5 +69,33 @@
         "many"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Listening device",
+      "tags": [
+        "listen to conversations at a distance"
+      ]
+    },
+    {
+      "name": "Box of goodies",
+      "tags": [
+        "candies and treats from home that you can use to ingratiate yourself to the locals"
+      ]
+    }
   ]
 }

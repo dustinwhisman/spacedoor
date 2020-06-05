@@ -70,5 +70,39 @@
         "useful"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Geiger counter",
+      "tags": [
+        "be alerted when radiation starts getting severe"
+      ]
+    },
+    {
+      "name": "Microscope",
+      "tags": [
+        "study alien biology and minerals in the field"
+      ]
+    },
+    {
+      "name": "Advanced toolkit",
+      "tags": [
+        "take apart or repair complex equipment in the field"
+      ]
+    }
   ]
 }

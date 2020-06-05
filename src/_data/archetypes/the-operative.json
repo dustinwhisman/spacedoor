@@ -81,5 +81,39 @@
         "quick"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Night vision goggles",
+      "tags": [
+        "+1 investigate, read a bad situation in the dark"
+      ]
+    },
+    {
+      "name": "Binoculars",
+      "tags": [
+        "+1 investigate, read a bad situation at a distance"
+      ]
+    },
+    {
+      "name": "Plastic explosives",
+      "tags": [
+        "plant, then detonate from a safe distance"
+      ]
+    }
   ]
 }

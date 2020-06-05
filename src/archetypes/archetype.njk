@@ -114,4 +114,16 @@ renderData:
       </li>
     {% endfor %}
   </ul>
+
+  <p class="font-style:italic">
+    Armor and special equipment (pick one):
+  </p>
+
+  <ul>
+    {% for item in archetype.items %}
+      <li>
+        {{ item.name }} ({{ item.tags.join(', ') }})
+      </li>
+    {% endfor %}
+  </ul>
 </div>

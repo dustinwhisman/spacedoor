@@ -80,5 +80,27 @@
         "many"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Extra rations",
+      "tags": [
+        "heal 1 more harm than normal from rest"
+      ]
+    }
   ]
 }

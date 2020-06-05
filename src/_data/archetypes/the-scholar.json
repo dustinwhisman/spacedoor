@@ -75,5 +75,39 @@
         "useful"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Sonar system",
+      "tags": [
+        "find ruins/artifacts buried underground or underwater"
+      ]
+    },
+    {
+      "name": "Codex",
+      "tags": [
+        "cross reference languages, myths, and religious texts quickly"
+      ]
+    },
+    {
+      "name": "Magnifying glass",
+      "tags": [
+        "get a better look at clues, +1 investigate"
+      ]
+    }
   ]
 }

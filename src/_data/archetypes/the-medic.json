@@ -69,5 +69,39 @@
         "useful"
       ]
     }
+  ],
+  "items": [
+    {
+      "name": "Flak jacket",
+      "tags": [
+        "2 armor",
+        "heavy"
+      ]
+    },
+    {
+      "name": "Protective vest",
+      "tags": [
+        "1 armor",
+        "light"
+      ]
+    },
+    {
+      "name": "Defibrillator",
+      "tags": [
+        "bring someone back from the brink of death"
+      ]
+    },
+    {
+      "name": "Surgical tools",
+      "tags": [
+        "treat unstable wounds in the field"
+      ]
+    },
+    {
+      "name": "Adrenaline shots",
+      "tags": [
+        "keep someone going even when severely injured"
+      ]
+    }
   ]
 }
