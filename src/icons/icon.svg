@@ -1,0 +1,16 @@
+
+<svg width="232px" height="208px" viewBox="0 0 232 208" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="50%" id="radialGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.5" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+        </radialGradient>
+        <polygon id="path-2" points="116 8 199.138439 56 199.138439 152 116 200 32.8615612 152 32.8615612 56"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linejoin="round">
+        <g id="Polygon" fill-rule="nonzero" transform="translate(116.000000, 104.000000) rotate(90.000000) translate(-116.000000, -104.000000) ">
+            <use fill="#3BA2A1" xlink:href="#path-2"></use>
+            <path stroke="#737373" stroke-width="20" d="M116,-3.54700538 L209.138439,50.2264973 L209.138439,157.773503 L116,211.547005 L22.8615612,157.773503 L22.8615612,50.2264973 L116,-3.54700538 Z" fill-opacity="0.65" fill="url(#radialGradient-1)" fill-rule="evenodd"></path>
+        </g>
+    </g>
+</svg>
