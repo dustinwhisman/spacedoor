@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@11ty/eleventy": "^0.11.0",
     "concurrently": "^5.2.0",
     "cssnano": "^4.1.10",
