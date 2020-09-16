@@ -17,6 +17,16 @@ layout: layouts/base.njk
     and feats that work for your concept.
   </p>
 
+  <ul>
+    {% for class in classes %}
+      <li>
+        <a href="/classes/{{ class.slug }}">
+          {{ class.Name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
   {% for class in classes %}
     <div>
       <h3>
@@ -24,20 +34,20 @@ layout: layouts/base.njk
           {{ class.Name }}
         </a>
       </h3>
+      <p>
+        {{ class.Description }}
+      </p>
       <ul>
         <li>
-          <b>Primary Stat:</b> {{ class['Primary Stat'] }}
+          Primary Stat: {{ class['Primary Stat'] }}
         </li>
         <li>
-          <b>Secondary Stat:</b> {{ class['Secondary Stat'] }}
+          Secondary Stat: {{ class['Secondary Stat'] }}
         </li>
         <li>
-          <b>Penalty Stat:</b> {{ class['Penalty'] }}
+          Penalty Stat: {{ class['Penalty'] }}
         </li>
       </ul>
-      <!-- <p>
-        {{ class.description }}
-      </p> -->
     </div>
   {% endfor %}
 </div>

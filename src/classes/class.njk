@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: classes
+  size: 1
+  alias: class
+permalink: classes/{{ class.slug }}/index.html
+renderData:
+  title: "{{ class.Name }}"
+---
+
+<div class="stack">
+  <h2>Classes</h2>
+  <ul>
+    {% for class in classes %}
+      <li>
+        <a href="/classs/{{ class.slug }}">
+          {{ class.Name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>
+    {{ class.Name }}
+  </h3>
+  <p>
+    {{ class.Description }}
+  </p>
+</div>

@@ -6,7 +6,7 @@ const base = new Airtable({
 
 module.exports = async () => {
   const records = await base('Classes').select({
-    fields: ['Name', 'Primary Stat', 'Secondary Stat', 'Penalty'],
+    fields: ['Name', 'Primary Stat', 'Secondary Stat', 'Penalty', 'Description'],
     sort: [{
       field: 'Name',
       direction: 'asc',
@@ -19,6 +19,5 @@ module.exports = async () => {
     shorthand: record.fields.Name.replace(/^The\s/, ''),
   }));
 
-  console.log(classes);
   return classes;
 };
