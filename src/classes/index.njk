@@ -1,0 +1,43 @@
+---
+title: Classes
+layout: layouts/base.njk
+---
+
+<div class="stack">
+  <h2>
+    Classes
+  </h2>
+  <p>
+    These are the official classes that players can choose to play as. Each
+    class has a primary stat, secondary stat, and penalty stat, and they each
+    have specific class feats that can be chosen as they level up. Each class
+    has subclass options, which give them specific abilities or restrictions
+    that help guide their actions in the game. If you want to paint outside the
+    lines and play as something else, work with your GM to come up with a class
+    and feats that work for your concept.
+  </p>
+
+  {% for class in classes %}
+    <div>
+      <h3>
+        <a href="/classes/{{ class.slug }}">
+          {{ class.Name }}
+        </a>
+      </h3>
+      <ul>
+        <li>
+          <b>Primary Stat:</b> {{ class['Primary Stat'] }}
+        </li>
+        <li>
+          <b>Secondary Stat:</b> {{ class['Secondary Stat'] }}
+        </li>
+        <li>
+          <b>Penalty Stat:</b> {{ class['Penalty'] }}
+        </li>
+      </ul>
+      <!-- <p>
+        {{ class.description }}
+      </p> -->
+    </div>
+  {% endfor %}
+</div>

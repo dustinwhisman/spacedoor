@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@11ty/eleventy": "^0.11.0",
+    "airtable": "^0.10.0",
     "concurrently": "^5.2.0",
     "cssnano": "^4.1.10",
+    "dotenv": "^8.2.0",
     "postcss-cli": "^7.1.1",
     "postcss-import": "^12.0.1",
     "postcss-preset-env": "^6.7.0"
