@@ -14,7 +14,7 @@ renderData:
   <ul>
     {% for class in classes %}
       <li>
-        <a href="/classs/{{ class.slug }}">
+        <a href="/classes/{{ class.slug }}">
           {{ class.Name }}
         </a>
       </li>
@@ -27,4 +27,31 @@ renderData:
   <p>
     {{ class.Description }}
   </p>
+  <ul>
+    <li>
+      Primary Stat: {{ class['Primary Stat'] }}
+    </li>
+    <li>
+      Secondary Stat: {{ class['Secondary Stat'] }}
+    </li>
+    <li>
+      Penalty Stat: {{ class['Penalty'] }}
+    </li>
+  </ul>
+
+  <h4>Subclasses</h4>
+  <p>
+    Choose a subclass for your character. Each subclass grants different
+    abilities restrictions, or mechanics that will affect your playstyle. Here
+    are the options for the {{ class.shorthand }} class.
+  </p>
+
+  {% for subclass in class.subclasses %}
+    <h5>
+      {{ subclass.Name }}
+    </h5>
+    <p>
+      {{ subclass.Description }}
+    </p>
+  {% endfor %}
 </div>
