@@ -1,0 +1,31 @@
+---
+title: General Feats
+layout: layouts/base.njk
+---
+
+<div class="stack">
+  <h2>General Feats</h2>
+  <p>
+    As you level up, you can choose to take class feats or general feats. Below
+    are the general feats that you can choose. You can choose each feat only
+    once, and you must meet the level requirements to take them.
+  </p>
+
+  {% for feat in feats %}
+    <div>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ feat.Name }}
+        </h4>
+        <p>
+          <small>
+            Level {{ feat.Level }}
+          </small>
+        </p>
+        <p>
+          {{ feat.Description }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
