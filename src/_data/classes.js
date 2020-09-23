@@ -6,7 +6,7 @@ const base = new Airtable({
 
 module.exports = async () => {
   const classRecords = await base('Classes').select({
-    fields: ['Name', 'Primary Stat', 'Secondary Stat', 'Penalty', 'Description', 'Subclasses'],
+    fields: ['Name', 'Primary Stat', 'Secondary Stat', 'Penalty', 'Description', 'Subclasses', 'Class Feats'],
     sort: [{
       field: 'Name',
       direction: 'asc',
@@ -23,12 +23,33 @@ module.exports = async () => {
       filterByFormula: `OR(${record.fields.Subclasses.map(r => `RECORD_ID()='${r}'`).join(',')})`,
     }).all();
 
+    let feats = [];
+    if (record.fields['Class Feats'] != null) {
+      feats = await base('Class Feats').select({
+        fields: ['Name', 'Level', 'Description'],
+        sort: [
+          {
+            field: 'Level',
+            direction: 'asc',
+          },
+          {
+            field: 'Name',
+            direction: 'asc',
+          },
+        ],
+        filterByFormula: `OR(${record.fields['Class Feats'].map(r => `RECORD_ID()='${r}'`).join(',')})`,
+      }).all();
+    }
+
     return {
       ...record.fields,
       slug: record.fields.Name.toLowerCase().replace(/\s/g, '-'),
       shorthand: record.fields.Name.replace(/^The\s/, ''),
       subclasses: subclasses.map((r) => ({
         ...r.fields
+      })),
+      feats: feats.map((r) => ({
+        ...r.fields,
       })),
     };
   }));

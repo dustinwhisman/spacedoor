@@ -21,9 +21,9 @@ renderData:
     {% endfor %}
   </ul>
 
-  <h3>
+  <h2>
     {{ class.Name }}
-  </h3>
+  </h2>
   <p>
     {{ class.Description }}
   </p>
@@ -39,7 +39,7 @@ renderData:
     </li>
   </ul>
 
-  <h4>Subclasses</h4>
+  <h3>Subclasses</h3>
   <p>
     Choose a subclass for your character. Each subclass grants different
     abilities restrictions, or mechanics that will affect your playstyle. Here
@@ -47,11 +47,35 @@ renderData:
   </p>
 
   {% for subclass in class.subclasses %}
-    <h5>
+    <h4>
       {{ subclass.Name }}
-    </h5>
+    </h4>
     <p>
       {{ subclass.Description }}
     </p>
+  {% endfor %}
+
+  <h3>Feats</h3>
+  <p>
+    As you level up, you can choose to take class feats or general feats. Below
+    are the class feats for the {{ class.shorthand }}.
+  </p>
+
+  {% for feat in class.feats %}
+    <div>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ feat.Name }}
+        </h4>
+        <p>
+          <small>
+            Level {{ feat.Level }}
+          </small>
+        </p>
+        <p>
+          {{ feat.Description }}
+        </p>
+    </div>
+  </div>
   {% endfor %}
 </div>
