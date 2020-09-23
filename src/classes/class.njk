@@ -1,5 +1,5 @@
 ---
-layout: layouts/base.njk
+layout: layouts/sidebar.njk
 pagination:
   data: classes
   size: 1
@@ -10,17 +10,6 @@ renderData:
 ---
 
 <div class="stack">
-  <h2>Classes</h2>
-  <ul>
-    {% for class in classes %}
-      <li>
-        <a href="/classes/{{ class.slug }}">
-          {{ class.Name }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
-
   <h2>
     {{ class.Name }}
   </h2>

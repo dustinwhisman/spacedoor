@@ -1,0 +1,95 @@
+---
+title: Spacedoor
+description: Rules for playing Spacedoor, a sci-fi space exploration tabletop RPG
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ renderData.title or title }} | Spacedoor</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#202020"/>
+    <link rel="apple-touch-icon" href="/icons/icon_192.png">
+    <style>
+      {% include "styles.css" %}
+    </style>
+  </head>
+  <body>
+    <div class="container spread" style="--max-width: 1200px">
+      <header>
+        <div class="cluster">
+          <div class="justify-content:space-between">
+            <h1 class="h3">
+              <a href="/" class="nav-link">
+                Spacedoor
+              </a>
+            </h1>
+            <!-- Anything added to the header should go in a nav > li element -->
+            <!-- <nav class="cluster">
+              <ul class="list-style:none">
+                <li>
+                  <a href="/how-to-play" class="nav-link">How to Play</a>
+                </li>
+                <li>
+                  <a href="/archetypes" class="nav-link">Explorer Archetypes</a>
+                </li>
+                <li>
+                  <a href="/keeper-info" class="nav-link">Keeper Info</a>
+                </li>
+              </ul>
+            </nav> -->
+          </div>
+        </div>
+      </header>
+
+      <main class="with-sidebar">
+        <div>
+          <aside>
+            <nav>
+              <ul class="stack list-style:none" style="--stack-space: 0.5rem">
+                <li>
+                  <a href="/armor">Armor</a>
+                </li>
+                <li>
+                  <a href="/weapons">Weapons</a>
+                </li>
+                <li>
+                  <a href="/feats">General Feats</a>
+                </li>
+                <li>
+                  <a href="/classes">Classes</a>
+                </li>
+                <li>
+                  <ul class="stack padding-inline-start:1em list-style:none" style="--stack-space: 0.5rem">
+                    {% for class in classes %}
+                      <li>
+                        <a href="/classes/{{ class.slug }}">
+                          {{ class.Name }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+          <article class="center">
+            {{ content | safe }}
+          </article>
+        </div>
+      </main>
+    </div>
+
+    {% if env.environment == 'production' %}
+      <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js');
+        }
+      </script>
+    {% endif %}
+  </body>
+</html>

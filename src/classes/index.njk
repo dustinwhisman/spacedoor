@@ -1,6 +1,6 @@
 ---
 title: Classes
-layout: layouts/base.njk
+layout: layouts/sidebar.njk
 ---
 
 <div class="stack">
@@ -16,16 +16,6 @@ layout: layouts/base.njk
     lines and play as something else, work with your GM to come up with a class
     and feats that work for your concept.
   </p>
-
-  <ul>
-    {% for class in classes %}
-      <li>
-        <a href="/classes/{{ class.slug }}">
-          {{ class.Name }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
 
   {% for class in classes %}
     <div>
