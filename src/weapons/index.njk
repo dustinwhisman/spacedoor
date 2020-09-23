@@ -1,0 +1,35 @@
+---
+title: Weapons
+layout: layouts/base.njk
+---
+
+<div class="stack">
+  <h2>Weapons</h2>
+  <p>
+    You may equip 2 weapons to use on each mission. Some weapons are available
+    for all characters to use, but others have required modifier bonuses. For
+    example, if your Cool bonus is only +1, you can't use a weapon that requires
+    a +2 Cool bonus. Some weapons also have limitations to watch out for, so
+    choose carefully.
+  </p>
+
+  {% for weapon in weapons %}
+    <div>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ weapon.Name }}
+        </h4>
+        {% if weapon.Modifier %}
+          <p>
+            <small>
+              +{{ weapon['Required Bonus'] }} {{ weapon.Modifier }}{% if weapon.Restrictions %}, {{ weapon.Restrictions }}{% endif %}
+            </small>
+          </p>
+        {% endif %}
+        <p>
+          {{ weapon.Description }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
