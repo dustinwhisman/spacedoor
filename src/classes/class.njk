@@ -69,7 +69,7 @@ renderData:
         </h4>
         <p>
           <small>
-            Level {{ feat.Level }}
+            Level {{ feat.Level }}{% for subclass in feat.subclasses %}, {{ subclass }}{% endfor %}
           </small>
         </p>
         <p>
