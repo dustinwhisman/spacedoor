@@ -16,6 +16,10 @@ module.exports = async () => {
   const classes = Promise.all(classRecords.map(async (record) => {
     const subclasses = await base('Subclasses').select({
       fields: ['Name', 'Description'],
+      sort: [{
+        field: 'Order',
+        direction: 'asc',
+      }],
       filterByFormula: `OR(${record.fields.Subclasses.map(r => `RECORD_ID()='${r}'`).join(',')})`,
     }).all();
 
