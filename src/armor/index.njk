@@ -1,0 +1,41 @@
+---
+title: Armor
+layout: layouts/base.njk
+---
+
+<div class="stack">
+  <h2>Armor</h2>
+  <p>
+    You may equip one piece of armor for each stat that has a +1 or more bonus.
+    The different stats have different kinds of armor that provide unique
+    benefits. As your stats get better, you get access to better versions of
+    armor.
+  </p>
+  <p>
+    Some types of armor offer either resistance or immunity to certain effects.
+    Mechanically speaking, resistance halves the negative effect, and immunity
+    fully prevents it. For example, resistance to blinding might mean that you
+    are blinded for half as long as you would have been otherwise, but immunity
+    would mean you avoid being blinded entirely.
+  </p>
+
+  {% for armor in armors %}
+    <div>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ armor.Name }}
+        </h4>
+        {% if armor.Modifier %}
+          <p>
+            <small>
+              +{{ armor['Required Bonus'] }} {{ armor.Modifier }}
+            </small>
+          </p>
+        {% endif %}
+        <p>
+          {{ armor.Description }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
