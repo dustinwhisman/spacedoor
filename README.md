@@ -1,7 +1,6 @@
 # Spacedoor
 
-This is a living document for the rules, archetypes, and recommendations for the
-Spacedoor RPG.
+This is an 11ty site built to handle rules for the Spacedoor RPG, version 2.
 
 ## Getting Started
 
