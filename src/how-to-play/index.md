@@ -31,7 +31,7 @@ layout: layouts/sidebar.njk
   - A character sheet to keep track of stats, health, luck, weapons, armor, and
     feats
   - Pencils and paper, or a notebook (or equivalent digital tools)
-  - A pair of 6 sided dice (or a digital dice roller) – Note: dice will commonly
+  - 2 or more 6 sided dice (or a digital dice roller) – Note: dice will commonly
     be referred to in a format like "2d6". The 2 represents the number of dice
     to roll, and the 6 represents how many sides the dice should have, so 2d6
     means to roll two six sided dice.
@@ -77,6 +77,20 @@ layout: layouts/sidebar.njk
   describing what happens as the result. There are other mechanics that can
   change this basic flow, such as during combat or as the result of a class
   feat, but that's essentially it.
+
+  ### Advantage and Disadvantage
+
+  At certain times, either from the Keeper's discretion or because of a feat or
+  character ability, players will roll with either advantage or disadvantage,
+  making rolls more or less likely to succeed, respectively.
+
+  When rolling with advantage, roll 3d6 and drop the lowest number rolled. For
+  example, if you rolled a 3, a 2, and a 6, you would drop the 2, leaving you
+  with a roll of 9.
+
+  When rolling with disadvantage, roll 3d6 and drop the highest number rolled.
+  That would change the result of the previous example to a 5, since the 6 would
+  have been dropped instead of the 2.
 
   ### Making Your Own Rules
 
