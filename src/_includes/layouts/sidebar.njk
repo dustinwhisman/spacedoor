@@ -29,71 +29,22 @@ description: Rules for playing Spacedoor, a sci-fi space exploration tabletop RP
               </a>
             </h1>
             <!-- Anything added to the header should go in a nav > li element -->
-            <!-- <nav class="cluster">
+            <nav class="cluster menu-link">
               <ul class="list-style:none">
                 <li>
-                  <a href="/how-to-play" class="nav-link">How to Play</a>
-                </li>
-                <li>
-                  <a href="/archetypes" class="nav-link">Explorer Archetypes</a>
-                </li>
-                <li>
-                  <a href="/keeper-info" class="nav-link">Keeper Info</a>
+                  <a href="/menu" class="nav-link">Menu</a>
                 </li>
               </ul>
-            </nav> -->
+            </nav>
           </div>
         </div>
       </header>
 
       <main class="with-sidebar">
         <div>
-          <aside>
+          <aside class="nav-sidebar">
             <nav>
-              <ul class="stack list-style:none" style="--stack-space: 0.5rem">
-                <li>
-                  <a href="/how-to-play">How To Play</a>
-                </li>
-                <li>
-                  <ul class="stack padding-inline-start:1em list-style:none" style="--stack-space: 0.5rem">
-                    <li>
-                      <a href="/how-to-play/character-creation-and-leveling-up">Character Creation and Leveling Up</a>
-                    </li>
-                    <li>
-                      <a href="/how-to-play/health-and-stamina">Health and Stamina</a>
-                    </li>
-                    <li>
-                      <a href="/how-to-play/combat">Combat</a>
-                    </li>
-                    <li>
-                      <a href="/how-to-play/advantage-disadvantage-helping-out">Advantage, Disadvantage, and Helping Out</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="/armor">Armor</a>
-                </li>
-                <li>
-                  <a href="/weapons">Weapons</a>
-                </li>
-                <li>
-                  <a href="/feats">General Feats</a>
-                </li>
-                <li>
-                  <a href="/classes">Classes</a>
-                </li>
-                <li>
-                  <ul class="stack padding-inline-start:1em list-style:none" style="--stack-space: 0.5rem">
-                    {% for class in classes %}
-                      <li>
-                        <a href="/classes/{{ class.slug }}">
-                          {{ class.Name }}
-                        </a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </li>
-              </ul>
+              {% include "navigation.njk" %}
             </nav>
           </aside>
           <article>

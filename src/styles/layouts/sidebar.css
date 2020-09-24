@@ -18,3 +18,23 @@
   flex-grow: 999;
   min-width: calc(60% - 2rem);
 }
+
+@media screen and (max-width: 950px) {
+  .nav-sidebar {
+    display: none;
+  }
+
+  .menu-link {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 951px) {
+  .nav-sidebar {
+    display: flex;
+  }
+
+  .menu-link {
+    display: none;
+  }
+}

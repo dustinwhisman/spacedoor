@@ -1,0 +1,44 @@
+<ul class="stack list-style:none" style="--stack-space: 0.5rem">
+  <li>
+    <a href="/how-to-play">How To Play</a>
+  </li>
+  <li>
+    <ul class="stack padding-inline-start:1em list-style:none" style="--stack-space: 0.5rem">
+      <li>
+        <a href="/how-to-play/character-creation-and-leveling-up">Character Creation and Leveling Up</a>
+      </li>
+      <li>
+        <a href="/how-to-play/health-and-stamina">Health and Stamina</a>
+      </li>
+      <li>
+        <a href="/how-to-play/combat">Combat</a>
+      </li>
+      <li>
+        <a href="/how-to-play/advantage-disadvantage-helping-out">Advantage, Disadvantage, and Helping Out</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="/armor">Armor</a>
+  </li>
+  <li>
+    <a href="/weapons">Weapons</a>
+  </li>
+  <li>
+    <a href="/feats">General Feats</a>
+  </li>
+  <li>
+    <a href="/classes">Classes</a>
+  </li>
+  <li>
+    <ul class="stack padding-inline-start:1em list-style:none" style="--stack-space: 0.5rem">
+      {% for class in classes %}
+      <li>
+        <a href="/classes/{{ class.slug }}">
+          {{ class.Name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>
