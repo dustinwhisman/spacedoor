@@ -116,13 +116,13 @@ layout: layouts/sidebar.njk
 
   After level 20, you don't get any more feats as you level up. At that point,
   you can choose to keep playing as that character without any new benefits, or
-  you can retire them and create a new character to play as. Your Keeper may let
-  you take over an NPC if you like, or you can start the new character at a high
+  you can retire them and create a new character to play as. Your GM may let you
+  take over an NPC if you like, or you can start the new character at a high
   level to keep your group balanced.
 
   The same concept applies if one of your characters dies, or if you simply
-  don't want to keep playing the same character. Your Keeper may also allow you
-  to convert your character to another class if it makes sense for your world –
+  don't want to keep playing the same character. Your GM may also allow you to
+  convert your character to another class if it makes sense for your world –
   [Robot](/classes/the-robot) or [Ascended](/classes/the-ascended), anyone?
 
 </div>

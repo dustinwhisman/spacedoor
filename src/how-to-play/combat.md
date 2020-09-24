@@ -21,8 +21,8 @@ layout: layouts/sidebar.njk
 
   That said, trying to exploit this mechanic won't prevent the enemy from
   attacking you. If you're in a situation where the bad guys want to kill you
-  and you decide to just ignore them, it is well within the Keeper's rights to
-  roll attacks and deal damage, regardless of player actions up to that point.
+  and you decide to just ignore them, it is well within the GM's rights to roll
+  attacks and deal damage, regardless of player actions up to that point.
 
   Depending on your group's preferences, you may choose to pick the order
   randomly by rolling dice, or players could volunteer to go first, second,

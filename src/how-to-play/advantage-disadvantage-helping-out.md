@@ -12,7 +12,7 @@ layout: layouts/sidebar.njk
 
   ### Advantage and Disadvantage
 
-  At certain times, either from the Keeper's discretion or because of a feat or
+  At certain times, either from the GM's discretion or because of a feat or
   character ability, players will roll with either advantage or disadvantage,
   making rolls more or less likely to succeed, respectively.
 

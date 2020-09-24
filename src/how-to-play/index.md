@@ -19,15 +19,14 @@ layout: layouts/sidebar.njk
   fighting off alien invasions, gathering new technologies, and handling
   whatever sci-fi adventures come up along the way.
 
-  One player will be the Keeper, or DM, or GM (whatever term you want, really),
-  and they will act as a sort of narrator. They will describe the settings,
-  portray non-player characters (NPCs), and react to the player characters'
-  (PCs) actions. It is usually the Keeper's job to come up with the missions
-  that the PCs need to complete.
+  One player will be the Game Manager (or GM), and they will act as a sort of
+  narrator. They will describe the settings, portray non-player characters
+  (NPCs), and react to the player characters' (PCs) actions. It is usually the
+  GM's job to come up with the missions that the PCs need to complete.
 
   ### What You'll Need
 
-  Each game needs a Keeper and ideally 3-5 players. Players will need:
+  Each game needs a GM and ideally 3-5 players. Players will need:
   - A character sheet to keep track of stats, health, luck, weapons, armor, and
     feats
   - Pencils and paper, or a notebook (or equivalent digital tools)
@@ -36,7 +35,7 @@ layout: layouts/sidebar.njk
     to roll, and the 6 represents how many sides the dice should have, so 2d6
     means to roll two six sided dice.
 
-  The Keeper will need:
+  The GM will need:
   - A reference sheet or notes about the mission
   - Dice of their own (they may want more polyhedral dice to introduce more
     randomness into the game)
@@ -44,10 +43,10 @@ layout: layouts/sidebar.njk
 
   ### What You Need To Know
 
-  The Keeper should be familiar with all the rules and the sort of situations
-  that each stat is used for. They should also read the recommendations for
-  creating scenarios. This system is fairly light on rules, so even
-  surface-level familiarity should be enough to get started.
+  The GM should be familiar with all the rules and the sort of situations that
+  each stat is used for. They should also read the recommendations for creating
+  scenarios. This system is fairly light on rules, so even surface-level
+  familiarity should be enough to get started.
 
   Players should read the descriptions of the classes that interest them, then
   choose one to play as. As a general rule, there should only be one player of a
@@ -60,20 +59,20 @@ layout: layouts/sidebar.njk
 
   ### Basic Gameplay
 
-  The game generally flows like this. The Keeper will describe a setting or a
+  The game generally flows like this. The GM will describe a setting or a
   situation, then the players will react to that by describing what they want to
-  do, such as investigating an alien artifact. The Keeper will occasionally ask
+  do, such as investigating an alien artifact. The GM will occasionally ask
   players to roll against stats to determine how successful they are. The
-  players will roll 2d6 (most of the time), add their bonus, and tell the Keeper
+  players will roll 2d6 (most of the time), add their bonus, and tell the GM
   what they got.
 
   For the most part, a 6 or lower is a failure, a 7-9 is a mixed success, and a
   10 or higher is a success. Snake eyes, or when both dice land on 1, mean a
   critical failure. Two sixes, on the other hand, mean a critical success. It's
-  up to the Keeper to determine what happens based on the level of success or
+  up to the GM to determine what happens based on the level of success or
   failure.
   
-  The Keeper will respond to the players' actions, then repeat the cycle by
+  The GM will respond to the players' actions, then repeat the cycle by
   describing what happens as the result. There are other mechanics that can
   change this basic flow, such as during combat or as the result of a class
   feat, but that's essentially it.
