@@ -78,20 +78,6 @@ layout: layouts/sidebar.njk
   change this basic flow, such as during combat or as the result of a class
   feat, but that's essentially it.
 
-  ### Advantage and Disadvantage
-
-  At certain times, either from the Keeper's discretion or because of a feat or
-  character ability, players will roll with either advantage or disadvantage,
-  making rolls more or less likely to succeed, respectively.
-
-  When rolling with advantage, roll 3d6 and drop the lowest number rolled. For
-  example, if you rolled a 3, a 2, and a 6, you would drop the 2, leaving you
-  with a roll of 9.
-
-  When rolling with disadvantage, roll 3d6 and drop the highest number rolled.
-  That would change the result of the previous example to a 5, since the 6 would
-  have been dropped instead of the 2.
-
   ### Making Your Own Rules
 
   This game is intended to be flexible, so if you need to make up a new rule to

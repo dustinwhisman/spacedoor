@@ -16,5 +16,5 @@
 .with-sidebar > * > :last-child {
   flex-basis: 0;
   flex-grow: 999;
-  min-width: calc(65% - 2rem);
+  min-width: calc(60% - 2rem);
 }
