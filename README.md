@@ -1,7 +1,8 @@
 # Spacedoor
 
 This is a living document for the rules, archetypes, and recommendations for the
-first edition of the Spacedoor RPG.
+first edition of the Spacedoor RPG. For the second edition, check the spacedoor
+branch.
 
 ## Getting Started
 
