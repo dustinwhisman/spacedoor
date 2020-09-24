@@ -52,10 +52,13 @@ module.exports = async () => {
         let subs = [];
         if (r.fields.Subclass != null) {
           r.fields.Subclass.forEach((s) => {
-            const matches = subclasses.filter((x) => {
+            const match = subclasses.find((x) => {
               return x.id === s;
-            }).map(x => x.fields.Name);
-            subs = matches;
+            });
+
+            if (match != null) {
+              subs.push(match.fields.Name);
+            }
           });
         }
 
