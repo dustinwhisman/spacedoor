@@ -60,4 +60,6 @@ layout: layouts/sidebar.njk
   If you succeed 3 times, you become stable, but you can't take any actions
   until you've been healed up to at least one health point.
 
+  [Combat](/how-to-play/combat)
+
 </div>

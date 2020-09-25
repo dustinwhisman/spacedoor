@@ -24,7 +24,6 @@ layout: layouts/sidebar.njk
   That would change the result of the previous example to a 5, since the 6 would
   have been dropped instead of the 2.
 
-
   ### Helping Out
 
   For most situations, only one player may roll to do the same action –
@@ -40,5 +39,7 @@ layout: layouts/sidebar.njk
 
   On a critical failure, the original roll becomes a failure and is unable to be
   helped. On a critical success, the original roll becomes a critical success.
+
+  [GM Guide](/gm-guide)
 
 </div>

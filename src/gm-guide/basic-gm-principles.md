@@ -33,4 +33,6 @@ layout: layouts/sidebar.njk
   - Anything can advance the plot
   - Prepare enough that you can throw your plans out the window and be fine
 
+  [Starting a Game](/gm-guide/starting-a-game)
+
 </div>

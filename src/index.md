@@ -26,4 +26,6 @@ layout: layouts/sidebar.njk
   Everything you need to know to play the game, as well as tools to help you run
   the game or randomize mission scenarios, can be found here.
 
+  [How to Play](/how-to-play)
+
 </div>

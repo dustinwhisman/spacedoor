@@ -65,4 +65,6 @@ layout: layouts/sidebar.njk
   - People, aliens, or creatures that the characters might encounter
   - A ticking clock to bring some urgency into the story
 
+  [Randomizing Scenarios](/gm-guide/randomizing-scenarios)
+
 </div>

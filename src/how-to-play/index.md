@@ -85,4 +85,6 @@ layout: layouts/sidebar.njk
   making rule changes or adding feats or equipment, it's all good. Have fun with
   it.
 
+  [Character Creation and Leveling Up](/how-to-play/character-creation-and-leveling-up)
+
 </div>

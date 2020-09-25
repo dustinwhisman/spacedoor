@@ -125,4 +125,6 @@ layout: layouts/sidebar.njk
   convert your character to another class if it makes sense for your world –
   [Robot](/classes/the-robot) or [Ascended](/classes/the-ascended), anyone?
 
+  [Health and Stamina](/how-to-play/health-and-stamina)
+
 </div>

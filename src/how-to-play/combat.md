@@ -63,4 +63,6 @@ layout: layouts/sidebar.njk
   On a success, they take half damage, and the target they're protecting takes
   no damage. On a critical success, they and the target both take no damage.
 
+  [Advantage, Disadvantage, and Helping Out](/how-to-play/advantage-disadvantage-helping-out)
+
 </div>

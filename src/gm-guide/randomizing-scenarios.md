@@ -64,4 +64,6 @@ layout: layouts/sidebar.njk
   environment. On a scale of 1 to 6, 1 is nothing useful at all, and 6 is tons
   of useful stuff just lying around.
 
+  [Running Combat](/gm-guide/running-combat)
+
 </div>

@@ -36,6 +36,8 @@ layout: layouts/sidebar.njk
   believable way. You can plant people, ruins, artifacts, or weapons for the
   explorers to find, but you have to be okay with letting them go if the
   explorers never find them, or decide to attack rather than help. You are only
-  creating possible outcomes, not definite ones. 
+  creating possible outcomes, not definite ones.
+
+  [Basic GM Principles](/gm-guide/basic-gm-principles)
 
 </div>
