@@ -36,12 +36,36 @@ renderData:
   </p>
 
   {% for subclass in class.subclasses %}
-    <h4>
-      {{ subclass.Name }}
-    </h4>
-    <p>
-      {{ subclass.Description }}
-    </p>
+    <div>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ subclass.Name }}
+        </h4>
+        <p>
+          {{ subclass.Description }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
+  <h3>Special Equipment</h3>
+  <p>
+    Before each mission, choose special equipment that will help you on your
+    way. You can swap out the special equipment between missions or if there is
+    a valid story reason for resupplying.
+  </p>
+
+  {% for item in class.equipment %}
+    <div>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ item.Name }}
+        </h4>
+        <p>
+          {{ item.Description }}
+        </p>
+      </div>
+    </div>
   {% endfor %}
 
   <h3>Feats</h3>
