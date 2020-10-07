@@ -13,46 +13,49 @@ layout: layouts/sidebar.njk
 
   ### Initiative
 
-  Enemies don't get turns of their own in this system, but instead, they react
-  to the players' actions as they happen. As such, the turn order between
-  players doesn't matter all that much, but it can be helpful to set an order to
-  focus the action, rather than having the same characters attack repeatedly
-  while others just sort of hang out nearby.
+  When it is obvious that combat is happening, whether from an ambush or
+  somebody attacking, all the players will roll initiative. There is no stat
+  modifier – this just establishes the order in which players or enemies will
+  attack. Whoever rolled highest goes first, then the next highest and so on. In
+  the event of a tie, roll again until one roll is higher than the other to
+  determine who goes first.
 
-  That said, trying to exploit this mechanic won't prevent the enemy from
-  attacking you. If you're in a situation where the bad guys want to kill you
-  and you decide to just ignore them, it is well within the GM's rights to roll
-  attacks and deal damage, regardless of player actions up to that point.
+  Working through the initiative order, each player or enemy will take a turn
+  where they can attack or take some other actions of their choosing. There are
+  no rigid movement restrictions or limits on what can happen during a turn,
+  other than players can only attack once per turn. Everything else will be up
+  to GM discretion to decide what's allowed during a single turn.
 
-  Depending on your group's preferences, you may choose to pick the order
-  randomly by rolling dice, or players could volunteer to go first, second,
-  third, etc. Then, as combat goes on, each player goes in order and the cycle
-  repeats until the combat encounter is over.
-
-  There are also no set limits on how much stuff a character can do during their
-  turn. If it's something that would obviously take a long time, that can be
-  something that goes on in the background while other players take their turns
-  for a while. It's not a big deal, so you can work out something that feels
-  right for your group.
+  Once the last player or enemy in the order has taken their turn, the round of
+  combat is over, and the next round starts with the person at the top of the
+  order. Keep cycling through the order until the conflict is resolved, either
+  violently, peacefully, or somewhere in between.
 
   ### Attacking
 
   On a player's turn, if they choose to attack, they roll with their Tough
-  modifier. On a failure, they deal no damage but take 2d6 damage from the enemy
-  they're fighting. On a mixed success, they deal 1d6 damage but also take 1d6
-  damage from the enemy. On a success, they deal 2d6 damage and take no damage
-  in return.
+  modifier. On a failure, they deal no damage or special effects based on their
+  weapon. On a mixed success, they deal 1d6 damage plus any extra damage or
+  effects described by their weapon. On a success, they deal 2d6 damage plus any
+  extra damage or effects described by their weapon.
 
-  Critical failures deal an extra 2d6 damage to the player from the enemy (4d6
-  total), and critical successes deal an extra 2d6 damage to the enemy.
+  On critical failures, the attack backfires and the player takes 1d6 damage. On
+  critical successes, the damage dice are doubled. For example, on a shotgun
+  attack, the primary target would take 4d6 damage, and adjacent targets would
+  take 2d6 damage.
 
   Certain weapons do not deal damage, but instead, they have special effects,
   such as restraining, blinding, or stunning enemies. If using those weapons,
-  ignore the damage dice dealt to the enemy (the player may still take damage),
-  and use the level of success to determine how effective that special effect
-  is. For example, a mixed success from a net gun attack might mean that the
-  enemy has its legs wrapped up in the net, but their hands are free and they
-  still have access to their weapons.
+  ignore the damage dice dealt to the enemy, and use the level of success to
+  determine how effective that special effect is. For example, a mixed success
+  from a net gun attack might mean that the enemy has its legs wrapped up in the
+  net, but their hands are free and they still have access to their weapons.
+
+  Enemies also make attack rolls and deal damage according to the same rules as
+  the players. It is up to the GM how they want to handle modifiers and the
+  actions of multiple NPCs. They may choose to have henchmen attack as a pack
+  and only roll once, applying the damage equally, or they may want to roll
+  individually for every NPC.
 
   ### Defending
 
@@ -61,7 +64,8 @@ layout: layouts/sidebar.njk
   failure, they and the target they're protecting both take full damage. On a
   mixed success, they and the target they're protecting both take half damage.
   On a success, they take half damage, and the target they're protecting takes
-  no damage. On a critical success, they and the target both take no damage.
+  no damage. On a critical success, they and the target both take no damage. As
+  a general rule, a player can only defend once per round.
 
   [Advantage, Disadvantage, and Helping Out](/how-to-play/advantage-disadvantage-helping-out)
 
