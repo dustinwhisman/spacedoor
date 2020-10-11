@@ -31,6 +31,18 @@ layout: layouts/sidebar.njk
   If you are wounded, halve your dice rolls, rounded down, and a full night's
   sleep will only recover half of your stamina, rounded down.
 
+  #### First Aid
+
+  To heal during combat, you can choose to apply first aid instead of attacking.
+  Roll a Cool check, then roll to determine how much stamina is recovered. On a
+  mixed success, roll 1d6. On a success, roll 2d6. On a critical success, roll
+  4d6. If you have a +2 or higher Cool bonus, add another dice to your roll.
+  Health cannot be restored from first aid.
+
+  You can apply first aid once per turn in combat, but outside of combat, you
+  can only apply first aid after a character takes damage. Once they've been
+  tended to, that's as much good as first aid can do until they get hurt again.
+
   ### Regaining Health
 
   Health can only be regained through hospitalization or expert treatment. Some
