@@ -14,15 +14,63 @@ renderData:
     display: none;
   }
 
-  .no-subclass [data-subclasses="0"] {
+  .any-level.no-subclass [data-subclasses="0"] {
+    display: block;
+  }
+
+  .no-subclass.level-1 [data-level="1"][data-subclasses="0"] {
+    display: block;
+  }
+
+  .no-subclass.level-6 [data-level="6"][data-subclasses="0"] {
+    display: block;
+  }
+
+  .no-subclass.level-11 [data-level="11"][data-subclasses="0"] {
+    display: block;
+  }
+
+  .no-subclass.level-16 [data-level="16"][data-subclasses="0"] {
+    display: block;
+  }
+
+  .any-subclass.level-1 [data-level="1"] {
+    display: block;
+  }
+
+  .any-subclass.level-6 [data-level="6"] {
+    display: block;
+  }
+
+  .any-subclass.level-11 [data-level="11"] {
+    display: block;
+  }
+
+  .any-subclass.level-16 [data-level="16"] {
     display: block;
   }
 
   {% for subclass in class.subclasses %}
-    .{{ subclass.shorthand }} [data-{{subclass.shorthand}}] {
+    .any-level.{{ subclass.shorthand }} [data-{{subclass.shorthand}}] {
       display: block;
     }
-  {% endfor %}
+
+    .level-1.{{ subclass.shorthand }} [data-level="1"][data-{{subclass.shorthand}}] {
+      display: block;
+    }
+
+    .level-6.{{ subclass.shorthand }} [data-level="6"][data-{{subclass.shorthand}}] {
+      display: block;
+    }
+
+    .level-11.{{ subclass.shorthand }} [data-level="11"][data-{{subclass.shorthand}}] {
+      display: block;
+    }
+
+    .level-16.{{ subclass.shorthand }} [data-level="16"][data-{{subclass.shorthand}}] {
+      display: block;
+    }
+{% endfor %}
 </style>
 
 <div class="stack" data-class-root>
@@ -91,6 +139,46 @@ renderData:
     {{ class.shorthand }}.
   </p>
 
+  <fieldset>
+    <legend>Filter by Level</legend>
+    <div class="stack" style="--stack-space: 0.5rem">
+      <div>
+        <input id="level-1" type="checkbox" name="feat-level" value="level-1">
+        <label for="level-1">Level 1</label>
+      </div>
+      <div>
+        <input id="level-6" type="checkbox" name="feat-level" value="level-6">
+        <label for="level-6">Level 6</label>
+      </div>
+      <div>
+        <input id="level-11" type="checkbox" name="feat-level" value="level-11">
+        <label for="level-11">Level 11</label>
+      </div>
+      <div>
+        <input id="level-16" type="checkbox" name="feat-level" value="level-16">
+        <label for="level-16">Level 16</label>
+      </div>
+    </div>
+  </fieldset>
+
+  {% if class.hasFeatSubclasses %}
+    <fieldset>
+      <legend>Filter by Subclass</legend>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <div>
+          <input id="no-subclass" type="checkbox" name="feat-subclass" value="no-subclass">
+          <label for="no-subclass">No Subclass</label>
+        </div>
+        {% for subclass in class.subclasses %}
+          <div>
+            <input id="{{ subclass.shorthand }}" type="checkbox" name="feat-subclass" value="{{ subclass.shorthand }}">
+            <label for="{{ subclass.shorthand }}">{{ subclass.Name }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% endif %}
+
   {% for feat in class.feats %}
     <div class="class-feat" data-level="{{ feat.Level }}" data-subclasses="{{ feat.subclasses.length }}" {% for subclass in feat.subclasses %} data-{{ subclass.shorthand }}{% endfor %}>
       <div class="stack" style="--stack-space: 0.5rem">
@@ -109,3 +197,39 @@ renderData:
     </div>
   {% endfor %}
 </div>
+
+<script>
+  document.addEventListener('change', (event) => {
+    const levelCheckboxes = document.querySelectorAll('[name=feat-level]');
+    const areLevelsFiltered = Array.from(levelCheckboxes).some(x => x.checked);
+
+    const subclassCheckboxes = document.querySelectorAll('[name=feat-subclass]');
+    const areSubclassesFiltered = Array.from(subclassCheckboxes).some(x => x.checked);
+
+    const classRoot = document.querySelector('[data-class-root]');
+
+    if (areLevelsFiltered || areSubclassesFiltered) {
+      classRoot.classList.add('hide-feats');
+    } else {
+      classRoot.classList.remove('hide-feats');
+    }
+
+    if (!areLevelsFiltered) {
+      classRoot.classList.add('any-level');
+    } else {
+      classRoot.classList.remove('any-level');
+    }
+
+    if (!areSubclassesFiltered) {
+      classRoot.classList.add('any-subclass');
+    } else {
+      classRoot.classList.remove('any-subclass');
+    }
+
+    if (event.target.checked) {
+      classRoot.classList.add(event.target.value);
+    } else {
+      classRoot.classList.remove(event.target.value);
+    }
+  });
+</script>

@@ -67,6 +67,16 @@ select {
   font: inherit;
 }
 
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+fieldset legend {
+  font-weight: bold;
+  margin-block-end: 0.5rem;
+}
+
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   * {

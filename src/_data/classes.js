@@ -79,6 +79,9 @@ module.exports = async () => {
           subclasses: subs,
         };
       }),
+      get hasFeatSubclasses() {
+        return !!this.feats.filter(feat => feat.subclasses.length).length;
+      },
     };
   }));
 
