@@ -9,7 +9,23 @@ renderData:
   title: "{{ class.Name }}"
 ---
 
-<div class="stack">
+<style>
+  .hide-feats .class-feat {
+    display: none;
+  }
+
+  .no-subclass [data-subclasses="0"] {
+    display: block;
+  }
+
+  {% for subclass in class.subclasses %}
+    .{{ subclass.shorthand }} [data-{{subclass.shorthand}}] {
+      display: block;
+    }
+  {% endfor %}
+</style>
+
+<div class="stack" data-class-root>
   <h2>
     {{ class.Name }}
   </h2>
@@ -76,14 +92,14 @@ renderData:
   </p>
 
   {% for feat in class.feats %}
-    <div>
+    <div class="class-feat" data-level="{{ feat.Level }}" data-subclasses="{{ feat.subclasses.length }}" {% for subclass in feat.subclasses %} data-{{ subclass.shorthand }}{% endfor %}>
       <div class="stack" style="--stack-space: 0.5rem">
         <h4>
           {{ feat.Name }}
         </h4>
         <p>
           <small>
-            Level {{ feat.Level }}{% for subclass in feat.subclasses %}, {{ subclass }}{% endfor %}
+            Level {{ feat.Level }}{% for subclass in feat.subclasses %}, {{ subclass.name }}{% endfor %}
           </small>
         </p>
         <p>

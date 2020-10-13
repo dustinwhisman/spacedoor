@@ -51,7 +51,8 @@ module.exports = async () => {
       slug: record.fields.Name.toLowerCase().replace(/\s/g, '-'),
       shorthand: record.fields.Name.replace(/^The\s/, ''),
       subclasses: subclasses.map((r) => ({
-        ...r.fields
+        ...r.fields,
+        shorthand: r.fields.Name.toLowerCase().replace(/\s/g, '-'),
       })),
       equipment: equipment.map((r) => ({
         ...r.fields,
@@ -65,7 +66,10 @@ module.exports = async () => {
             });
 
             if (match != null) {
-              subs.push(match.fields.Name);
+              subs.push({
+                name: match.fields.Name,
+                shorthand: match.fields.Name.toLowerCase().replace(/\s/g, '-'),
+              });
             }
           });
         }
