@@ -34,22 +34,24 @@ layout: layouts/sidebar.njk
   ### Attacking
 
   On a player's turn, if they choose to attack, they roll with their Tough
-  modifier. On a failure, they deal no damage or special effects based on their
-  weapon. On a mixed success, they deal 1d6 damage plus any extra damage or
-  effects described by their weapon. On a success, they deal 2d6 damage plus any
-  extra damage or effects described by their weapon.
+  modifier for most weapons, or whichever modifier best applies for the weapon
+  they are using, such as Sharp for a sniper rifle. On a failure, they deal no
+  damage or special effects based on their weapon. On mixed success and success
+  rolls, they deal damage based on whatever weapon they are using and apply
+  special effects accordingly. This typically means half as much damage or
+  effect on mixed success rolls, compared to successful rolls.
 
-  On critical failures, the attack backfires and the player takes 1d6 damage. On
-  critical successes, the damage dice are doubled. For example, on a shotgun
+  On critical failures, the attack backfires and the player takes the equivalent
+  of whatever their weapon does on a mixed success. On critical successes, the
+  damage dice and any special effects are doubled. For example, on a shotgun
   attack, the primary target would take 4d6 damage, and adjacent targets would
   take 2d6 damage.
 
   Certain weapons do not deal damage, but instead, they have special effects,
-  such as restraining, blinding, or stunning enemies. If using those weapons,
-  ignore the damage dice dealt to the enemy, and use the level of success to
-  determine how effective that special effect is. For example, a mixed success
-  from a net gun attack might mean that the enemy has its legs wrapped up in the
-  net, but their hands are free and they still have access to their weapons.
+  such as restraining, blinding, or stunning enemies. For example, a mixed
+  success from a net gun attack might mean that the enemy has its legs wrapped
+  up in the net, but their hands are free and they still have access to their
+  weapons.
 
   Enemies also make attack rolls and deal damage according to the same rules as
   the players. It is up to the GM how they want to handle modifiers and the
