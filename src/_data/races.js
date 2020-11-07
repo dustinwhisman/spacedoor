@@ -6,7 +6,7 @@ const base = new Airtable({
 
 module.exports = async () => {
   const raceRecords = await base('Races').select({
-    fields: ['Name', 'Description'],
+    fields: ['Name', 'Description', 'Race Feats'],
     sort: [
       {
         field: 'Order',
@@ -15,9 +15,32 @@ module.exports = async () => {
     ]
   }).all();
 
-  const races = raceRecords.map(r => ({
-    slug: r.fields.Name.toLowerCase().replace(/\s/g, '-'),
-    ...r.fields,
+  const races = Promise.all(raceRecords.map(async (record) => {
+    let feats = [];
+    if (record.fields['Race Feats'] != null) {
+      feats = await base('Race Feats').select({
+        fields: ['Name', 'Level', 'Description'],
+        sort: [
+          {
+            field: 'Level',
+            direction: 'asc',
+          },
+          {
+            field: 'Name',
+            direction: 'asc',
+          },
+        ],
+        filterByFormula: `OR(${record.fields['Race Feats'].map(r => `RECORD_ID()='${r}'`).join(',')})`,
+      }).all();
+    }
+
+    return {
+      ...record.fields,
+      slug: record.fields.Name.toLowerCase().replace(/\s/g, '-'),
+      feats: feats.map((r) => ({
+        ...r.fields,
+      })),
+    };
   }));
 
   return races;

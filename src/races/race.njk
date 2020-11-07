@@ -16,4 +16,31 @@ renderData:
   <p>
     {{ race.Description }}
   </p>
+
+  <h3>
+    Feats
+  </h3>
+  <p>
+    As you level up, you can choose to take race feats, class feats, or
+    <a href="/feats">general feats</a>. Below are the race feats for the
+    {{ race.Name }} race.
+  </p>
+
+  {% for feat in race.feats %}
+    <div>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ feat.Name }}
+        </h4>
+        <p>
+          <small>
+            Level {{ feat.Level }}
+          </small>
+        </p>
+        <p>
+          {{ feat.Description }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
 </div>
