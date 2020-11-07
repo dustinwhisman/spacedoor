@@ -29,6 +29,15 @@ layout: layouts/sidebar.njk
     unfamiliar technology – plugging a MacBook into an alien mothership, for
     example
 
+  ### Races
+
+  Races do not directly affect your stats when creating your character, but they
+  offer different ability bonuses and feats that you can take as you level up.
+  Races are mostly for flavor, but classes make more of a mechanical difference
+  for how you character works.
+
+  ### Classes
+
   Each class has a primary stat, a secondary stat, and a penalty stat, which are
   listed under the class descriptions. The primary and secondary stats both
   start at +1, and the penalty stat starts at -1. Other stats start at 0. In
@@ -86,10 +95,11 @@ layout: layouts/sidebar.njk
 
   ### Feats
 
-  Each time you level up, you get to choose either a [general feat](/feats) or a
-  class feat that is specific to your character's class. You don't get to choose
-  a feat to start with, but leveling up happens quickly in this game, so check
-  the lists to see what you might want to take once you level up.
+  Each time you level up, you get to choose either a [general feat](/feats), a
+  race feat specific to your character's race, or a class feat specific to your
+  character's class. You don't get to choose a feat to start with, but leveling
+  up happens quickly in this game, so check the lists to see what you might want
+  to take once you level up.
 
   ### Details and Flavor
 
