@@ -1,0 +1,19 @@
+---
+layout: layouts/sidebar.njk
+pagination:
+  data: races
+  size: 1
+  alias: race
+permalink: races/{{ race.slug }}/index.html
+renderData:
+  title: "{{ race.Name }}"
+---
+
+<div class="stack">
+  <h2>
+    {{ race.Name }}
+  </h2>
+  <p>
+    {{ race.Description }}
+  </p>
+</div>

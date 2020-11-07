@@ -1,0 +1,29 @@
+---
+title: Races
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2>
+    Races
+  </h2>
+  <p>
+    These are the official races that players can choose to play as. Each race
+    offers slightly different bonuses to abilities, and they have their own
+    feats that they can choose as they level up. Mostly, however, races are all
+    about flavor and creating details about your character.
+  </p>
+
+  {% for race in races %}
+    <div>
+      <h3>
+        <a href="/races/{{ race.slug }}">
+          {{ race.Name }}
+        </a>
+      </h3>
+      <p>
+        {{ race.Description }}
+      </p>
+    </div>
+  {% endfor %}
+</div>

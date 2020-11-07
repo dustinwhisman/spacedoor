@@ -47,6 +47,20 @@
     <a href="/feats">General Feats</a>
   </li>
   <li>
+    <a href="/races">Races</a>
+  </li>
+  <li>
+    <ul class="stack padding-inline-start:1em list-style:none" style="--stack-space: 0.5rem">
+      {% for race in races %}
+      <li>
+        <a href="/races/{{ race.slug }}">
+          {{ race.Name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+  <li>
     <a href="/classes">Classes</a>
   </li>
   <li>
