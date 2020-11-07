@@ -31,7 +31,7 @@ module.exports = async () => {
     let feats = [];
     if (record.fields['Class Feats'] != null) {
       feats = await base('Class Feats').select({
-        fields: ['Name', 'Level', 'Description', 'Subclass'],
+        fields: ['Name', 'Level', 'Description'],
         sort: [
           {
             field: 'Level',
@@ -57,31 +57,9 @@ module.exports = async () => {
       equipment: equipment.map((r) => ({
         ...r.fields,
       })),
-      feats: feats.map((r) => {
-        let subs = [];
-        if (r.fields.Subclass != null) {
-          r.fields.Subclass.forEach((s) => {
-            const match = subclasses.find((x) => {
-              return x.id === s;
-            });
-
-            if (match != null) {
-              subs.push({
-                name: match.fields.Name,
-                shorthand: match.fields.Name.toLowerCase().replace(/\s/g, '-'),
-              });
-            }
-          });
-        }
-
-        return {
-          ...r.fields,
-          subclasses: subs,
-        };
-      }),
-      get hasFeatSubclasses() {
-        return !!this.feats.filter(feat => feat.subclasses.length).length;
-      },
+      feats: feats.map((r) => ({
+        ...r.fields,
+      })),
     };
   }));
 

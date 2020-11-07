@@ -14,63 +14,21 @@ renderData:
     display: none;
   }
 
-  .any-level.no-subclass [data-subclasses="0"] {
+  .level-1 [data-level="1"] {
     display: block;
   }
 
-  .no-subclass.level-1 [data-level="1"][data-subclasses="0"] {
+  .level-6 [data-level="6"] {
     display: block;
   }
 
-  .no-subclass.level-6 [data-level="6"][data-subclasses="0"] {
+  .level-11 [data-level="11"] {
     display: block;
   }
 
-  .no-subclass.level-11 [data-level="11"][data-subclasses="0"] {
+  .level-16 [data-level="16"] {
     display: block;
   }
-
-  .no-subclass.level-16 [data-level="16"][data-subclasses="0"] {
-    display: block;
-  }
-
-  .any-subclass.level-1 [data-level="1"] {
-    display: block;
-  }
-
-  .any-subclass.level-6 [data-level="6"] {
-    display: block;
-  }
-
-  .any-subclass.level-11 [data-level="11"] {
-    display: block;
-  }
-
-  .any-subclass.level-16 [data-level="16"] {
-    display: block;
-  }
-
-  {% for subclass in class.subclasses %}
-    .any-level.{{ subclass.shorthand }} [data-{{subclass.shorthand}}] {
-      display: block;
-    }
-
-    .level-1.{{ subclass.shorthand }} [data-level="1"][data-{{subclass.shorthand}}] {
-      display: block;
-    }
-
-    .level-6.{{ subclass.shorthand }} [data-level="6"][data-{{subclass.shorthand}}] {
-      display: block;
-    }
-
-    .level-11.{{ subclass.shorthand }} [data-level="11"][data-{{subclass.shorthand}}] {
-      display: block;
-    }
-
-    .level-16.{{ subclass.shorthand }} [data-level="16"][data-{{subclass.shorthand}}] {
-      display: block;
-    }
-{% endfor %}
 </style>
 
 <div class="stack" data-class-root>
@@ -161,33 +119,15 @@ renderData:
     </div>
   </fieldset>
 
-  {% if class.hasFeatSubclasses %}
-    <fieldset>
-      <legend>Filter by Subclass</legend>
-      <div class="stack" style="--stack-space: 0.5rem">
-        <div>
-          <input id="no-subclass" type="checkbox" name="feat-subclass" value="no-subclass">
-          <label for="no-subclass">No Subclass</label>
-        </div>
-        {% for subclass in class.subclasses %}
-          <div>
-            <input id="{{ subclass.shorthand }}" type="checkbox" name="feat-subclass" value="{{ subclass.shorthand }}">
-            <label for="{{ subclass.shorthand }}">{{ subclass.Name }}</label>
-          </div>
-        {% endfor %}
-      </div>
-    </fieldset>
-  {% endif %}
-
   {% for feat in class.feats %}
-    <div class="class-feat" data-level="{{ feat.Level }}" data-subclasses="{{ feat.subclasses.length }}" {% for subclass in feat.subclasses %} data-{{ subclass.shorthand }}{% endfor %}>
+    <div class="class-feat" data-level="{{ feat.Level }}">
       <div class="stack" style="--stack-space: 0.5rem">
         <h4>
           {{ feat.Name }}
         </h4>
         <p>
           <small>
-            Level {{ feat.Level }}{% for subclass in feat.subclasses %}, {{ subclass.name }}{% endfor %}
+            Level {{ feat.Level }}
           </small>
         </p>
         <p>
@@ -203,12 +143,9 @@ renderData:
     const levelCheckboxes = document.querySelectorAll('[name=feat-level]');
     const areLevelsFiltered = Array.from(levelCheckboxes).some(x => x.checked);
 
-    const subclassCheckboxes = document.querySelectorAll('[name=feat-subclass]');
-    const areSubclassesFiltered = Array.from(subclassCheckboxes).some(x => x.checked);
-
     const classRoot = document.querySelector('[data-class-root]');
 
-    if (areLevelsFiltered || areSubclassesFiltered) {
+    if (areLevelsFiltered) {
       classRoot.classList.add('hide-feats');
     } else {
       classRoot.classList.remove('hide-feats');
@@ -218,12 +155,6 @@ renderData:
       classRoot.classList.add('any-level');
     } else {
       classRoot.classList.remove('any-level');
-    }
-
-    if (!areSubclassesFiltered) {
-      classRoot.classList.add('any-subclass');
-    } else {
-      classRoot.classList.remove('any-subclass');
     }
 
     if (event.target.checked) {
