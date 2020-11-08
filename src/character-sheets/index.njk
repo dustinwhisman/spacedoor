@@ -1,0 +1,42 @@
+---
+title: Dice Roller
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2>
+    Character Sheets
+  </h2>
+  <p>
+    You can create your own character sheets with pen and paper, or you can
+    manage your characters through the site. For pen and paper, make sure you
+    have spaces for your character's name, race, class, subclass, stats,
+    experience, luck points, health, stamina, and feats. Feats will take up the
+    most space, especially if you write down the full description, and you'll be
+    adding to them over time, so ideally that will be the last thing on your
+    sheet.
+  </p>
+
+  <div>
+    <a href="/character-sheets/add-character">
+      Add Character
+    </a>
+  </div>
+</div>
+
+<script type="module">
+  import { getAllFromDb } from '../scripts/get-all-from-db.mjs';
+
+  const initialize = async () => {
+    let characters = [];
+    try {
+      characters = await getAllFromDb('characters');
+    } catch (error) {
+      console.error(error);
+    }
+
+    console.log(characters);
+  };
+
+  initialize();
+</script>

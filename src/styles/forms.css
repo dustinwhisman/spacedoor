@@ -1,0 +1,45 @@
+label {
+  display: block;
+  max-width: max-content;
+  margin-block-end: 0.35em;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='number'],
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #555555;
+  border-radius: 0.25em;
+  padding: 0.25em 0.35em;
+  line-height: 1.5;
+  width: 100%;
+  max-width: 60ch;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  margin-block-end: 0.35em;
+  font-weight: var(--font-weight);
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  display: inline-block;
+  margin-right: 0.25rem;
+  min-height: 1rem;
+  min-width: 1rem;
+}
+
+input[type='radio'] + label,
+input[type='checkbox'] + label {
+  display: inline;
+}
