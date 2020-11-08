@@ -29,6 +29,19 @@ layout: layouts/sidebar.njk
         <p>
           {{ weapon.Description }}
         </p>
+        {% if weapon['Mixed Success Damage'] %}
+          <ul>
+            <li>
+              Mixed Success Damage: {{ weapon['Mixed Success Damage'] }}
+            </li>
+            <li>
+              Success Damage: {{ weapon['Success Damage'] }}
+            </li>
+            <li>
+              Critical Success Damage: {{ weapon['Critical Success Damage'] }}
+            </li>
+          </ul>
+        {% endif %}
       </div>
     </div>
   {% endfor %}
