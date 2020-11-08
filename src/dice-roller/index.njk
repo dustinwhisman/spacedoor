@@ -44,6 +44,13 @@ layout: layouts/sidebar.njk
     </div>
     <div data-results="advantage" aria-live="polite"></div>
   </div>
+  <div>
+    <button data-roll="disadvantage">
+      Roll with Disadvantage
+    </button>
+  </div>
+  <div data-results="disadvantage" aria-live="polite"></div>
+</div>
 </div>
 
 <script>
@@ -88,36 +95,74 @@ layout: layouts/sidebar.njk
     });
   };
 
+  const rollWithAdvantage = () => {
+    const results = rollDice(3, 6);
+    const total = results.reduce((sum, dice) => {
+      if (dice.isMin) {
+        return sum;
+      }
+
+      return sum + dice.value;
+    }, 0);
+
+    const resultsDiv = document.querySelector('[data-results=advantage]');
+    resultsDiv.innerHTML = `
+      <div class="cluster">
+        <div>
+          ${results.map((dice) => {
+            return `<div class="dice${dice.isMin ? ' not-counted' : ''}">${dice.value}</div>`;
+          }).join('+')}
+          <div>
+            =
+          </div>
+          <div class="total">
+            ${total}
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
+  const rollWithDisadvantage = () => {
+    const results = rollDice(3, 6);
+    const total = results.reduce((sum, dice) => {
+      if (dice.isMax) {
+        return sum;
+      }
+
+      return sum + dice.value;
+    }, 0);
+
+    const resultsDiv = document.querySelector('[data-results=disadvantage]');
+    resultsDiv.innerHTML = `
+      <div class="cluster">
+        <div>
+          ${results.map((dice) => {
+            return `<div class="dice${dice.isMax ? ' not-counted' : ''}">${dice.value}</div>`;
+          }).join('+')}
+          <div>
+            =
+          </div>
+          <div class="total">
+            ${total}
+          </div>
+        </div>
+      </div>
+    `;
+  };
+
   document.addEventListener('click', (event) => {
     if (event.target.matches('[data-roll]')) {
       const type = event.target.dataset.roll;
 
       if (type === 'advantage') {
-        const results = rollDice(3, 6);
-        const total = results.reduce((sum, dice) => {
-          if (dice.isMin) {
-            return sum;
-          }
+        rollWithAdvantage();
+        return;
+      }
 
-          return sum + dice.value;
-        }, 0);
-
-        const resultsDiv = document.querySelector('[data-results=advantage]');
-        resultsDiv.innerHTML = `
-          <div class="cluster">
-            <div>
-              ${results.map((dice) => {
-                return `<div class="dice${dice.isMin ? ' not-counted' : ''}">${dice.value}</div>`;
-              }).join('+')}
-              <div>
-                =
-              </div>
-              <div class="total">
-                ${total}
-              </div>
-            </div>
-          </div>
-        `;
+      if (type === 'disadvantage') {
+        rollWithDisadvantage();
+        return;
       }
     }
   });
