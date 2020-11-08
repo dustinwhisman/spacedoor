@@ -65,7 +65,15 @@ layout: layouts/sidebar.njk
     }
   };
 
-  document.addEventListener('click', (event) => {
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('click', async (event) => {
     if (event.target.matches('[data-add-feat]')) {
       const feat = {
         owner: character.key,
@@ -75,12 +83,44 @@ layout: layouts/sidebar.njk
         description: event.target.dataset.description,
       };
 
-      addFeat(feat);
+      if (feat.name === 'Charm Boost' || feat.name === 'Expert Charm') {
+        character.charm += 1;
+        await updateCharacter(character);
+      }
+
+      if (feat.name === 'Cool Boost' || feat.name === 'Expert Cool') {
+        character.cool += 1;
+        await updateCharacter(character);
+      }
+
+      if (feat.name === 'Sharp Boost' || feat.name === 'Expert Sharp') {
+        character.sharp += 1;
+        await updateCharacter(character);
+      }
+
+      if (feat.name === 'Tough Boost' || feat.name === 'Expert Tough') {
+        character.tough += 1;
+        await updateCharacter(character);
+      }
+
+      if (feat.name === 'Technobabble Boost' || feat.name === 'Expert Technobabble') {
+        character.technobabble += 1;
+        await updateCharacter(character);
+      }
+
+      if (feat.name === 'Lucky Break') {
+        character.luck += 1;
+        await updateCharacter(character);
+      }
+
+      await addFeat(feat);
     }
   });
 
-  document.addEventListener('item-added', () => {
-    window.location.href = `/character-sheets/character?key=${character.key}`;
+  document.addEventListener('item-added', (event) => {
+    if (event.detail !== character.key) {
+      window.location.href = `/character-sheets/character?key=${character.key}`;
+    }
   });
 
   getCharacter();
