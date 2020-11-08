@@ -3,10 +3,16 @@ title: Character
 layout: layouts/sidebar.njk
 ---
 
-<div class="stack" data-character-sheet></div>
+<div class="stack">
+  <div data-character-sheet class="stack"></div>
+
+  <h3>Feats</h3>
+  <div data-feat-links class="stack"></div>
+  <div data-feats class="stack"></div>
+</div>
 
 <script type="module">
-  import { getFromDb } from '../../scripts/db.mjs';
+  import { getFromDb, getAllFromDb } from '/scripts/db.mjs';
 
   let character;
   const getCharacter = async () => {
@@ -40,10 +46,43 @@ layout: layouts/sidebar.njk
         <p>Experience: ${character.experience}</p>
         <p>Luck Points: ${character.luck}</p>
       </div>
-      <h3>Feats</h3>
     `;
+
     const sheetElement = document.querySelector(`[data-character-sheet]`);
     sheetElement.innerHTML = characterSheetTemplate;
+
+    const featLinksTemplate = `
+      <div>
+        <a href="/races/${character.race.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Add Race Feats</a>
+      </div>
+      <div>
+        <a href="/classes/${character.class.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Add Class Feats</a>
+      </div>
+      <div>
+        <a href="/feats?key=${character.key}">Add General Feats</a>
+      </div>
+    `;
+
+    const featLinksElement = document.querySelector('[data-feat-links]');
+    featLinksElement.innerHTML = featLinksTemplate;
+
+    const allFeats = await getAllFromDb('feats');
+    const feats = allFeats.filter((feat) => feat.owner === key);
+
+    const featsTemplate = feats.map((feat) => {
+      return `
+        <div>
+          <h4>${feat.name}</h4>
+          <p>
+            <small>Level ${feat.level}</small>
+          </p>
+          <p>${feat.description}</p>
+        </div>
+      `;
+    }).join('');
+
+    const featsElement = document.querySelector('[data-feats]');
+    featsElement.innerHTML = featsTemplate;
   };
 
   getCharacter();

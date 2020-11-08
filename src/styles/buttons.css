@@ -13,3 +13,8 @@ button:focus {
   border-color: var(--blue-hover);
   color: var(--blue-hover);
 }
+
+button.small {
+  font-size: var(--h6);
+  padding: 0.25rem 0.5rem;
+}

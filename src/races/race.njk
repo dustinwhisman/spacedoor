@@ -40,7 +40,63 @@ renderData:
         <p>
           {{ feat.Description }}
         </p>
+        <div>
+          <button type="button" class="small" data-add-feat data-race="{{ race.Name }}" data-level="{{ feat.Level }}" data-name="{{ feat.Name }}" data-description="{{ feat.Description }}" hidden>
+            Take This Feat
+          </button>
+        </div>
       </div>
     </div>
   {% endfor %}
 </div>
+
+<script type="module">
+  import { getFromDb, addToDb } from '/scripts/db.mjs';
+
+  let character;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      return;
+    }
+
+    character = await getFromDb('characters', key);
+    const selectableFeats = document.querySelectorAll(`[data-race="${character.race}"]`);
+    selectableFeats.forEach((feat) => {
+      const level = Number(feat.dataset.level);
+      if (level <= character.level) {
+        feat.removeAttribute('hidden');
+      }
+    });
+  };
+
+  const addFeat = async (feat) => {
+    try {
+      await addToDb('feats', feat);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('[data-add-feat]')) {
+      const feat = {
+        owner: character.key,
+        type: 'race',
+        name: event.target.dataset.name,
+        level: event.target.dataset.level,
+        description: event.target.dataset.description,
+      };
+
+      addFeat(feat);
+    }
+  });
+
+  document.addEventListener('item-added', () => {
+    window.location.href = `/character-sheets/character?key=${character.key}`;
+  });
+
+  getCharacter();
+</script>
