@@ -46,6 +46,9 @@ layout: layouts/sidebar.njk
   enemies strong weapons or vice versa, or you can create a boss battle where
   the big bad has a huge pool of health and deals massive damage.
 
+  Take a look at the [weapons](/weapons) available to your players for ideas of
+  how much damage is appropriate for the kinds of weapons you're designing.
+
   ### NPC and Lair Actions
 
   Other than just attacking the players, you can spice up combat by having your

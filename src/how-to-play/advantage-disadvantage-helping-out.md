@@ -24,6 +24,9 @@ layout: layouts/sidebar.njk
   That would change the result of the previous example to a 5, since the 6 would
   have been dropped instead of the 2.
 
+  To see how that works, or to handle the majority of your rolls, you can use
+  the [dice roller](/dice-roller).
+
   ### Helping Out
 
   For most situations, only one player may roll to do the same action –
@@ -33,7 +36,7 @@ layout: layouts/sidebar.njk
 
   To help out, other players must roll against the same stat as the original
   roll. On a failure, the original roll decreases by one. On a mixed success,
-  the original roll remains the same. On a success, the player who made the
+  the original roll increases by one. On a success, the player who made the
   original check can choose to either add 1d6 to their original roll or reroll
   the check with advantage.
 

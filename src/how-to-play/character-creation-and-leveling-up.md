@@ -132,8 +132,8 @@ layout: layouts/sidebar.njk
 
   The same concept applies if one of your characters dies, or if you simply
   don't want to keep playing the same character. Your GM may also allow you to
-  convert your character to another class if it makes sense for your world –
-  [Robot](/classes/the-robot) or [Ascended](/classes/the-ascended), anyone?
+  convert your character to another race or class if it makes sense for your
+  world – [Robot](/races/robot) or [Ascended](/races/ascended), anyone?
 
   [Health and Stamina](/how-to-play/health-and-stamina)
 
