@@ -56,6 +56,14 @@ layout: layouts/sidebar.njk
       </button>
     </div>
     <div data-results="disadvantage" aria-live="polite"></div>
+    {% for dice in damageDice %}
+    <div>
+      <button data-roll="{{ dice }}">
+        {{ dice }}
+      </button>
+    </div>
+    <div data-results="{{ dice }}" aria-live="polite"></div>
+    {% endfor %}
   </div>
 
 </div>
@@ -108,7 +116,7 @@ layout: layouts/sidebar.njk
       return sum + dice.value;
     }, 0);
 
-    const resultsDiv = document.querySelector(`[data-results=${type}]`);
+    const resultsDiv = document.querySelector(`[data-results="${type}"]`);
     resultsDiv.innerHTML = `
       <div class="cluster">
         <div>
@@ -200,6 +208,9 @@ layout: layouts/sidebar.njk
         rollWithDisadvantage();
         return;
       }
+
+      const [ numberOfDice, numberOfSides ] = type.split('d');
+      commonRoll(Number(numberOfDice), Number(numberOfSides), type);
     }
   });
 </script>
