@@ -1,5 +1,5 @@
 ---
-title: Dice Roller
+title: Add Character
 layout: layouts/sidebar.njk
 ---
 
@@ -22,12 +22,16 @@ layout: layouts/sidebar.njk
         <legend>
           Race
         </legend>
-        <div class="stack" style="--stack-space: 0.5rem">
+        <div class="stack">
           {% for race in races %}
             <div>
               <input id="{{ race.Name }}" type="radio" name="race" value="{{ race.Name }}" required>
               <label for="{{ race.Name }}">
                 {{ race.Name }}
+                <br>
+                <small>
+                  {{ race.Description }}
+                </small>
               </label>
             </div>
           {% endfor %}
@@ -39,17 +43,63 @@ layout: layouts/sidebar.njk
         <legend>
           Class
         </legend>
-        <div class="stack" style="--stack-space: 0.5rem">
+        <div class="stack">
           {% for class in classes %}
             <div>
               <input id="{{ class.Name }}" type="radio" name="class" value="{{ class.Name }}" required>
               <label for="{{ class.Name }}">
                 {{ class.Name }}
+                <br>
+                <small>
+                  {{ class.Description }}
+                </small>
               </label>
             </div>
           {% endfor %}
         </div>
       </fieldset>
     </div>
+    <div>
+      <button type="submit">
+        Save and Continue
+      </button>
+    </div>
   </form>
 </div>
+
+<script type="module">
+  import { addToDb } from '../../scripts/db.mjs';
+
+  const addCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (event.target.matches('#addCharacterForm')) {
+      const character = {
+        name: event.target.elements.name.value,
+        race: event.target.elements.race.value,
+        class: event.target.elements.class.value,
+        level: 1,
+        experience: 0,
+        luck: 7,
+        maxHealth: 3,
+        currentHealth: 3,
+        maxStamina: 9,
+        currentStamina: 9,
+      };
+
+      addCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', (event) => {
+    const key = event.detail;
+    window.location.href = `/character-sheets/select-subclass?key=${key}`;
+  });
+</script>

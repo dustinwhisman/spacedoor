@@ -24,7 +24,7 @@ export const addToDb = (storeName, thingToAdd) => {
 
       const result = objectStore.put(thingToAdd);
       result.onsuccess = () => {
-        const successEvent = new CustomEvent('item-added', { detail: storeName });
+        const successEvent = new CustomEvent('item-added', { detail: thingToAdd.key });
         document.dispatchEvent(successEvent);
       };
     };

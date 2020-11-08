@@ -1,0 +1,86 @@
+---
+title: Select Subclass
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2>
+    Select Subclass
+  </h2>
+  <p>
+    Now choose which subclass you want your character to have.
+  </p>
+
+  <form id="selectSubclassForm" class="stack">
+    {% for class in classes %}
+      <fieldset data-class="{{ class.Name }}" hidden>
+        <legend>
+          {{ class.Name }} Subclass
+        </legend>
+        <div class="stack">
+          {% for subclass in class.subclasses %}
+            <div>
+              <input id="{{ subclass.Name }}" type="radio" name="subclass" value="{{ subclass.Name }}" required>
+              <label for="{{ subclass.Name }}">
+                {{ subclass.Name }}
+                <br>
+                <small>
+                  {{ subclass.Description }}
+                </small>
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+      </fieldset>
+    {% endfor %}
+    <div>
+      <button type="submit">
+        Save and Continue
+      </button>
+    </div>
+  </form>
+
+<script type="module">
+  import { getFromDb, addToDb } from '../../scripts/db.mjs';
+
+  let character;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      window.location.href = '/character-sheets/add-character';
+    }
+
+    character = await getFromDb('characters', key);
+    const fieldset = document.querySelector(`[data-class="${character.class}"]`);
+    fieldset.removeAttribute('hidden');
+  };
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (event.target.matches('#selectSubclassForm')) {
+      if (!character || !character.key) {
+        return;
+      }
+
+      character.subclass = event.target.elements.subclass.value;
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', (event) => {
+    const key = event.detail;
+    window.location.href = `/character-sheets/finalize-stats?key=${key}`;
+  });
+
+  getCharacter();
+</script>
