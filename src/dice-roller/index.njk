@@ -1,0 +1,124 @@
+---
+title: Dice Roller
+layout: layouts/sidebar.njk
+---
+
+<style>
+  .dice, .total {
+    border: 1px solid var(--text-color);
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .total {
+    border-radius: 50%;
+  }
+
+  .not-counted {
+    border-color: red;
+    color: red;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='red' /></svg>");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%, auto;
+  }
+</style>
+
+<div class="stack">
+  <h2>
+    Dice Roller
+  </h2>
+  <p>
+    Use this dice roller to quickly roll common dice combinations, such as
+    advantage, disadvantage, and typical weapon damage rolls. Don't forget to
+    add your modifiers!
+  </p>
+
+  <div class="stack">
+    <div>
+      <button data-roll="advantage">
+        Roll with Advantage
+      </button>
+    </div>
+    <div data-results="advantage" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+  const rollDice = (numberOfDice, numberOfSides) => {
+    let minValue = Infinity;
+    let maxValue = 0;
+    const roll = Array.apply(null, Array(numberOfDice)).map((a) => {
+      const value = Math.ceil(Math.random() * numberOfSides);
+      if (value < minValue) {
+        minValue = value;
+      }
+
+      if (value > maxValue) {
+        maxValue = value;
+      }
+
+      return value;
+    });
+
+    let minValueAssigned = false;
+    let maxValueAssigned = false;
+
+    return roll.map((value) => {
+      let isMin = false;
+      let isMax = false;
+
+      if (value === minValue && !minValueAssigned) {
+        isMin = true;
+        minValueAssigned = true;
+      }
+
+      if (value === maxValue && !maxValueAssigned) {
+        isMax = true;
+        maxValueAssigned = true;
+      }
+
+      return {
+        isMin,
+        isMax,
+        value,
+      };
+    });
+  };
+
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('[data-roll]')) {
+      const type = event.target.dataset.roll;
+
+      if (type === 'advantage') {
+        const results = rollDice(3, 6);
+        const total = results.reduce((sum, dice) => {
+          if (dice.isMin) {
+            return sum;
+          }
+
+          return sum + dice.value;
+        }, 0);
+
+        const resultsDiv = document.querySelector('[data-results=advantage]');
+        resultsDiv.innerHTML = `
+          <div class="cluster">
+            <div>
+              ${results.map((dice) => {
+                return `<div class="dice${dice.isMin ? ' not-counted' : ''}">${dice.value}</div>`;
+              }).join('+')}
+              <div>
+                =
+              </div>
+              <div class="total">
+                ${total}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+  });
+</script>
