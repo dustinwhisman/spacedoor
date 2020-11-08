@@ -3,9 +3,7 @@ title: Character
 layout: layouts/sidebar.njk
 ---
 
-<div class="stack">
-  <h2 data-character-name></h2>
-</div>
+<div class="stack" data-character-sheet></div>
 
 <script type="module">
   import { getFromDb } from '../../scripts/db.mjs';
@@ -20,8 +18,32 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
-    const nameElement = document.querySelector(`[data-character-name]`);
-    nameElement.innerHTML = character.name;
+    const characterSheetTemplate = `
+      <h2>${character.name}</h2>
+      <div>
+        <p>${character.race}</p>
+        <p>${character.class}: ${character.subclass}</p>
+        <p>Level ${character.level}</p>
+      </div>
+      <div>
+        <p>Charm:</p>
+        <p>Cool:</p>
+        <p>Sharp:</p>
+        <p>Tough:</p>
+        <p>Technobabble:</p>
+      </div>
+      <div>
+        <p>Health: ${character.currentHealth} / ${character.maxHealth}</p>
+        <p>Stamina: ${character.currentStamina} / ${character.maxStamina}</p>
+      </div>
+      <div>
+        <p>Experience: ${character.experience}</p>
+        <p>Luck Points: ${character.luck}</p>
+      </div>
+      <h3>Feats</h3>
+    `;
+    const sheetElement = document.querySelector(`[data-character-sheet]`);
+    sheetElement.innerHTML = characterSheetTemplate;
   };
 
   getCharacter();
