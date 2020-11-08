@@ -22,6 +22,15 @@ layout: layouts/sidebar.njk
       Add Character
     </a>
   </div>
+
+  <h3>
+    Your Characters
+  </h3>
+  <p data-no-characters hidden>
+    You haven't added any characters yet. When you do, they'll show up both here
+    and in the main navigation of the site.
+  </p>
+  <ul class="stack list-style:none" data-character-list></ul>
 </div>
 
 <script type="module">
@@ -35,7 +44,17 @@ layout: layouts/sidebar.njk
       console.error(error);
     }
 
-    console.log(characters);
+    if (!characters.length) {
+      const noCharactersMessage = document.querySelector('[data-no-characters]');
+      noCharactersMessage.removeAttribute('hidden');
+    }
+
+    const navElement = document.querySelector('[data-character-list]');
+    characters.forEach((character) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="/character-sheets/character?key=${character.key}">${character.name}</a>`;
+      navElement.appendChild(li);
+    });
   };
 
   initialize();

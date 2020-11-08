@@ -77,4 +77,37 @@
       {% endfor %}
     </ul>
   </li>
+  <li>
+    <a href="/character-sheets">Character Sheets</a>
+  </li>
+  <li>
+    <ul class="stack padding-inline-start:1em list-style:none" style="--stack-space: 0.5rem" data-navigation-list="characters">
+      <li>
+        <a href="/character-sheets/add-character">Add Character</a>
+      </li>
+    </ul>
+  </li>
 </ul>
+
+<script type="module">
+  import { getAllFromDb } from '/scripts/db.mjs';
+
+  const initialize = async () => {
+    let characters = [];
+    try {
+      characters = await getAllFromDb('characters');
+    } catch (error) {
+      console.error(error);
+    }
+
+    const navElement = document.querySelector('[data-navigation-list=characters]');
+
+    characters.forEach((character) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="/character-sheets/character?key=${character.key}">${character.name}</a>`;
+      navElement.appendChild(li);
+    });
+  };
+
+  initialize();
+</script>

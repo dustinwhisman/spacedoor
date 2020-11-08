@@ -1,0 +1,28 @@
+---
+title: Character
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2 data-character-name></h2>
+</div>
+
+<script type="module">
+  import { getFromDb } from '../../scripts/db.mjs';
+
+  let character;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      window.location.href = '/character-sheets';
+    }
+
+    character = await getFromDb('characters', key);
+    const nameElement = document.querySelector(`[data-character-name]`);
+    nameElement.innerHTML = character.name;
+  };
+
+  getCharacter();
+</script>
