@@ -141,6 +141,19 @@ renderData:
       </div>
     </div>
   {% endfor %}
+
+  <div data-class-links hidden>
+    <h3>Feats From Other Classes</h3>
+    <ul class="list-style:none">
+      {% for class in classes %}
+        <li>
+          <a href="/classes/{{ class.slug }}">
+            {{ class.Name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
 <script type="module">
@@ -154,6 +167,13 @@ renderData:
     if (!key) {
       return;
     }
+
+    const classLinksWrapper = document.querySelector('[data-class-links]');
+    const classLinks = document.querySelectorAll('[data-class-links] a');
+    classLinks.forEach((link) => {
+      link.href += `?key=${key}`;
+    });
+    classLinksWrapper.removeAttribute('hidden');
 
     character = await getFromDb('characters', key);
     const selectableFeats = document.querySelectorAll(`[data-add-feat]`);
