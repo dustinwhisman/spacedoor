@@ -7,4 +7,187 @@ layout: layouts/sidebar.njk
   <h2>
     Finalize Stats
   </h2>
+  <p>
+    If your primary, secondary, or penalty stats are predefined by your class,
+    those numbers should be autofilled for you. If you have a choice in stats,
+    you will need to set your chosen stat to either 1 or -1. Remember that you
+    have an additional +1 boost and a -1 penalty that you can assign to any of
+    these stats as well.
+  </p>
+  <div>
+    {% for class in classes %}
+      <ul class="list-style:none" data-class="{{ class.Name }}" hidden>
+        <li data-primary-stat="{{ class['Primary Stat'] }}">
+          Primary Stat: {{ class['Primary Stat'] }}
+        </li>
+        <li data-secondary-stat="{{ class['Secondary Stat'] }}">
+          Secondary Stat: {{ class['Secondary Stat'] }}
+        </li>
+        <li data-penalty-stat="{{ class['Penalty'] }}">
+          Penalty Stat: {{ class['Penalty'] }}
+        </li>
+      </ul>
+    {% endfor %}
+  </div>
+  <form id="finalizeStatsForm" class="stack">
+    <div>
+      <label for="charm">
+        Charm
+      </label>
+      <input id="charm" type="text" name="charm" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+    </div>
+    <div>
+      <label for="cool">
+        Cool
+      </label>
+      <input id="cool" type="text" name="cool" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+    </div>
+    <div>
+      <label for="sharp">
+        Sharp
+      </label>
+      <input id="sharp" type="text" name="sharp" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+    </div>
+    <div>
+      <label for="tough">
+        Tough
+      </label>
+      <input id="tough" type="text" name="tough" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+    </div>
+    <div>
+      <label for="technobabble">
+        Technobabble
+      </label>
+      <input id="technobabble" type="text" name="technobabble" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+    </div>
+    <div>
+      <button type="submit">
+        Save and Finish
+      </button>
+    </div>
+  </form>
 </div>
+
+<script type="module">
+  import { getFromDb, addToDb } from '../../scripts/db.mjs';
+
+  let character;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      window.location.href = '/character-sheets/add-character';
+    }
+
+    character = await getFromDb('characters', key);
+    const classStatsElement = document.querySelector(`[data-class="${character.class}"]`);
+    classStatsElement.removeAttribute('hidden');
+
+    const primaryStatElement = document.querySelector(`[data-class="${character.class}"] [data-primary-stat]`);
+    const primaryStat = primaryStatElement.dataset.primaryStat;
+
+    const secondaryStatElement = document.querySelector(`[data-class="${character.class}"] [data-secondary-stat]`);
+    const secondaryStat = secondaryStatElement.dataset.secondaryStat;
+
+    const penaltyStatElement = document.querySelector(`[data-class="${character.class}"] [data-penalty-stat]`);
+    const penaltyStat = penaltyStatElement.dataset.penaltyStat;
+
+    const charmInput = document.querySelector(`#charm`);
+    const coolInput = document.querySelector(`#cool`);
+    const sharpInput = document.querySelector(`#sharp`);
+    const toughInput = document.querySelector(`#tough`);
+    const technobabbleInput = document.querySelector(`#technobabble`);
+
+    switch (primaryStat) {
+      case 'Charm':
+        charmInput.value = '1';
+        break;
+      case 'Cool':
+        coolInput.value = '1';
+        break;
+      case 'Sharp':
+        sharpInput.value = '1';
+        break;
+      case 'Tough':
+        toughInput.value = '1';
+        break;
+      case 'Technobabble':
+        technobabbleInput.value = '1';
+        break;
+      default:
+        break;
+    }
+
+    switch (secondaryStat) {
+      case 'Charm':
+        charmInput.value = '1';
+        break;
+      case 'Cool':
+        coolInput.value = '1';
+        break;
+      case 'Sharp':
+        sharpInput.value = '1';
+        break;
+      case 'Tough':
+        toughInput.value = '1';
+        break;
+      case 'Technobabble':
+        technobabbleInput.value = '1';
+        break;
+      default:
+        break;
+    }
+
+    switch (penaltyStat) {
+      case 'Charm':
+        charmInput.value = '-1';
+        break;
+      case 'Cool':
+        coolInput.value = '-1';
+        break;
+      case 'Sharp':
+        sharpInput.value = '-1';
+        break;
+      case 'Tough':
+        toughInput.value = '-1';
+        break;
+      case 'Technobabble':
+        technobabbleInput.value = '-1';
+        break;
+      default:
+        break;
+    }
+  };
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (event.target.matches('#finalizeStatsForm')) {
+      if (!character || !character.key) {
+        return;
+      }
+
+      character.charm = Number(event.target.elements.charm.value);
+      character.cool = Number(event.target.elements.cool.value);
+      character.sharp = Number(event.target.elements.sharp.value);
+      character.tough = Number(event.target.elements.tough.value);
+      character.technobabble = Number(event.target.elements.technobabble.value);
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', (event) => {
+    const key = event.detail;
+    window.location.href = `/character-sheets/character?key=${key}`;
+  });
+
+  getCharacter();
+</script>
