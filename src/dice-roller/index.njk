@@ -19,6 +19,7 @@ layout: layouts/sidebar.njk
   .not-counted {
     border-color: red;
     color: red;
+    opacity: 0.5;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='red' /></svg>");
     background-repeat: no-repeat;
     background-position: center center;
@@ -38,19 +39,25 @@ layout: layouts/sidebar.njk
 
   <div class="stack">
     <div>
+      <button data-roll="normal">
+        Roll Normally (2d6)
+      </button>
+    </div>
+    <div data-results="normal" aria-live="polite"></div>
+    <div>
       <button data-roll="advantage">
         Roll with Advantage
       </button>
     </div>
     <div data-results="advantage" aria-live="polite"></div>
+    <div>
+      <button data-roll="disadvantage">
+        Roll with Disadvantage
+      </button>
+    </div>
+    <div data-results="disadvantage" aria-live="polite"></div>
   </div>
-  <div>
-    <button data-roll="disadvantage">
-      Roll with Disadvantage
-    </button>
-  </div>
-  <div data-results="disadvantage" aria-live="polite"></div>
-</div>
+
 </div>
 
 <script>
@@ -93,6 +100,30 @@ layout: layouts/sidebar.njk
         value,
       };
     });
+  };
+
+  const commonRoll = (numberOfDice, numberOfSides, type) => {
+    const results = rollDice(numberOfDice, numberOfSides);
+    const total = results.reduce((sum, dice) => {
+      return sum + dice.value;
+    }, 0);
+
+    const resultsDiv = document.querySelector(`[data-results=${type}]`);
+    resultsDiv.innerHTML = `
+      <div class="cluster">
+        <div>
+          ${results.map((dice) => {
+            return `<div class="dice">${dice.value}</div>`;
+          }).join('+')}
+          <div>
+            =
+          </div>
+          <div class="total">
+            ${total}
+          </div>
+        </div>
+      </div>
+    `;
   };
 
   const rollWithAdvantage = () => {
@@ -154,6 +185,11 @@ layout: layouts/sidebar.njk
   document.addEventListener('click', (event) => {
     if (event.target.matches('[data-roll]')) {
       const type = event.target.dataset.roll;
+
+      if (type === 'normal') {
+        commonRoll(2, 6, type);
+        return;
+      }
 
       if (type === 'advantage') {
         rollWithAdvantage();
