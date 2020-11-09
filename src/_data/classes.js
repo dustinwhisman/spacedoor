@@ -58,6 +58,7 @@ module.exports = async () => {
         ...r.fields,
       })),
       feats: feats.map((r) => ({
+        id: r.id,
         ...r.fields,
       })),
     };

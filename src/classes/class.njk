@@ -134,7 +134,7 @@ renderData:
           {{ feat.Description }}
         </p>
         <div>
-          <button type="button" class="small" data-add-feat data-level="{{ feat.Level }}" data-name="{{ feat.Name }}" data-description="{{ feat.Description }}" hidden>
+          <button type="button" class="small" data-toggle-feat data-id="{{ feat.id }}" data-level="{{ feat.Level }}" hidden>
             Take This Feat
           </button>
         </div>
@@ -176,34 +176,45 @@ renderData:
     classLinksWrapper.removeAttribute('hidden');
 
     character = await getFromDb('characters', key);
-    const selectableFeats = document.querySelectorAll(`[data-add-feat]`);
+    const selectableFeats = document.querySelectorAll(`[data-toggle-feat]`);
     selectableFeats.forEach((feat) => {
       const level = Number(feat.dataset.level);
+      const id = feat.dataset.id;
       if (level <= character.level) {
         feat.removeAttribute('hidden');
+        if (character.feats && character.feats.length && character.feats.includes(id)) {
+          feat.textContent = 'Remove This Feat';
+          feat.setAttribute('data-is-taken', true);
+        }
       }
     });
   };
 
-  const addFeat = async (feat) => {
+  const toggleFeat = async (character) => {
     try {
-      await addToDb('feats', feat);
+      await addToDb('characters', character);
     } catch (error) {
       console.error(error);
     }
   };
 
   document.addEventListener('click', (event) => {
-    if (event.target.matches('[data-add-feat]')) {
-      const feat = {
-        owner: character.key,
-        type: 'class',
-        name: event.target.dataset.name,
-        level: event.target.dataset.level,
-        description: event.target.dataset.description,
-      };
+    if (event.target.matches('[data-toggle-feat]')) {
+      const id = event.target.dataset.id;
+      const isTaken = !!event.target.dataset.isTaken;
 
-      addFeat(feat);
+      if (isTaken) {
+        const index = character.feats.findIndex(feat => feat === id);
+        character.feats.splice(index, 1);
+      } else {
+        if (!character.feats) {
+          character.feats = [id];
+        } else {
+          character.feats.push(id);
+        }
+      }
+
+      toggleFeat(character);
     }
   });
 
