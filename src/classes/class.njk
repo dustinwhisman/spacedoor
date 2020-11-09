@@ -86,6 +86,11 @@ renderData:
         <p>
           {{ item.Description }}
         </p>
+        <div>
+          <button type="button" class="small" data-toggle-equipment data-id="{{ item.id }}" hidden>
+            Equip
+          </button>
+        </div>
       </div>
     </div>
   {% endfor %}
@@ -185,12 +190,28 @@ renderData:
         if (character.feats && character.feats.length && character.feats.includes(id)) {
           feat.textContent = 'Remove This Feat';
           feat.setAttribute('data-is-taken', true);
+        } else {
+          feat.textContent = 'Take This Feat';
+          feat.removeAttribute('data-is-taken');
         }
+      }
+    });
+
+    const equipment = document.querySelectorAll('[data-toggle-equipment]');
+    equipment.forEach((item) => {
+      const id = item.dataset.id;
+      item.removeAttribute('hidden');
+      if (character.equipment === id) {
+        item.textContent = 'Unequip';
+        item.setAttribute('data-is-equipped', true);
+      } else {
+        item.textContent = 'Equip';
+        item.removeAttribute('data-is-equipped');
       }
     });
   };
 
-  const toggleFeat = async (character) => {
+  const updateCharacter = async (character) => {
     try {
       await addToDb('characters', character);
     } catch (error) {
@@ -214,12 +235,27 @@ renderData:
         }
       }
 
-      toggleFeat(character);
+      updateCharacter(character);
+      return;
+    }
+
+    if (event.target.matches('[data-toggle-equipment]')) {
+      const id = event.target.dataset.id;
+      const isEquipped = !!event.target.dataset.isEquipped;
+
+      if (isEquipped) {
+        character.equipment = '';
+      } else {
+        character.equipment = id;
+      }
+
+      updateCharacter(character);
+      return;
     }
   });
 
   document.addEventListener('item-added', () => {
-    window.location.href = `/character-sheets/character?key=${character.key}`;
+    getCharacter();
   });
 
   getCharacter();

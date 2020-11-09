@@ -55,6 +55,7 @@ module.exports = async () => {
         shorthand: r.fields.Name.toLowerCase().replace(/\s/g, '-'),
       })),
       equipment: equipment.map((r) => ({
+        id: r.id,
         ...r.fields,
       })),
       feats: feats.map((r) => ({

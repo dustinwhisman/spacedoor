@@ -7,25 +7,20 @@ layout: layouts/sidebar.njk
   <div data-character-sheet class="stack"></div>
 
   <h3>Special Equipment</h3>
-  <p>
-    This is the list of special equipment that you can use. Pick one at the
-    start of each mission.
-  </p>
+  <div data-change-equipment></div>
   {% for class in classes %}
-    <div data-equipment-class="{{ class.Name }}" class="stack" hidden>
-      {% for item in class.equipment %}
-        <div>
-          <div class="stack" style="--stack-space: 0.5rem">
-            <h4>
-              {{ item.Name }}
-            </h4>
-            <p>
-              {{ item.Description }}
-            </p>
-          </div>
+    {% for item in class.equipment %}
+      <div class="stack" data-equipment data-id="{{ item.id }}" hidden>
+        <div class="stack" style="--stack-space: 0.5rem">
+          <h4>
+            {{ item.Name }}
+          </h4>
+          <p>
+            {{ item.Description }}
+          </p>
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
   {% endfor %}
 
   <h3>Weapons</h3>
@@ -128,9 +123,14 @@ layout: layouts/sidebar.njk
 
     character = await getFromDb('characters', key);
 
-    const equipment = document.querySelectorAll(`[data-equipment-class="${character.class}"]`);
+    const changeEquipmentElement = document.querySelector('[data-change-equipment]');
+    changeEquipmentElement.innerHTML = `<a href="/classes/${character.class.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Change Equipment</a>`;
+
+    const equipment = document.querySelectorAll('[data-equipment]');
     equipment.forEach((item) => {
-      item.removeAttribute('hidden');
+      if (item.dataset.id === character.equipment) {
+        item.removeAttribute('hidden');
+      }
     });
 
     const weapons = document.querySelectorAll('[data-weapon-modifier]');
