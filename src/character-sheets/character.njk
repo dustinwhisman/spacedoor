@@ -92,8 +92,26 @@ layout: layouts/sidebar.njk
   {% endfor %}
 
   <h3>Feats</h3>
-  <div data-feat-links class="stack"></div>
-  <div data-feats class="stack"></div>
+  <div class="cluster">
+    <div data-feat-links></div>
+  </div>
+  {% for feat in allFeats %}
+    <div data-feat data-id="{{ feat.id }}" hidden>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ feat.Name }}
+        </h4>
+        <p>
+          <small>
+            Level {{ feat.Level }}
+          </small>
+        </p>
+        <p>
+          {{ feat.Description }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 
 <script type="module">
@@ -183,23 +201,12 @@ layout: layouts/sidebar.njk
     const featLinksElement = document.querySelector('[data-feat-links]');
     featLinksElement.innerHTML = featLinksTemplate;
 
-    const allFeats = await getAllFromDb('feats');
-    const feats = allFeats.filter((feat) => feat.owner === key);
-
-    const featsTemplate = feats.map((feat) => {
-      return `
-        <div>
-          <h4>${feat.name}</h4>
-          <p>
-            <small>Level ${feat.level}</small>
-          </p>
-          <p>${feat.description}</p>
-        </div>
-      `;
-    }).join('');
-
-    const featsElement = document.querySelector('[data-feats]');
-    featsElement.innerHTML = featsTemplate;
+    const feats = document.querySelectorAll('[data-feat]');
+    feats.forEach((feat) => {
+      if (character.feats && character.feats.length && character.feats.includes(feat.dataset.id)) {
+        feat.removeAttribute('hidden');
+      }
+    });
   };
 
   getCharacter();
