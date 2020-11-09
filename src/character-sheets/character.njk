@@ -6,6 +6,24 @@ layout: layouts/sidebar.njk
 <div class="stack">
   <div data-character-sheet class="stack"></div>
 
+  <h3>Special Equipment</h3>
+  {% for class in classes %}
+    <div data-equipment-class="{{ class.Name }}" class="stack" hidden>
+      {% for item in class.equipment %}
+        <div>
+          <div class="stack" style="--stack-space: 0.5rem">
+            <h4>
+              {{ item.Name }}
+            </h4>
+            <p>
+              {{ item.Description }}
+            </p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
   <h3>Feats</h3>
   <div data-feat-links class="stack"></div>
   <div data-feats class="stack"></div>
@@ -24,6 +42,12 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
+
+    const usableEquipment = document.querySelectorAll(`[data-equipment-class="${character.class}"]`);
+    usableEquipment.forEach((item) => {
+      item.removeAttribute('hidden');
+    });
+
     const characterSheetTemplate = `
       <h2>${character.name}</h2>
       <div>

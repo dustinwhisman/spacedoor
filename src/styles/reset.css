@@ -85,3 +85,7 @@ fieldset legend {
     scroll-behavior: auto !important;
   }
 }
+
+[hidden] {
+  display: none !important;
+}
