@@ -76,6 +76,9 @@ layout: layouts/sidebar.njk
         if (character.feats && character.feats.length && character.feats.includes(id)) {
           feat.textContent = 'Remove This Feat';
           feat.setAttribute('data-is-taken', true);
+        } else {
+          feat.textContent = 'Take This Feat';
+          feat.removeAttribute('data-is-taken');
         }
       }
     });
@@ -155,8 +158,11 @@ layout: layouts/sidebar.njk
       }
 
       await updateCharacter(character);
-      window.location.href = `/character-sheets/character?key=${character.key}`;
     }
+  });
+
+  document.addEventListener('item-added', () => {
+    getCharacter();
   });
 
   getCharacter();

@@ -72,12 +72,15 @@ renderData:
         if (character.feats && character.feats.length && character.feats.includes(id)) {
           feat.textContent = 'Remove This Feat';
           feat.setAttribute('data-is-taken', true);
+        } else {
+          feat.textContent = 'Take This Feat';
+          feat.removeAttribute('data-is-taken');
         }
       }
     });
   };
 
-  const toggleFeat = async (character) => {
+  const updateCharacter = async (character) => {
     try {
       await addToDb('characters', character);
     } catch (error) {
@@ -101,12 +104,12 @@ renderData:
         }
       }
 
-      toggleFeat(character);
+      updateCharacter(character);
     }
   });
 
   document.addEventListener('item-added', () => {
-    window.location.href = `/character-sheets/character?key=${character.key}`;
+    getCharacter();
   });
 
   getCharacter();

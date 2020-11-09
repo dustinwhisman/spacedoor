@@ -24,12 +24,9 @@ layout: layouts/sidebar.njk
   {% endfor %}
 
   <h3>Weapons</h3>
-  <p>
-    These are the weapons that your character can use. Pick two (or more with
-    certain feats) to use at the beginning of the mission.
-  </p>
+  <div data-change-weapons></div>
   {% for weapon in weapons %}
-    <div data-weapon-modifier="{{ weapon.Modifier }}" data-required-weapon-bonus="{{ weapon['Required Bonus'] }}" hidden>
+    <div data-weapon data-id="{{ weapon.id }}" hidden>
       <div class="stack" style="--stack-space: 0.5rem">
         <h4>
           {{ weapon.Name }}
@@ -133,16 +130,13 @@ layout: layouts/sidebar.njk
       }
     });
 
-    const weapons = document.querySelectorAll('[data-weapon-modifier]');
-    weapons.forEach((weapon) => {
-      if (!weapon.dataset.weaponModifier) {
-        weapon.removeAttribute('hidden');
-        return;
-      }
+    const changeWeaponsElement = document.querySelector('[data-change-weapons]');
+    changeWeaponsElement.innerHTML = `<a href="/weapons?key=${character.key}">Change Weapons</a>`;
 
-      if (character[weapon.dataset.weaponModifier.toLowerCase()] >= Number(weapon.dataset.requiredWeaponBonus)) {
+    const weapons = document.querySelectorAll('[data-weapon]');
+    weapons.forEach((weapon) => {
+      if (character.weapons && character.weapons.length && character.weapons.includes(weapon.dataset.id)) {
         weapon.removeAttribute('hidden');
-        return;
       }
     });
 

@@ -24,6 +24,7 @@ module.exports = async () => {
   }).all();
 
   const weapons = weaponRecords.map(r => ({
+    id: r.id,
     ...r.fields,
   }));
 
