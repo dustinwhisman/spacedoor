@@ -20,6 +20,7 @@ module.exports = async () => {
   }).all();
 
   const feats = featRecords.map(r => ({
+    id: r.id,
     ...r.fields,
   }));
 
