@@ -66,6 +66,31 @@ layout: layouts/sidebar.njk
     </div>
   {% endfor %}
 
+  <h3>Armor</h3>
+  <p>
+    These are the options for armor that your character is qualified to use.
+    Choose one for each stat category to wear on your missions.
+  </p>
+  {% for armor in armors %}
+    <div data-armor-modifier="{{ armor.Modifier }}" data-required-armor-bonus="{{ armor['Required Bonus'] }}" hidden>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ armor.Name }}
+        </h4>
+        {% if armor.Modifier %}
+          <p>
+            <small>
+              +{{ armor['Required Bonus'] }} {{ armor.Modifier }}
+            </small>
+          </p>
+        {% endif %}
+        <p>
+          {{ armor.Description }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+
   <h3>Feats</h3>
   <div data-feat-links class="stack"></div>
   <div data-feats class="stack"></div>
@@ -99,6 +124,19 @@ layout: layouts/sidebar.njk
 
       if (character[weapon.dataset.weaponModifier.toLowerCase()] >= Number(weapon.dataset.requiredWeaponBonus)) {
         weapon.removeAttribute('hidden');
+        return;
+      }
+    });
+
+    const armors = document.querySelectorAll('[data-armor-modifier]');
+    armors.forEach((armor) => {
+      if (!armor.dataset.armorModifier) {
+        armor.removeAttribute('hidden');
+        return;
+      }
+
+      if (character[armor.dataset.armorModifier.toLowerCase()] >= Number(armor.dataset.requiredArmorBonus)) {
+        armor.removeAttribute('hidden');
         return;
       }
     });
