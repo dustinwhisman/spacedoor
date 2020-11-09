@@ -35,7 +35,86 @@ layout: layouts/sidebar.njk
         <p>
           {{ armor.Description }}
         </p>
+        <div>
+          <button type="button" class="small" data-toggle-armor data-id="{{ armor.id }}" data-modifier="{{ armor.Modifier }}" data-required-bonus="{{ armor['Required Bonus'] }}" hidden>
+            Equip
+          </button>
+        </div>
       </div>
     </div>
   {% endfor %}
 </div>
+
+<script type="module">
+  import { getFromDb, addToDb } from '/scripts/db.mjs';
+
+  let character;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      return;
+    }
+
+    character = await getFromDb('characters', key);
+    const usableArmors = document.querySelectorAll(`[data-toggle-armor]`);
+    usableArmors.forEach((armor) => {
+      let canEquip = false;
+      const id = armor.dataset.id;
+
+      if (!armor.dataset.modifier) {
+        canEquip = true;
+      }
+
+      if (character[armor.dataset.modifier.toLowerCase()] >= Number(armor.dataset.requiredBonus)) {
+        canEquip = true;
+      }
+
+      if (canEquip) {
+        armor.removeAttribute('hidden');
+        if (character.armors && character.armors.length && character.armors.includes(id)) {
+          armor.textContent = 'Unequip';
+          armor.setAttribute('data-is-equipped', true);
+        } else {
+          armor.textContent = 'Equip';
+          armor.removeAttribute('data-is-equipped');
+        }
+      }
+    });
+  };
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('[data-toggle-armor]')) {
+      const id = event.target.dataset.id;
+      const isEquipped = !!event.target.dataset.isEquipped;
+
+      if (isEquipped) {
+        const index = character.armors.findIndex(feat => feat === id);
+        character.armors.splice(index, 1);
+      } else {
+        if (!character.armors) {
+          character.armors = [id];
+        } else {
+          character.armors.push(id);
+        }
+      }
+
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', () => {
+    getCharacter();
+  });
+
+  getCharacter();
+</script>

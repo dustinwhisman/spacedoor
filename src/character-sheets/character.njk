@@ -59,12 +59,9 @@ layout: layouts/sidebar.njk
   {% endfor %}
 
   <h3>Armor</h3>
-  <p>
-    These are the options for armor that your character is qualified to use.
-    Choose one for each stat category to wear on your missions.
-  </p>
+  <div data-change-armor></div>
   {% for armor in armors %}
-    <div data-armor-modifier="{{ armor.Modifier }}" data-required-armor-bonus="{{ armor['Required Bonus'] }}" hidden>
+    <div data-armor data-id="{{ armor.id }}" hidden>
       <div class="stack" style="--stack-space: 0.5rem">
         <h4>
           {{ armor.Name }}
@@ -140,16 +137,13 @@ layout: layouts/sidebar.njk
       }
     });
 
-    const armors = document.querySelectorAll('[data-armor-modifier]');
-    armors.forEach((armor) => {
-      if (!armor.dataset.armorModifier) {
-        armor.removeAttribute('hidden');
-        return;
-      }
+    const changeArmorElement = document.querySelector('[data-change-armor]');
+    changeArmorElement.innerHTML = `<a href="/armor?key=${character.key}">Change Armor</a>`;
 
-      if (character[armor.dataset.armorModifier.toLowerCase()] >= Number(armor.dataset.requiredArmorBonus)) {
+    const armors = document.querySelectorAll('[data-armor]');
+    armors.forEach((armor) => {
+      if (character.armors && character.armors.length && character.armors.includes(armor.dataset.id)) {
         armor.removeAttribute('hidden');
-        return;
       }
     });
 

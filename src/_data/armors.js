@@ -24,6 +24,7 @@ module.exports = async () => {
   }).all();
 
   const armors = armorRecords.map(r => ({
+    id: r.id,
     ...r.fields,
   }));
 
