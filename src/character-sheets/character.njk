@@ -7,6 +7,10 @@ layout: layouts/sidebar.njk
   <div data-character-sheet class="stack"></div>
 
   <h3>Special Equipment</h3>
+  <p>
+    This is the list of special equipment that you can use. Pick one at the
+    start of each mission.
+  </p>
   {% for class in classes %}
     <div data-equipment-class="{{ class.Name }}" class="stack" hidden>
       {% for item in class.equipment %}
@@ -21,6 +25,44 @@ layout: layouts/sidebar.njk
           </div>
         </div>
       {% endfor %}
+    </div>
+  {% endfor %}
+
+  <h3>Weapons</h3>
+  <p>
+    These are the weapons that your character can use. Pick two (or more with
+    certain feats) to use at the beginning of the mission.
+  </p>
+  {% for weapon in weapons %}
+    <div data-weapon-modifier="{{ weapon.Modifier }}" data-required-weapon-bonus="{{ weapon['Required Bonus'] }}" hidden>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ weapon.Name }}
+        </h4>
+        {% if weapon.Modifier %}
+          <p>
+            <small>
+              +{{ weapon['Required Bonus'] }} {{ weapon.Modifier }}{% if weapon.Restrictions %}, {{ weapon.Restrictions }}{% endif %}
+            </small>
+          </p>
+        {% endif %}
+        <p>
+          {{ weapon.Description }}
+        </p>
+        {% if weapon['Mixed Success Damage'] %}
+          <ul>
+            <li>
+              Mixed Success Damage: {{ weapon['Mixed Success Damage'] }}
+            </li>
+            <li>
+              Success Damage: {{ weapon['Success Damage'] }}
+            </li>
+            <li>
+              Critical Success Damage: {{ weapon['Critical Success Damage'] }}
+            </li>
+          </ul>
+        {% endif %}
+      </div>
     </div>
   {% endfor %}
 
@@ -43,9 +85,22 @@ layout: layouts/sidebar.njk
 
     character = await getFromDb('characters', key);
 
-    const usableEquipment = document.querySelectorAll(`[data-equipment-class="${character.class}"]`);
-    usableEquipment.forEach((item) => {
+    const equipment = document.querySelectorAll(`[data-equipment-class="${character.class}"]`);
+    equipment.forEach((item) => {
       item.removeAttribute('hidden');
+    });
+
+    const weapons = document.querySelectorAll('[data-weapon-modifier]');
+    weapons.forEach((weapon) => {
+      if (!weapon.dataset.weaponModifier) {
+        weapon.removeAttribute('hidden');
+        return;
+      }
+
+      if (character[weapon.dataset.weaponModifier.toLowerCase()] >= Number(weapon.dataset.requiredWeaponBonus)) {
+        weapon.removeAttribute('hidden');
+        return;
+      }
     });
 
     const characterSheetTemplate = `
