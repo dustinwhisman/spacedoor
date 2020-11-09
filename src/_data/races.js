@@ -38,6 +38,7 @@ module.exports = async () => {
       ...record.fields,
       slug: record.fields.Name.toLowerCase().replace(/\s/g, '-'),
       feats: feats.map((r) => ({
+        id: r.id,
         ...r.fields,
       })),
     };
