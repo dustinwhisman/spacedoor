@@ -58,6 +58,17 @@ layout: layouts/sidebar.njk
     width: 2rem;
     height: 2rem;
   }
+
+  .stat-bubble {
+    display: inline-block;
+    margin-inline-end: 0.5rem;
+    border: 1px solid var(--text-color);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.5;
+  }
 </style>
 
 <div class="stack">
@@ -232,13 +243,41 @@ layout: layouts/sidebar.njk
         <p>Level ${character.level}</p>
         <a href="/character-sheets/level-up?key=${character.key}" data-level-up-link>Level Up</a>
       </div>
-      <div>
-        <p>Charm: ${character.charm}</p>
-        <p>Cool: ${character.cool}</p>
-        <p>Sharp: ${character.sharp}</p>
-        <p>Tough: ${character.tough}</p>
-        <p>Technobabble: ${character.technobabble}</p>
+      <h3>Stats</h3>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <p class="h4">
+          <span class="stat-bubble">
+            ${character.charm}
+          </span>
+          Charm
+        </p>
+        <p class="h4">
+          <span class="stat-bubble">
+            ${character.cool}
+          </span>
+          Cool
+        </p>
+        <p class="h4">
+          <span class="stat-bubble">
+            ${character.sharp}
+          </span>
+          Sharp
+        </p>
+        <p class="h4">
+          <span class="stat-bubble">
+            ${character.tough}
+          </span>
+          Tough
+        </p>
+        <p class="h4">
+          <span class="stat-bubble">
+            ${character.technobabble}
+          </span>
+          Technobabble
+        </p>
       </div>
+
+      <h3>Health, Experience, and Luck</h3>
       <div>
         <div>
           <label for="health">Health: ${character.currentHealth} / ${character.maxHealth}</label>
