@@ -52,6 +52,12 @@ layout: layouts/sidebar.njk
   meter::-webkit-meter-even-less-good-value {
     background: var(--sub-sub-optimum);
   }
+
+  [data-toggle-experience],
+  [data-toggle-luck] {
+    width: 2rem;
+    height: 2rem;
+  }
 </style>
 
 <div class="stack">
@@ -285,7 +291,19 @@ layout: layouts/sidebar.njk
         </div>
       </div>
       <div>
-        <p>Experience: ${character.experience}</p>
+        <fieldset>
+          <legend id="experienceLabel">Experience</legend>
+          <div class="cluster">
+            <div style="--cluster-space: 0">
+              ${Array.apply(null, Array(5)).map((a, index) => {
+                return `<input type="checkbox" aria-describedby="experienceLabel" data-toggle-experience${index < character.experience ? ' checked' : ''}>`;
+              }).join('')}
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      ${character.experience === 5 ? `<div><a href="/character-sheets/level-up?key=${character.key}" data-level-up-link>Level Up!</a></div>`: ''}
+      <div>
         <p>Luck Points: ${character.luck}</p>
       </div>
     `;
@@ -327,8 +345,8 @@ layout: layouts/sidebar.njk
   document.addEventListener('click', async (event) => {
     if (event.target.matches('[data-level-up-link]')) {
       event.preventDefault();
-      // increment level, then navigate
       character.level += 1;
+      character.experience = 0;
       await updateCharacter(character);
       window.location.href = event.target.href;
     }
@@ -378,6 +396,26 @@ layout: layouts/sidebar.njk
         }
       } else {
         character.currentHealth += health;
+      }
+
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('change', (event) => {
+    if (event.target.matches('[data-toggle-experience]')) {
+      if (event.target.checked) {
+        character.experience += 1;
+      } else {
+        character.experience -= 1;
+      }
+
+      if (character.experience > 5) {
+        character.experience = 5;
+      }
+
+      if (character.experience < 0) {
+        character.experience = 0;
       }
 
       updateCharacter(character);
