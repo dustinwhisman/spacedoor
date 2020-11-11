@@ -242,6 +242,47 @@ layout: layouts/sidebar.njk
           <label for="stamina">Stamina: ${character.currentStamina} / ${character.maxStamina}</label>
           <meter id="stamina" min="0" max="${character.maxStamina}" low="${Math.ceil(character.maxStamina / 3)}" high="${Math.ceil(character.maxStamina * 2 / 3)}" optimum="${character.maxStamina}" value="${character.currentStamina}"></meter>
         </div>
+        <div class="stack">
+          <div>
+            <form id="takeDamageForm" class="stack" style="--stack-space: 0.5rem">
+              <label for="damage">Damage</label>
+              <div class="cluster">
+                <div>
+                  <input id="damage" type="text" name="damage" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+                  <button type="submit" class="small">
+                    Take Damage
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div>
+            <form id="gainStaminaForm" class="stack" style="--stack-space: 0.5rem">
+              <label for="gainStamina">Stamina</label>
+              <div class="cluster">
+                <div>
+                  <input id="gainStamina" type="text" name="gain-stamina" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+                  <button type="submit" class="small">
+                    Gain Stamina
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div>
+            <form id="gainHealthForm" class="stack" style="--stack-space: 0.5rem">
+              <label for="gainHealth">Health</label>
+              <div class="cluster">
+                <div>
+                  <input id="gainHealth" type="text" name="gain-health" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+                  <button type="submit" class="small">
+                    Gain Health
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
       <div>
         <p>Experience: ${character.experience}</p>
@@ -275,6 +316,14 @@ layout: layouts/sidebar.njk
     });
   };
 
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   document.addEventListener('click', async (event) => {
     if (event.target.matches('[data-level-up-link]')) {
       event.preventDefault();
@@ -285,13 +334,59 @@ layout: layouts/sidebar.njk
     }
   });
 
-  const updateCharacter = async (character) => {
-    try {
-      await addToDb('characters', character);
-    } catch (error) {
-      console.error(error);
+  document.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (event.target.matches('#takeDamageForm')) {
+      const damage = Number(event.target.elements.damage.value);
+      const remainder = character.currentStamina - damage;
+
+      if (remainder < 0) {
+        character.currentStamina = 0;
+        character.currentHealth += remainder;
+
+        if (character.currentHealth <= 0) {
+          character.currentHealth = 0;
+        }
+      } else {
+        character.currentStamina -= damage;
+      }
+
+      updateCharacter(character);
     }
-  };
+
+    if (event.target.matches('#gainStaminaForm')) {
+      const stamina = Number(event.target.elements['gain-stamina'].value);
+
+      character.currentStamina += stamina;
+      if (character.currentStamina > character.maxStamina) {
+        character.currentStamina = character.maxStamina;
+      }
+
+      updateCharacter(character);
+    }
+
+    if (event.target.matches('#gainHealthForm')) {
+      const health = Number(event.target.elements['gain-health'].value);
+      const overage = character.currentHealth + health - character.maxHealth;
+
+      if (overage > 0) {
+        character.currentHealth = character.maxHealth;
+
+        character.currentStamina += overage;
+        if (character.currentStamina > character.maxStamina) {
+          character.currentStamina = character.maxStamina;
+        }
+      } else {
+        character.currentHealth += health;
+      }
+
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', () => {
+    getCharacter();
+  });
 
   getCharacter();
 </script>
