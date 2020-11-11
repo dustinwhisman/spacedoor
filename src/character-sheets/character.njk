@@ -3,6 +3,57 @@ title: Character
 layout: layouts/sidebar.njk
 ---
 
+<style>
+  meter {
+    --background: #dadada;
+    --optimum: forestgreen;
+    --sub-optimum: gold;
+    --sub-sub-optimum: crimson;
+
+    /* The gray background in Firefox */
+    background: var(--background);
+    display: block;
+    margin-bottom: 1em;
+    width: 100%;
+    max-width: 40ch;
+  }
+
+  /* The gray background in Chrome, etc. */
+  meter::-webkit-meter-bar {
+    background: var(--background);
+  }
+
+  /* The green (optimum) bar in Firefox */
+  meter:-moz-meter-optimum::-moz-meter-bar {
+    background: var(--optimum);
+  }
+
+  /* The green (optimum) bar in Chrome etc. */
+  meter::-webkit-meter-optimum-value {
+    background: var(--optimum);
+  }
+
+  /* The yellow (sub-optimum) bar in Firefox */
+  meter:-moz-meter-sub-optimum::-moz-meter-bar {
+    background: var(--sub-optimum);
+  }
+
+  /* The yellow (sub-optimum) bar in Chrome etc. */
+  meter::-webkit-meter-suboptimum-value {
+    background: var(--sub-optimum);
+  }
+
+  /* The red (even less good) bar in Firefox */
+  meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+    background: var(--sub-sub-optimum);
+  }
+
+  /* The red (even less good) bar in Chrome etc. */
+  meter::-webkit-meter-even-less-good-value {
+    background: var(--sub-sub-optimum);
+  }
+</style>
+
 <div class="stack">
   <div data-character-sheet class="stack"></div>
 
@@ -183,8 +234,14 @@ layout: layouts/sidebar.njk
         <p>Technobabble: ${character.technobabble}</p>
       </div>
       <div>
-        <p>Health: ${character.currentHealth} / ${character.maxHealth}</p>
-        <p>Stamina: ${character.currentStamina} / ${character.maxStamina}</p>
+        <div>
+          <label for="health">Health: ${character.currentHealth} / ${character.maxHealth}</label>
+          <meter id="health" min="0" style="max-width: calc(${character.maxHealth / character.maxStamina} * 40ch)" max="${character.maxHealth}" low="${Math.ceil(character.maxHealth / 3)}" high="${Math.ceil(character.maxHealth * 2 / 3)}" optimum="${character.maxHealth}" value="${character.currentHealth}"></meter>
+        </div>
+        <div>
+          <label for="stamina">Stamina: ${character.currentStamina} / ${character.maxStamina}</label>
+          <meter id="stamina" min="0" max="${character.maxStamina}" low="${Math.ceil(character.maxStamina / 3)}" high="${Math.ceil(character.maxStamina * 2 / 3)}" optimum="${character.maxStamina}" value="${character.currentStamina}"></meter>
+        </div>
       </div>
       <div>
         <p>Experience: ${character.experience}</p>
