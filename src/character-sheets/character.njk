@@ -304,7 +304,16 @@ layout: layouts/sidebar.njk
       </div>
       ${character.experience === 5 ? `<div><a href="/character-sheets/level-up?key=${character.key}" data-level-up-link>Level Up!</a></div>`: ''}
       <div>
-        <p>Luck Points: ${character.luck}</p>
+        <fieldset>
+          <legend id="luckLabel">Luck Points</legend>
+          <div class="cluster">
+            <div style="--cluster-space: 0">
+              ${Array.apply(null, Array(7)).map((a, index) => {
+                return `<input type="checkbox" aria-describedby="luckLabel" data-toggle-luck${index < (7 - character.luck) ? ' checked' : ''}>`;
+              }).join('')}
+            </div>
+          </div>
+        </fieldset>
       </div>
     `;
 
@@ -416,6 +425,24 @@ layout: layouts/sidebar.njk
 
       if (character.experience < 0) {
         character.experience = 0;
+      }
+
+      updateCharacter(character);
+    }
+
+    if (event.target.matches('[data-toggle-luck]')) {
+      if (event.target.checked) {
+        character.luck -= 1;
+      } else {
+        character.luck += 1;
+      }
+
+      if (character.luck > 7) {
+        character.luck = 7;
+      }
+
+      if (character.luck < 0) {
+        character.luck = 0;
       }
 
       updateCharacter(character);
