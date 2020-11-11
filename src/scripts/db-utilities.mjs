@@ -1,4 +1,4 @@
-export const schemaVersion = 1;
+export const schemaVersion = 3;
 
 export const updateSchema = (event) => {
   const upgradeDb = event.target.result;
@@ -7,11 +7,6 @@ export const updateSchema = (event) => {
     upgradeDb.deleteObjectStore('characters');
   }
   upgradeDb.createObjectStore('characters', { keyPath: 'key' });
-
-  if (upgradeDb.objectStoreNames.contains('feats')) {
-    upgradeDb.deleteObjectStore('feats');
-  }
-  upgradeDb.createObjectStore('feats', { keyPath: 'key' });
 };
 
 // tiny uuidv4 generator
