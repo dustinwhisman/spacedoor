@@ -1,0 +1,286 @@
+---
+title: Level Up
+layout: layouts/sidebar.njk
+---
+
+<style>
+  .dice, .total {
+    border: 1px solid var(--text-color);
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .total {
+    border-radius: 50%;
+  }
+
+  .not-counted {
+    border-color: red;
+    color: red;
+    opacity: 0.5;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='red' /></svg>");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%, auto;
+  }
+</style>
+
+<div class="stack">
+  <h2>Level Up</h2>
+  <p>
+    Roll for new health and stamina, then choose a feat to finish leveling up.
+  </p>
+  <form id="increaseHealthForm" class="stack">
+    <div>
+      <label for="level">Level</label>
+      <input id="level" type="text" name="level" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+    </div>
+    <p data-describe-health>
+      Roll 2d6 and add the lower value to your Max Health. Add the higher value
+      to your Max Stamina. Add your tough modifier to whichever pool you would
+      like to.
+    </p>
+    <div>
+      <button type="button" data-roll="health">
+        Roll for Health
+      </button>
+    </div>
+    <div data-results="health" aria-live="polite"></div>
+    <div>
+      <label for="maxHealth">Max Health</label>
+      <input id="maxHealth" type="text" name="max-health" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+    </div>
+    <div>
+      <label for="maxStamina">Max Stamina</label>
+      <input id="maxStamina" type="text" name="max-stamina" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+    </div>
+    <div>
+      <button type="submit">
+        Save Changes
+      </button>
+    </div>
+  </form>
+
+  <h3>Take a Feat</h3>
+  <p>
+    These are all the feats that you should be able to take, given your race,
+    class, and level. If you take a generalist feat that gives you access to
+    other class feats, you can toggle those to appear as well.
+  </p>
+  <div>
+    <input id="toggleClassFeats" type="checkbox">
+    <label for="toggleClassFeats">Show All Class Feats</label>
+  </div>
+  {% for feat in allFeats %}
+    <div data-feat data-id="{{ feat.id }}" data-race="{{ feat.race }}" data-feat-class="{{ feat.class }}" data-level="{{ feat.Level }}" hidden>
+      <div class="stack" style="--stack-space: 0.5rem">
+        <h4>
+          {{ feat.Name }}
+        </h4>
+        <p>
+          <small>
+            Level {{ feat.Level }}
+          </small>
+        </p>
+        <p>
+          {{ feat.Description }}
+        </p>
+        <div>
+          <button type="button" class="small" data-toggle-feat data-id="{{ feat.id }}">
+            Take This Feat
+          </button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script src="/scripts/dice-roller.js"></script>
+<script type="module">
+  import { getFromDb, addToDb } from '/scripts/db.mjs';
+
+  let character;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      return;
+    }
+
+    character = await getFromDb('characters', key);
+
+    const levelInput = document.querySelector('#level');
+    levelInput.value = character.level;
+
+    const maxHealthInput = document.querySelector('#maxHealth');
+    maxHealthInput.value = character.maxHealth;
+
+    const maxStaminaInput = document.querySelector('#maxStamina');
+    maxStaminaInput.value = character.maxStamina;
+
+    if (character.tough > 0) {
+      const healthDescription = document.querySelector('[data-describe-health]');
+      healthDescription.textContent = `Roll 2d6 and add the lower value to your Max Health. Add the higher value to your Max Stamina. Add your tough modifier (+${character.tough}) to whichever pool you would like to${character.tough > 1 ? ', or you can split it between both pools' : ''}.`;
+    }
+
+    const featElements = document.querySelectorAll('[data-feat]');
+    featElements.forEach((feat) => {
+      const { id, race, featClass, level } = feat.dataset;
+      if (race && race !== character.race) {
+        return;
+      }
+
+      if (featClass && !featClass.includes(character.class)) {
+        return;
+      }
+
+      if (character.level < Number(level)) {
+        return;
+      }
+
+      feat.removeAttribute('hidden');
+      const featButton = feat.querySelector('[data-toggle-feat]');
+      if (character.feats && character.feats.length && character.feats.includes(id)) {
+        featButton.textContent = 'Remove This Feat';
+        featButton.setAttribute('data-is-taken', true);
+      } else {
+        featButton.textContent = 'Take This Feat';
+        featButton.removeAttribute('data-is-taken');
+      }
+    });
+  };
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    if (event.target.matches('#increaseHealthForm')) {
+      event.preventDefault();
+      const health = Number(event.target.elements['max-health'].value);
+      const stamina = Number(event.target.elements['max-stamina'].value);
+
+      character.level = Number(event.target.elements['level'].value);
+      character.currentHealth += health - character.maxHealth;
+      character.currentStamina += stamina - character.maxStamina;
+      character.maxHealth = health;
+      character.maxStamina = stamina;
+
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('change', (event) => {
+    if (event.target.matches('#toggleClassFeats')) {
+      const featElements = document.querySelectorAll('[data-feat]');
+      featElements.forEach((feat) => {
+        const { race, featClass, level } = feat.dataset;
+        if (race && race !== character.race) {
+          return;
+        }
+
+        if (!event.target.checked) {
+          if (featClass && !featClass.includes(character.class)) {
+            feat.setAttribute('hidden', '');
+            return;
+          }
+        }
+
+        if (character.level < Number(level)) {
+          return;
+        }
+
+        feat.removeAttribute('hidden');
+        if (character.feats && character.feats.length && character.feats.includes(id)) {
+          featButton.textContent = 'Remove This Feat';
+          featButton.setAttribute('data-is-taken', true);
+        } else {
+          featButton.textContent = 'Take This Feat';
+          featButton.removeAttribute('data-is-taken');
+        }
+      });
+    }
+  });
+
+  document.addEventListener('click', async (event) => {
+    if (event.target.matches('[data-toggle-feat]')) {
+      const id = event.target.dataset.id;
+      const isTaken = !!event.target.dataset.isTaken;
+      const name = event.target.dataset.name;
+
+      if (isTaken) {
+        const index = character.feats.findIndex(feat => feat === id);
+        character.feats.splice(index, 1);
+      } else {
+        if (!character.feats) {
+          character.feats = [id];
+        } else {
+          character.feats.push(id);
+        }
+      }
+
+      if (name === 'Charm Boost' || name === 'Expert Charm') {
+        if (isTaken) {
+          character.charm -= 1;
+        } else {
+          character.charm += 1;
+        }
+      }
+
+      if (name === 'Cool Boost' || name === 'Expert Cool') {
+        if (isTaken) {
+          character.cool -= 1;
+        } else {
+          character.cool += 1;
+        }
+      }
+
+      if (name === 'Sharp Boost' || name === 'Expert Sharp') {
+        if (isTaken) {
+          character.sharp -= 1;
+        } else {
+          character.sharp += 1;
+        }
+      }
+
+      if (name === 'Tough Boost' || name === 'Expert Tough') {
+        if (isTaken) {
+          character.tough -= 1;
+        } else {
+          character.tough += 1;
+        }
+      }
+
+      if (name === 'Technobabble Boost' || name === 'Expert Technobabble') {
+        if (isTaken) {
+          character.technobabble -= 1;
+        } else {
+          character.technobabble += 1;
+        }
+      }
+
+      if (name === 'Lucky Break') {
+        if (isTaken) {
+          character.luck -= 1;
+        } else {
+          character.luck += 1;
+        }
+      }
+
+      await updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', () => {
+    getCharacter();
+  });
+
+  getCharacter();
+</script>

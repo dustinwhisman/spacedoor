@@ -6,7 +6,7 @@ const base = new Airtable({
 
 module.exports = async () => {
   const raceFeats = await base('Race Feats').select({
-    fields: ['Name', 'Level', 'Description'],
+    fields: ['Name', 'Level', 'Description', 'Race'],
     sort: [
       {
         field: 'Level',
@@ -19,8 +19,17 @@ module.exports = async () => {
     ]
   }).all();
 
+  const raceRecords = await base('Races').select({
+    fields: ['Name'],
+  }).all();
+
+  const races = raceRecords.reduce((acc, r) => ({
+    ...acc,
+    [r.id]: r.fields.Name,
+  }), {});
+
   const classFeats = await base('Class Feats').select({
-    fields: ['Name', 'Level', 'Description'],
+    fields: ['Name', 'Level', 'Description', 'Class'],
     sort: [
       {
         field: 'Level',
@@ -32,12 +41,21 @@ module.exports = async () => {
       },
     ]
   }).all();
+
+  const classRecords = await base('Classes').select({
+    fields: ['Name'],
+  }).all();
+
+  const classes = classRecords.reduce((acc, r) => ({
+    ...acc,
+    [r.id]: r.fields.Name,
+  }), {});
 
   const generalFeats = await base('General Feats').select({
     fields: ['Name', 'Level', 'Description'],
     sort: [
       {
-        field: 'Level',
+        field: 'Order',
         direction: 'asc',
       },
       {
@@ -50,10 +68,12 @@ module.exports = async () => {
   const feats = raceFeats.map(r => ({
     id: r.id,
     ...r.fields,
+    race: races[r.fields.Race],
   }))
   .concat(classFeats.map(r => ({
     id: r.id,
     ...r.fields,
+    class: r.fields.Class.map((i) => classes[i]).join(','),
   })))
   .concat(generalFeats.map(r => ({
     id: r.id,

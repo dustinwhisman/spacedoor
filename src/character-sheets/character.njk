@@ -104,7 +104,7 @@ layout: layouts/sidebar.njk
 </div>
 
 <script type="module">
-  import { getFromDb, getAllFromDb } from '/scripts/db.mjs';
+  import { getFromDb, getAllFromDb, addToDb } from '/scripts/db.mjs';
 
   let character;
   const getCharacter = async () => {
@@ -116,6 +116,7 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
+    document.title = `${character.name} | Spacedoor`;
 
     const changeEquipmentElement = document.querySelector('[data-change-equipment]');
     changeEquipmentElement.innerHTML = `<a href="/classes/${character.class.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Change Equipment</a>`;
@@ -153,6 +154,7 @@ layout: layouts/sidebar.njk
         <p>${character.race}</p>
         <p>${character.class}: ${character.subclass}</p>
         <p>Level ${character.level}</p>
+        <a href="/character-sheets/level-up?key=${character.key}" data-level-up-link>Level Up</a>
       </div>
       <div>
         <p>Charm: ${character.charm}</p>
@@ -195,6 +197,24 @@ layout: layouts/sidebar.njk
         feat.removeAttribute('hidden');
       }
     });
+  };
+
+  document.addEventListener('click', async (event) => {
+    if (event.target.matches('[data-level-up-link]')) {
+      event.preventDefault();
+      // increment level, then navigate
+      character.level += 1;
+      await updateCharacter(character);
+      window.location.href = event.target.href;
+    }
+  });
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   getCharacter();
