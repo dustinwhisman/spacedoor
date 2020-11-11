@@ -6,9 +6,21 @@ layout: layouts/sidebar.njk
 <div class="stack">
   <div data-character-sheet class="stack"></div>
 
-  <h3>Special Equipment</h3>
+  <h3>Subclass and Special Equipment</h3>
   <div data-change-equipment></div>
   {% for class in classes %}
+    {% for subclass in class.subclasses %}
+      <div data-subclass data-name="{{ subclass.Name }}" hidden>
+        <div class="stack" style="--stack-space: 0.5rem">
+          <h4>
+            {{ subclass.Name }}
+          </h4>
+          <p>
+            {{ subclass.Description }}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
     {% for item in class.equipment %}
       <div class="stack" data-equipment data-id="{{ item.id }}" hidden>
         <div class="stack" style="--stack-space: 0.5rem">
@@ -120,6 +132,13 @@ layout: layouts/sidebar.njk
 
     const changeEquipmentElement = document.querySelector('[data-change-equipment]');
     changeEquipmentElement.innerHTML = `<a href="/classes/${character.class.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Change Equipment</a>`;
+
+    const subclassElement = document.querySelectorAll('[data-subclass]');
+    subclassElement.forEach((subclass) => {
+      if (subclass.dataset.name === character.subclass) {
+        subclass.removeAttribute('hidden');
+      }
+    });
 
     const equipment = document.querySelectorAll('[data-equipment]');
     equipment.forEach((item) => {
