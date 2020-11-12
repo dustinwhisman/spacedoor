@@ -8,7 +8,7 @@ layout: layouts/sidebar.njk
     --background: #dadada;
     --optimum: forestgreen;
     --sub-optimum: gold;
-    --sub-sub-optimum: crimson;
+    --sub-sub-optimum: var(--red);
 
     /* The gray background in Firefox */
     background: var(--background);
@@ -181,10 +181,16 @@ layout: layouts/sidebar.njk
       </div>
     </div>
   {% endfor %}
+
+  <div>
+    <button type="button" class="danger" data-delete-character>
+      Delete Character
+    </button>
+  </div>
 </div>
 
 <script type="module">
-  import { getFromDb, getAllFromDb, addToDb } from '/scripts/db.mjs';
+  import { getFromDb, getAllFromDb, addToDb, deleteFromDb } from '/scripts/db.mjs';
 
   let character;
   const getCharacter = async () => {
@@ -398,6 +404,14 @@ layout: layouts/sidebar.njk
       await updateCharacter(character);
       window.location.href = event.target.href;
     }
+
+    if (event.target.matches('[data-delete-character]')) {
+      try {
+        await deleteFromDb('characters', character.key);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   });
 
   document.addEventListener('submit', (event) => {
@@ -490,6 +504,10 @@ layout: layouts/sidebar.njk
 
   document.addEventListener('item-added', () => {
     getCharacter();
+  });
+
+  document.addEventListener('item-deleted', () => {
+    window.location.href = '/character-sheets';
   });
 
   getCharacter();
