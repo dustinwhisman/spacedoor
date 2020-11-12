@@ -182,10 +182,19 @@ layout: layouts/sidebar.njk
     </div>
   {% endfor %}
 
-  <div>
-    <button type="button" class="danger" data-delete-character>
-      Delete Character
-    </button>
+  <div class="cluster">
+    <div>
+      <div>
+        <button type="button" data-export-character>
+          Export Character
+        </button>
+      </div>
+      <div>
+        <button type="button" class="danger" data-delete-character>
+          Delete Character
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -411,6 +420,16 @@ layout: layouts/sidebar.njk
       } catch (error) {
         console.error(error);
       }
+    }
+
+    if (event.target.matches('[data-export-character]')) {
+      const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(character, null, 2))}`;
+      const anchor = document.createElement('a');
+      anchor.setAttribute('href', dataStr);
+      anchor.setAttribute('download', `${character.name.toLowerCase().replace(/\s/g, '-')}.json`);
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
     }
   });
 

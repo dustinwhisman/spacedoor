@@ -1,0 +1,49 @@
+---
+title: Import Character
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2>
+    Import Character
+  </h2>
+  <p>
+    You can export characters from their character sheets and then upload the
+    resulting file here to import them to your device. You can use this to keep
+    your character up to date on multiple devices, or you can share your
+    character build with other players or your GM.
+  </p>
+  <div>
+    <label for="importFile" class="button">Choose a File</label>
+    <input id="importFile" type="file" name="import-file" class="visually-hidden" data-import-character>
+  </div>
+</div>
+
+<script type="module">
+  import { addToDb } from '/scripts/db.mjs';
+
+  const addCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('change', (event) => {
+    if (event.target.matches('[data-import-character]')) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const character = JSON.parse(e.target.result);
+        addCharacter(character);
+      };
+      reader.readAsText(file);
+    }
+  });
+
+  document.addEventListener('item-added', (event) => {
+    const key = event.detail;
+    window.location.href = `/character-sheets/character?key=${key}`;
+  });
+</script>
