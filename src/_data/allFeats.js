@@ -73,7 +73,7 @@ module.exports = async () => {
   .concat(classFeats.map(r => ({
     id: r.id,
     ...r.fields,
-    class: r.fields.Class.map((i) => classes[i]).join(','),
+    class: r.fields.Class?.map((i) => classes[i]).join(','),
   })))
   .concat(generalFeats.map(r => ({
     id: r.id,
