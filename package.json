@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"postcss src/styles/index.css -o src/_includes/styles.css -w\" \"NODE_ENV=development npx @11ty/eleventy --serve\"",
-    "build": "postcss src/styles/index.css -o src/_includes/styles.css && NODE_ENV=production npx @11ty/eleventy"
+    "dev": "concurrently \"postcss src/styles/index.css -o src/_includes/styles.css -w\" \"cross-env NODE_ENV=development npx @11ty/eleventy --serve\"",
+    "build": "postcss src/styles/index.css -o src/_includes/styles.css && cross-env NODE_ENV=production npx @11ty/eleventy"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +19,8 @@
     "postcss-cli": "^7.1.1",
     "postcss-import": "^12.0.1",
     "postcss-preset-env": "^6.7.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
