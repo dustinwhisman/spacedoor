@@ -18,7 +18,10 @@ layout: layouts/sidebar.njk
 </style>
 
 <div class="stack">
-  <h2>Edit Health & Stamina</h2>
+  <h2>
+    Edit Health & Stamina
+    <span data-character-name></span>
+  </h2>
   <form id="increaseHealthForm" class="stack">
     <p data-describe-health>
       Roll 2d6 and add the lower value to your Max Health. Add the higher value
@@ -71,6 +74,9 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
+
+    const heading = document.querySelector('[data-character-name]');
+    heading.innerHTML = `– ${character.name}`;
 
     const maxHealthInput = document.querySelector('#maxHealth');
     maxHealthInput.value = character.maxHealth;

@@ -4,7 +4,10 @@ layout: layouts/sidebar.njk
 ---
 
 <div class="stack margin-block-end:3rem">
-  <h2>Select Feats</h2>
+  <h2>
+    Select Feats
+    <span data-character-name></span>
+  </h2>
   <p>
     These are all the feats that you should be able to take, given your race,
     class, and level. If you take a generalist feat that gives you access to
@@ -53,6 +56,9 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
+
+    const heading = document.querySelector('[data-character-name]');
+    heading.innerHTML = `– ${character.name}`;
 
     const featElements = document.querySelectorAll('[data-feat]');
     featElements.forEach((feat) => {

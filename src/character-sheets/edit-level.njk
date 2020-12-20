@@ -4,7 +4,10 @@ layout: layouts/sidebar.njk
 ---
 
 <div class="stack">
-  <h2>Edit Level</h2>
+  <h2>
+    Edit Level
+    <span data-character-name></span>
+  </h2>
   <form id="increaseHealthForm" class="stack">
     <div>
       <label for="level">Level</label>
@@ -31,6 +34,9 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
+
+    const heading = document.querySelector('[data-character-name]');
+    heading.innerHTML = `– ${character.name}`;
 
     const levelInput = document.querySelector('#level');
     levelInput.value = character.level;
