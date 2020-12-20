@@ -32,7 +32,7 @@ layout: layouts/sidebar.njk
       </fieldset>
     {% endfor %}
     <div>
-      <button type="submit">
+      <button type="submit" data-submit-button>
         Save and Continue
       </button>
     </div>
@@ -55,6 +55,12 @@ layout: layouts/sidebar.njk
     fieldset.removeAttribute('hidden');
     const heading = document.querySelector('[data-character-name]');
     heading.innerHTML = `– ${character.name}`;
+    if (document.referrer.includes('/character-sheets/character')) {
+      const radioButton = document.querySelector(`input[value="${character.subclass}"]`);
+      radioButton.checked = true;
+      const submitButton = document.querySelector('[data-submit-button]');
+      submitButton.innerHTML = 'Save Changes';
+    }
   };
 
   const updateCharacter = async (character) => {
@@ -79,7 +85,11 @@ layout: layouts/sidebar.njk
 
   document.addEventListener('item-added', (event) => {
     const key = event.detail;
-    window.location.href = `/character-sheets/finalize-stats?key=${key}`;
+    if (document.referrer.includes('/character-sheets/character')) {
+      window.location.href = `/character-sheets/character?key=${key}`;
+    } else {
+      window.location.href = `/character-sheets/finalize-stats?key=${key}`;
+    }
   });
 
   getCharacter();

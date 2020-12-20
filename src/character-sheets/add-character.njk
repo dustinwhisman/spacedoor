@@ -4,7 +4,7 @@ layout: layouts/sidebar.njk
 ---
 
 <div class="stack">
-  <h2>
+  <h2 data-heading>
     Add Character
   </h2>
   <form id="addCharacterForm" class="stack">
@@ -15,7 +15,7 @@ layout: layouts/sidebar.njk
       <input id="name" type="text" name="name" autocapitalize="on" autofill="false" autocomplete="off" style="max-width: 30ch" required>
     </div>
     <div>
-      <button type="submit">
+      <button type="submit" data-submit-button>
         Save and Continue
       </button>
     </div>
@@ -23,7 +23,25 @@ layout: layouts/sidebar.njk
 </div>
 
 <script type="module">
-  import { addToDb } from '/scripts/db.mjs';
+  import { getFromDb, addToDb } from '/scripts/db.mjs';
+
+  let existingCharacter;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      return;
+    }
+
+    existingCharacter = await getFromDb('characters', key);
+    const heading = document.querySelector('[data-heading]');
+    heading.innerHTML = 'Change Character Name';
+    const nameInput = document.querySelector('#name');
+    nameInput.value = existingCharacter.name;
+    const submitButton = document.querySelector('[data-submit-button]');
+    submitButton.innerHTML = 'Save Changes';
+  };
 
   const addCharacter = async (character) => {
     try {
@@ -36,23 +54,36 @@ layout: layouts/sidebar.njk
   document.addEventListener('submit', (event) => {
     event.preventDefault();
     if (event.target.matches('#addCharacterForm')) {
-      const character = {
-        name: event.target.elements.name.value,
-        level: 1,
-        experience: 0,
-        luck: 7,
-        maxHealth: 3,
-        currentHealth: 3,
-        maxStamina: 9,
-        currentStamina: 9,
-      };
+      if (!existingCharacter) {
+        const character = {
+          name: event.target.elements.name.value,
+          level: 1,
+          experience: 0,
+          luck: 7,
+          maxHealth: 3,
+          currentHealth: 3,
+          maxStamina: 9,
+          currentStamina: 9,
+        };
 
-      addCharacter(character);
+        addCharacter(character);
+      } else {
+        existingCharacter.name = event.target.elements.name.value;
+
+        addCharacter(existingCharacter);
+      }
     }
   });
 
   document.addEventListener('item-added', (event) => {
     const key = event.detail;
-    window.location.href = `/character-sheets/select-race?key=${key}`;
+
+    if (existingCharacter) {
+      window.location.href = `/character-sheets/character?key=${key}`;
+    } else {
+      window.location.href = `/character-sheets/select-race?key=${key}`;
+    }
   });
+
+  getCharacter();
 </script>

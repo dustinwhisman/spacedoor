@@ -252,10 +252,28 @@ layout: layouts/sidebar.njk
 
     const characterSheetTemplate = `
       <h2>${character.name}</h2>
+      <div class="cluster small">
+        <div>
+          <a href="/character-sheets/add-character?key=${character.key}">
+            Change Name
+          </a>
+          <a href="/character-sheets/select-race?key=${character.key}">
+            Change Race
+          </a>
+          <a href="/character-sheets/select-class?key=${character.key}">
+            Change Class
+          </a>
+          <a href="/character-sheets/select-subclass?key=${character.key}">
+            Change Subclass
+          </a>
+        </div>
+      </div>
       <div>
         <p>${character.race}</p>
         <p>${character.class}: ${character.subclass}</p>
         <p>Level ${character.level}</p>
+      </div>
+      <div>
         <a href="/character-sheets/level-up?key=${character.key}" data-level-up-link>Level Up</a>
       </div>
       <h3>Stats</h3>
