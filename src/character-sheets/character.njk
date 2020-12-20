@@ -136,9 +136,8 @@ layout: layouts/sidebar.njk
   {% endfor %}
 
   <h3>Armor</h3>
-  <div data-change-armor></div>
   {% for armor in armors %}
-    <div data-armor data-id="{{ armor.id }}" hidden>
+    <div data-armor data-id="{{ armor.id }}" data-stat="{{ armor.Modifier }}" data-required-bonus="{{ armor['Required Bonus'] }}" hidden>
       <div class="stack" style="--stack-space: 0.5rem">
         <h4>
           {{ armor.Name }}
@@ -237,12 +236,13 @@ layout: layouts/sidebar.njk
       }
     });
 
-    const changeArmorElement = document.querySelector('[data-change-armor]');
-    changeArmorElement.innerHTML = `<a href="/armor?key=${character.key}">Change Armor</a>`;
-
     const armors = document.querySelectorAll('[data-armor]');
     armors.forEach((armor) => {
-      if (character.armors && character.armors.length && character.armors.includes(armor.dataset.id)) {
+      if (character[armor.dataset.stat.toLowerCase()] >= 3 && Number(armor.dataset.requiredBonus < 3)) {
+        return;
+      }
+
+      if (character[armor.dataset.stat.toLowerCase()] >= Number(armor.dataset.requiredBonus)) {
         armor.removeAttribute('hidden');
       }
     });
