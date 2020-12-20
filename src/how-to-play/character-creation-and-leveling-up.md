@@ -97,9 +97,9 @@ layout: layouts/sidebar.njk
 
   Each time you level up, you get to choose either a [general feat](/feats), a
   race feat specific to your character's race, or a class feat specific to your
-  character's class. You don't get to choose a feat to start with, but leveling
-  up happens quickly in this game, so check the lists to see what you might want
-  to take once you level up.
+  character's class. Level 1 characters start with one feat, and leveling up
+  happens fast in the beginning, so be sure to look at which ones appeal to you
+  the most.
 
   ### Details and Flavor
 

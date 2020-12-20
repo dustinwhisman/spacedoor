@@ -13,6 +13,10 @@ layout: layouts/sidebar.njk
     class, and level. If you take a generalist feat that gives you access to
     other class feats, you can toggle those to appear as well.
   </p>
+  <p data-initial-description>
+    As a level 1 character, you start with one feat. Choose one and then you'll
+    be able to view your full character sheet.
+  </p>
   <div>
     <input id="toggleClassFeats" type="checkbox">
     <label for="toggleClassFeats">Show All Class Feats</label>
@@ -42,6 +46,14 @@ layout: layouts/sidebar.njk
   <div data-back-link></div>
 </div>
 
+<script>
+  if (document.referrer.includes('/character-sheets/character')) {
+    const initialDescription = document.querySelectorAll('[data-initial-description]');
+    initialDescription.forEach((node) => {
+      node.setAttribute('hidden', true);
+    });
+  }
+</script>
 <script type="module">
   import { getFromDb, addToDb } from '/scripts/db.mjs';
 
@@ -202,7 +214,7 @@ layout: layouts/sidebar.njk
       hasChosenFeat = true;
       const backLinkTemplate = `
         <a href="/character-sheets/character?key=${character.key}" class="button fixed-block-inline-end">
-          Back to Character Sheet
+          Go to Character Sheet
         </a>
       `;
       const backLinkWrapper = document.querySelector('[data-back-link]');

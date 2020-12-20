@@ -338,7 +338,11 @@ layout: layouts/sidebar.njk
 
   document.addEventListener('item-added', (event) => {
     const key = event.detail;
-    window.location.href = `/character-sheets/character?key=${key}`;
+    if (document.referrer.includes('/character-sheets/character')) {
+      window.location.href = `/character-sheets/character?key=${key}`;
+    } else {
+      window.location.href = `/character-sheets/select-feats?key=${key}`;
+    }
   });
 
   getCharacter();
