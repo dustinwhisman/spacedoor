@@ -68,8 +68,7 @@ layout: layouts/sidebar.njk
 <div class="stack">
   <div data-character-sheet class="stack"></div>
 
-  <h3>Subclass and Special Equipment</h3>
-  <div data-change-equipment></div>
+  <h3>Subclass</h3>
   {% for class in classes %}
     {% for subclass in class.subclasses %}
       <div data-subclass data-name="{{ subclass.Name }}" hidden>
@@ -77,22 +76,26 @@ layout: layouts/sidebar.njk
           <h4>
             {{ subclass.Name }}
           </h4>
-          <p>
+          <p class="small">
             {{ subclass.Description }}
           </p>
         </div>
       </div>
     {% endfor %}
+
+    <h3 data-equipment data-class="{{ class.Name }}" hidden>Special Equipment</h3>
     {% for item in class.equipment %}
-      <div class="stack" data-equipment data-id="{{ item.id }}" hidden>
-        <div class="stack" style="--stack-space: 0.5rem">
-          <h4>
+      <div data-equipment data-id="{{ item.id }}" data-class="{{ class.Name }}" hidden>
+        <label class="custom-checkbox">
+          <input id="equipment-{{ item.id }}" type="radio" name="special-equipment" value="{{ item.id }}">
+          {% include "radio-svg.njk" %}
+          <span>
             {{ item.Name }}
-          </h4>
-          <p>
-            {{ item.Description }}
-          </p>
-        </div>
+          </span>
+        </label>
+        <p class="small indented">
+          {{ item.Description }}
+        </p>
       </div>
     {% endfor %}
   {% endfor %}
@@ -205,9 +208,6 @@ layout: layouts/sidebar.njk
     character = await getFromDb('characters', key);
     document.title = `${character.name} | Spacedoor`;
 
-    const changeEquipmentElement = document.querySelector('[data-change-equipment]');
-    changeEquipmentElement.innerHTML = `<a href="/classes/${character.class.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Change Equipment</a>`;
-
     const subclassElement = document.querySelectorAll('[data-subclass]');
     subclassElement.forEach((subclass) => {
       if (subclass.dataset.name === character.subclass) {
@@ -217,10 +217,15 @@ layout: layouts/sidebar.njk
 
     const equipment = document.querySelectorAll('[data-equipment]');
     equipment.forEach((item) => {
-      if (item.dataset.id === character.equipment) {
+      if (item.dataset.class === character.class) {
         item.removeAttribute('hidden');
       }
     });
+
+    const selectedEquipment = document.querySelector(`#equipment-${character.equipment}`);
+    if (selectedEquipment) {
+      selectedEquipment.checked = true;
+    }
 
     const changeWeaponsElement = document.querySelector('[data-change-weapons]');
     changeWeaponsElement.innerHTML = `<a href="/weapons?key=${character.key}">Change Weapons</a>`;
@@ -543,6 +548,12 @@ layout: layouts/sidebar.njk
       if (character.luck < 0) {
         character.luck = 0;
       }
+
+      updateCharacter(character);
+    }
+
+    if (event.target.matches('[name="special-equipment"]')) {
+      character.equipment = event.target.value;
 
       updateCharacter(character);
     }
