@@ -7,57 +7,12 @@ layout: layouts/sidebar.njk
   <h2>
     Add Character
   </h2>
-  <p>
-    Start by choosing your character's name, race, and class.
-  </p>
   <form id="addCharacterForm" class="stack">
     <div>
       <label for="name">
-        Name
+        Character Name
       </label>
       <input id="name" type="text" name="name" autocapitalize="on" autofill="false" autocomplete="off" style="max-width: 30ch" required>
-    </div>
-    <div>
-      <fieldset>
-        <legend>
-          Race
-        </legend>
-        <div class="stack">
-          {% for race in races %}
-            <div>
-              <input id="{{ race.Name }}" type="radio" name="race" value="{{ race.Name }}" required>
-              <label for="{{ race.Name }}">
-                {{ race.Name }}
-                <br>
-                <small>
-                  {{ race.Description }}
-                </small>
-              </label>
-            </div>
-          {% endfor %}
-        </div>
-      </fieldset>
-    </div>
-    <div>
-      <fieldset>
-        <legend>
-          Class
-        </legend>
-        <div class="stack">
-          {% for class in classes %}
-            <div>
-              <input id="{{ class.Name }}" type="radio" name="class" value="{{ class.Name }}" required>
-              <label for="{{ class.Name }}">
-                {{ class.Name }}
-                <br>
-                <small>
-                  {{ class.Description }}
-                </small>
-              </label>
-            </div>
-          {% endfor %}
-        </div>
-      </fieldset>
     </div>
     <div>
       <button type="submit">
@@ -83,8 +38,6 @@ layout: layouts/sidebar.njk
     if (event.target.matches('#addCharacterForm')) {
       const character = {
         name: event.target.elements.name.value,
-        race: event.target.elements.race.value,
-        class: event.target.elements.class.value,
         level: 1,
         experience: 0,
         luck: 7,
@@ -100,6 +53,6 @@ layout: layouts/sidebar.njk
 
   document.addEventListener('item-added', (event) => {
     const key = event.detail;
-    window.location.href = `/character-sheets/select-subclass?key=${key}`;
+    window.location.href = `/character-sheets/select-race?key=${key}`;
   });
 </script>

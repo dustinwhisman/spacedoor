@@ -1,42 +1,42 @@
 ---
-title: Select Subclass
+title: Select Race
 layout: layouts/sidebar.njk
 ---
 
 <div class="stack">
   <h2>
-    Select Subclass
+    Select Race
     <span data-character-name></span>
   </h2>
-
-  <form id="selectSubclassForm" class="stack">
-    {% for class in classes %}
-      <fieldset data-class="{{ class.Name }}" hidden>
+  <form id="selectRaceForm" class="stack">
+    <div>
+      <fieldset>
         <legend>
-          {{ class.Name }} Subclass
+          Race
         </legend>
         <div class="stack">
-          {% for subclass in class.subclasses %}
+          {% for race in races %}
             <div>
-              <input id="{{ subclass.Name }}" type="radio" name="subclass" value="{{ subclass.Name }}" required>
-              <label for="{{ subclass.Name }}">
-                {{ subclass.Name }}
+              <input id="{{ race.Name }}" type="radio" name="race" value="{{ race.Name }}" required>
+              <label for="{{ race.Name }}">
+                {{ race.Name }}
                 <br>
                 <small>
-                  {{ subclass.Description }}
+                  {{ race.Description }}
                 </small>
               </label>
             </div>
           {% endfor %}
         </div>
       </fieldset>
-    {% endfor %}
+    </div>
     <div>
       <button type="submit">
         Save and Continue
       </button>
     </div>
   </form>
+</div>
 
 <script type="module">
   import { getFromDb, addToDb } from '/scripts/db.mjs';
@@ -51,8 +51,6 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
-    const fieldset = document.querySelector(`[data-class="${character.class}"]`);
-    fieldset.removeAttribute('hidden');
     const heading = document.querySelector('[data-character-name]');
     heading.innerHTML = `– ${character.name}`;
   };
@@ -67,19 +65,19 @@ layout: layouts/sidebar.njk
 
   document.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (event.target.matches('#selectSubclassForm')) {
+    if (event.target.matches('#selectRaceForm')) {
       if (!character || !character.key) {
         return;
       }
 
-      character.subclass = event.target.elements.subclass.value;
+      character.race = event.target.elements.race.value;
       updateCharacter(character);
     }
   });
 
   document.addEventListener('item-added', (event) => {
     const key = event.detail;
-    window.location.href = `/character-sheets/finalize-stats?key=${key}`;
+    window.location.href = `/character-sheets/select-class?key=${key}`;
   });
 
   getCharacter();

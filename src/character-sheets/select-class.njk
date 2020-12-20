@@ -1,42 +1,52 @@
 ---
-title: Select Subclass
+title: Select Class
 layout: layouts/sidebar.njk
 ---
 
 <div class="stack">
   <h2>
-    Select Subclass
+    Select Class
     <span data-character-name></span>
   </h2>
-
-  <form id="selectSubclassForm" class="stack">
-    {% for class in classes %}
-      <fieldset data-class="{{ class.Name }}" hidden>
+  <form id="selectClassForm" class="stack">
+    <div>
+      <fieldset>
         <legend>
-          {{ class.Name }} Subclass
+          Class
         </legend>
         <div class="stack">
-          {% for subclass in class.subclasses %}
+          {% for class in classes %}
             <div>
-              <input id="{{ subclass.Name }}" type="radio" name="subclass" value="{{ subclass.Name }}" required>
-              <label for="{{ subclass.Name }}">
-                {{ subclass.Name }}
-                <br>
-                <small>
-                  {{ subclass.Description }}
-                </small>
+              <input id="{{ class.Name }}" type="radio" name="class" value="{{ class.Name }}" required>
+              <label for="{{ class.Name }}">
+                {{ class.Name }}
               </label>
+              <ul class="margin-block:0">
+                <li class="small">
+                  Primary Stat: {{ class['Primary Stat'] }}
+                </li>
+                <li class="small">
+                  Secondary Stat: {{ class['Secondary Stat'] }}
+                </li>
+                <li class="small">
+                  Penalty Stat: {{ class.Penalty }}
+                </li>
+                <li class="small list-style:none">
+                <a href="/classes/{{ class.slug }}">Details</a>
+                </li>
+              </ul>
             </div>
           {% endfor %}
         </div>
       </fieldset>
-    {% endfor %}
+    </div>
     <div>
       <button type="submit">
         Save and Continue
       </button>
     </div>
   </form>
+</div>
 
 <script type="module">
   import { getFromDb, addToDb } from '/scripts/db.mjs';
@@ -51,8 +61,6 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
-    const fieldset = document.querySelector(`[data-class="${character.class}"]`);
-    fieldset.removeAttribute('hidden');
     const heading = document.querySelector('[data-character-name]');
     heading.innerHTML = `– ${character.name}`;
   };
@@ -67,19 +75,19 @@ layout: layouts/sidebar.njk
 
   document.addEventListener('submit', (event) => {
     event.preventDefault();
-    if (event.target.matches('#selectSubclassForm')) {
+    if (event.target.matches('#selectClassForm')) {
       if (!character || !character.key) {
         return;
       }
 
-      character.subclass = event.target.elements.subclass.value;
+      character.class = event.target.elements.class.value;
       updateCharacter(character);
     }
   });
 
   document.addEventListener('item-added', (event) => {
     const key = event.detail;
-    window.location.href = `/character-sheets/finalize-stats?key=${key}`;
+    window.location.href = `/character-sheets/select-subclass?key=${key}`;
   });
 
   getCharacter();

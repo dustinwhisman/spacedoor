@@ -70,7 +70,7 @@ h5, .h5 {
   font-size: calc(var(--h5));
 }
 
-h6, .h6 {
+h6, .h6, .small {
   font-size: calc(var(--h6));
 }
 
