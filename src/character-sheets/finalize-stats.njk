@@ -4,17 +4,17 @@ layout: layouts/sidebar.njk
 ---
 
 <div class="stack">
-  <h2>
+  <h2 data-heading>
     Finalize Stats
   </h2>
-  <p>
+  <p data-initial-description>
     If your primary, secondary, or penalty stats are predefined by your class,
     those numbers should be autofilled for you. If you have a choice in stats,
     you will need to set your chosen stat to either 1 or -1. Remember that you
     have an additional +1 boost and a -1 penalty that you can assign to any of
     these stats as well.
   </p>
-  <div>
+  <div data-initial-description>
     {% for class in classes %}
       <ul class="list-style:none" data-class="{{ class.Name }}" hidden>
         <li data-primary-stat="{{ class['Primary Stat'] }}">
@@ -61,13 +61,21 @@ layout: layouts/sidebar.njk
       <input id="technobabble" type="text" name="technobabble" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
     </div>
     <div>
-      <button type="submit">
+      <button type="submit" data-submit-button>
         Save and Finish
       </button>
     </div>
   </form>
 </div>
 
+<script>
+  if (document.referrer.includes('/character-sheets/character')) {
+    const initialDescription = document.querySelectorAll('[data-initial-description]');
+    initialDescription.forEach((node) => {
+      node.setAttribute('hidden', true);
+    });
+  }
+</script>
 <script type="module">
   import { getFromDb, addToDb } from '/scripts/db.mjs';
 
@@ -81,82 +89,97 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
-    const classStatsElement = document.querySelector(`[data-class="${character.class}"]`);
-    classStatsElement.removeAttribute('hidden');
-
-    const primaryStatElement = document.querySelector(`[data-class="${character.class}"] [data-primary-stat]`);
-    const primaryStat = primaryStatElement.dataset.primaryStat;
-
-    const secondaryStatElement = document.querySelector(`[data-class="${character.class}"] [data-secondary-stat]`);
-    const secondaryStat = secondaryStatElement.dataset.secondaryStat;
-
-    const penaltyStatElement = document.querySelector(`[data-class="${character.class}"] [data-penalty-stat]`);
-    const penaltyStat = penaltyStatElement.dataset.penaltyStat;
 
     const charmInput = document.querySelector(`#charm`);
     const coolInput = document.querySelector(`#cool`);
     const sharpInput = document.querySelector(`#sharp`);
     const toughInput = document.querySelector(`#tough`);
     const technobabbleInput = document.querySelector(`#technobabble`);
+    const heading = document.querySelector('[data-heading]');
 
-    switch (primaryStat) {
-      case 'Charm':
-        charmInput.value = '1';
-        break;
-      case 'Cool':
-        coolInput.value = '1';
-        break;
-      case 'Sharp':
-        sharpInput.value = '1';
-        break;
-      case 'Tough':
-        toughInput.value = '1';
-        break;
-      case 'Technobabble':
-        technobabbleInput.value = '1';
-        break;
-      default:
-        break;
-    }
+    if (document.referrer.includes('/character-sheets/character')) {
+      charmInput.value = `${character.charm}`;
+      coolInput.value = `${character.cool}`;
+      sharpInput.value = `${character.sharp}`;
+      toughInput.value = `${character.tough}`;
+      technobabbleInput.value = `${character.technobabble}`;
 
-    switch (secondaryStat) {
-      case 'Charm':
-        charmInput.value = '1';
-        break;
-      case 'Cool':
-        coolInput.value = '1';
-        break;
-      case 'Sharp':
-        sharpInput.value = '1';
-        break;
-      case 'Tough':
-        toughInput.value = '1';
-        break;
-      case 'Technobabble':
-        technobabbleInput.value = '1';
-        break;
-      default:
-        break;
-    }
+      heading.innerHTML = `Change Stats – ${character.name}`;
+      const submitButton = document.querySelector('[data-submit-button]');
+      submitButton.innerHTML = 'Save Changes';
+    } else {
+      heading.innerHTML = `Finalize Stats – ${character.name}`;
+      const classStatsElement = document.querySelector(`[data-class="${character.class}"]`);
+      classStatsElement.removeAttribute('hidden');
 
-    switch (penaltyStat) {
-      case 'Charm':
-        charmInput.value = '-1';
-        break;
-      case 'Cool':
-        coolInput.value = '-1';
-        break;
-      case 'Sharp':
-        sharpInput.value = '-1';
-        break;
-      case 'Tough':
-        toughInput.value = '-1';
-        break;
-      case 'Technobabble':
-        technobabbleInput.value = '-1';
-        break;
-      default:
-        break;
+      const primaryStatElement = document.querySelector(`[data-class="${character.class}"] [data-primary-stat]`);
+      const primaryStat = primaryStatElement.dataset.primaryStat;
+
+      const secondaryStatElement = document.querySelector(`[data-class="${character.class}"] [data-secondary-stat]`);
+      const secondaryStat = secondaryStatElement.dataset.secondaryStat;
+
+      const penaltyStatElement = document.querySelector(`[data-class="${character.class}"] [data-penalty-stat]`);
+      const penaltyStat = penaltyStatElement.dataset.penaltyStat;
+
+      switch (primaryStat) {
+        case 'Charm':
+          charmInput.value = '1';
+          break;
+        case 'Cool':
+          coolInput.value = '1';
+          break;
+        case 'Sharp':
+          sharpInput.value = '1';
+          break;
+        case 'Tough':
+          toughInput.value = '1';
+          break;
+        case 'Technobabble':
+          technobabbleInput.value = '1';
+          break;
+        default:
+          break;
+      }
+
+      switch (secondaryStat) {
+        case 'Charm':
+          charmInput.value = '1';
+          break;
+        case 'Cool':
+          coolInput.value = '1';
+          break;
+        case 'Sharp':
+          sharpInput.value = '1';
+          break;
+        case 'Tough':
+          toughInput.value = '1';
+          break;
+        case 'Technobabble':
+          technobabbleInput.value = '1';
+          break;
+        default:
+          break;
+      }
+
+      switch (penaltyStat) {
+        case 'Charm':
+          charmInput.value = '-1';
+          break;
+        case 'Cool':
+          coolInput.value = '-1';
+          break;
+        case 'Sharp':
+          sharpInput.value = '-1';
+          break;
+        case 'Tough':
+          toughInput.value = '-1';
+          break;
+        case 'Technobabble':
+          technobabbleInput.value = '-1';
+          break;
+        default:
+          break;
+      }
     }
   };
 

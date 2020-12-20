@@ -252,7 +252,7 @@ layout: layouts/sidebar.njk
 
     const characterSheetTemplate = `
       <h2>${character.name}</h2>
-      <div class="cluster small">
+      <div class="cluster">
         <div>
           <a href="/character-sheets/add-character?key=${character.key}">
             Change Name
@@ -308,6 +308,11 @@ layout: layouts/sidebar.njk
           </span>
           Technobabble
         </p>
+      </div>
+      <div>
+        <a href="/character-sheets/finalize-stats?key=${character.key}">
+          Edit Stats
+        </a>
       </div>
 
       <h3>Health, Experience, and Luck</h3>
