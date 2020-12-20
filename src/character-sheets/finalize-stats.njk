@@ -3,6 +3,19 @@ title: Finalize Stats
 layout: layouts/sidebar.njk
 ---
 
+<style>
+  .stat-bubble {
+    display: inline-block;
+    margin-inline-end: 0.5rem;
+    border: 1px solid var(--text-color);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+</style>
+
 <div class="stack">
   <h2 data-heading>
     Finalize Stats
@@ -31,34 +44,101 @@ layout: layouts/sidebar.njk
   </div>
   <form id="finalizeStatsForm" class="stack">
     <div>
-      <label for="charm">
+      <p class="h4">
+        <span class="stat-bubble" data-charm>
+          0
+        </span>
         Charm
-      </label>
-      <input id="charm" type="text" name="charm" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+      </p>
+      <div class="cluster margin-block-start:halfrem">
+        <div>
+          <button type="button" class="small" data-alter-stat data-type="penalty" data-stat="charm">
+            -1 Penalty
+          </button>
+          <button type="button" class="small" data-alter-stat data-type="boost" data-stat="charm">
+            +1 Boost
+          </button>
+        </div>
+      </div>
     </div>
     <div>
-      <label for="cool">
+      <p class="h4">
+        <span class="stat-bubble" data-cool>
+          0
+        </span>
         Cool
-      </label>
-      <input id="cool" type="text" name="cool" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+      </p>
+      <div class="cluster margin-block-start:halfrem">
+        <div>
+          <button type="button" class="small" data-alter-stat data-type="penalty" data-stat="cool">
+            -1 Penalty
+          </button>
+          <button type="button" class="small" data-alter-stat data-type="boost" data-stat="cool">
+            +1 Boost
+          </button>
+        </div>
+      </div>
     </div>
     <div>
-      <label for="sharp">
+      <p class="h4">
+        <span class="stat-bubble" data-sharp>
+          0
+        </span>
         Sharp
-      </label>
-      <input id="sharp" type="text" name="sharp" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+      </p>
+      <div class="cluster margin-block-start:halfrem">
+        <div>
+          <button type="button" class="small" data-alter-stat data-type="penalty" data-stat="sharp">
+            -1 Penalty
+          </button>
+          <button type="button" class="small" data-alter-stat data-type="boost" data-stat="sharp">
+            +1 Boost
+          </button>
+        </div>
+      </div>
     </div>
     <div>
-      <label for="tough">
+      <p class="h4">
+        <span class="stat-bubble" data-tough>
+          0
+        </span>
         Tough
-      </label>
-      <input id="tough" type="text" name="tough" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+      </p>
+      <div class="cluster margin-block-start:halfrem">
+        <div>
+          <button type="button" class="small" data-alter-stat data-type="penalty" data-stat="tough">
+            -1 Penalty
+          </button>
+          <button type="button" class="small" data-alter-stat data-type="boost" data-stat="tough">
+            +1 Boost
+          </button>
+        </div>
+      </div>
     </div>
     <div>
-      <label for="technobabble">
+      <p class="h4">
+        <span class="stat-bubble" data-technobabble>
+          0
+        </span>
         Technobabble
-      </label>
-      <input id="technobabble" type="text" name="technobabble" pattern="-?[0-2]" value="0" required style="max-width: 6ch" inputmode="numeric" autocomplete="off" autofill="false">
+      </p>
+      <div class="cluster margin-block-start:halfrem">
+        <div>
+          <button type="button" class="small" data-alter-stat data-type="penalty" data-stat="technobabble">
+            -1 Penalty
+          </button>
+          <button type="button" class="small" data-alter-stat data-type="boost" data-stat="technobabble">
+            +1 Boost
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <input id="charm" type="hidden" name="charm" value="0">
+      <input id="cool" type="hidden" name="cool" value="0">
+      <input id="sharp" type="hidden" name="sharp" value="0">
+      <input id="tough" type="hidden" name="tough" value="0">
+      <input id="technobabble" type="hidden" name="technobabble" value="0">
     </div>
     <div>
       <button type="submit" data-submit-button>
@@ -91,18 +171,37 @@ layout: layouts/sidebar.njk
     character = await getFromDb('characters', key);
 
     const charmInput = document.querySelector(`#charm`);
+    const charmIndicator = document.querySelector(`[data-charm]`);
+
     const coolInput = document.querySelector(`#cool`);
+    const coolIndicator = document.querySelector(`[data-cool]`);
+
     const sharpInput = document.querySelector(`#sharp`);
+    const sharpIndicator = document.querySelector(`[data-sharp]`);
+
     const toughInput = document.querySelector(`#tough`);
+    const toughIndicator = document.querySelector(`[data-tough]`);
+
     const technobabbleInput = document.querySelector(`#technobabble`);
+    const technobabbleIndicator = document.querySelector(`[data-technobabble]`);
+
     const heading = document.querySelector('[data-heading]');
 
     if (document.referrer.includes('/character-sheets/character')) {
-      charmInput.value = `${character.charm}`;
-      coolInput.value = `${character.cool}`;
-      sharpInput.value = `${character.sharp}`;
-      toughInput.value = `${character.tough}`;
-      technobabbleInput.value = `${character.technobabble}`;
+      charmInput.value = character.charm;
+      charmIndicator.innerHTML = `${character.charm}`;
+
+      coolInput.value = character.cool;
+      coolIndicator.innerHTML = `${character.cool}`;
+
+      sharpInput.value = character.sharp;
+      sharpIndicator.innerHTML = `${character.sharp}`;
+
+      toughInput.value = character.tough;
+      toughIndicator.innerHTML = `${character.tough}`;
+
+      technobabbleInput.value = character.technobabble;
+      technobabbleIndicator.innerHTML = `${character.technobabble}`;
 
       heading.innerHTML = `Change Stats – ${character.name}`;
       const submitButton = document.querySelector('[data-submit-button]');
@@ -123,19 +222,24 @@ layout: layouts/sidebar.njk
 
       switch (primaryStat) {
         case 'Charm':
-          charmInput.value = '1';
+          charmInput.value = 1;
+          charmIndicator.innerHTML = '1';
           break;
         case 'Cool':
-          coolInput.value = '1';
+          coolInput.value = 1;
+          coolIndicator.innerHTML = '1';
           break;
         case 'Sharp':
-          sharpInput.value = '1';
+          sharpInput.value = 1;
+          sharpIndicator.innerHTML = '1';
           break;
         case 'Tough':
-          toughInput.value = '1';
+          toughInput.value = 1;
+          toughIndicator.innerHTML = '1';
           break;
         case 'Technobabble':
-          technobabbleInput.value = '1';
+          technobabbleInput.value = 1;
+          technobabbleIndicator.innerHTML = '1';
           break;
         default:
           break;
@@ -143,19 +247,24 @@ layout: layouts/sidebar.njk
 
       switch (secondaryStat) {
         case 'Charm':
-          charmInput.value = '1';
+          charmInput.value = 1;
+          charmIndicator.innerHTML = '1';
           break;
         case 'Cool':
-          coolInput.value = '1';
+          coolInput.value = 1;
+          coolIndicator.innerHTML = '1';
           break;
         case 'Sharp':
-          sharpInput.value = '1';
+          sharpInput.value = 1;
+          sharpIndicator.innerHTML = '1';
           break;
         case 'Tough':
-          toughInput.value = '1';
+          toughInput.value = 1;
+          toughIndicator.innerHTML = '1';
           break;
         case 'Technobabble':
-          technobabbleInput.value = '1';
+          technobabbleInput.value = 1;
+          technobabbleIndicator.innerHTML = '1';
           break;
         default:
           break;
@@ -163,19 +272,24 @@ layout: layouts/sidebar.njk
 
       switch (penaltyStat) {
         case 'Charm':
-          charmInput.value = '-1';
+          charmInput.value = -1;
+          charmIndicator.innerHTML = '-1';
           break;
         case 'Cool':
-          coolInput.value = '-1';
+          coolInput.value = -1;
+          coolIndicator.innerHTML = '-1';
           break;
         case 'Sharp':
-          sharpInput.value = '-1';
+          sharpInput.value = -1;
+          sharpIndicator.innerHTML = '-1';
           break;
         case 'Tough':
-          toughInput.value = '-1';
+          toughInput.value = -1;
+          toughIndicator.innerHTML = '-1';
           break;
         case 'Technobabble':
-          technobabbleInput.value = '-1';
+          technobabbleInput.value = -1;
+          technobabbleIndicator.innerHTML = '-1';
           break;
         default:
           break;
@@ -190,6 +304,21 @@ layout: layouts/sidebar.njk
       console.error(error);
     }
   };
+
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('[data-alter-stat]')) {
+      const input = document.querySelector(`#${event.target.dataset.stat}`);
+      const indicator = document.querySelector(`[data-${event.target.dataset.stat}]`);
+
+      if (event.target.dataset.type === 'penalty') {
+        input.value = Number(input.value) - 1;
+        indicator.innerHTML = `${input.value}`;
+      } else {
+        input.value = Number(input.value) + 1;
+        indicator.innerHTML = `${input.value}`;
+      }
+    }
+  });
 
   document.addEventListener('submit', (event) => {
     event.preventDefault();
