@@ -25,7 +25,7 @@ layout: layouts/sidebar.njk
         </h4>
         <p>
           <small>
-            Level {{ feat.Level }}
+            Level {{ feat.Level }}, {{ feat.type }}
           </small>
         </p>
         <p>
@@ -99,7 +99,7 @@ layout: layouts/sidebar.njk
     if (event.target.matches('#toggleClassFeats')) {
       const featElements = document.querySelectorAll('[data-feat]');
       featElements.forEach((feat) => {
-        const { race, featClass, level } = feat.dataset;
+        const { id, race, featClass, level } = feat.dataset;
         if (race && race !== character.race) {
           return;
         }
@@ -116,6 +116,7 @@ layout: layouts/sidebar.njk
         }
 
         feat.removeAttribute('hidden');
+        const featButton = feat.querySelector('[data-toggle-feat]');
         if (character.feats && character.feats.length && character.feats.includes(id)) {
           featButton.textContent = 'Remove This Feat';
           featButton.setAttribute('data-is-taken', true);

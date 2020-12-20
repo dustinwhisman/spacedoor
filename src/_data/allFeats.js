@@ -69,15 +69,18 @@ module.exports = async () => {
     id: r.id,
     ...r.fields,
     race: races[r.fields.Race],
+    type: `${races[r.fields.Race]} Feat`,
   }))
   .concat(classFeats.map(r => ({
     id: r.id,
     ...r.fields,
     class: r.fields.Class?.map((i) => classes[i]).join(','),
+    type: `${r.fields.Class?.map((i) => classes[i]).join(',')} Feat`,
   })))
   .concat(generalFeats.map(r => ({
     id: r.id,
     ...r.fields,
+    type: 'General Feat'
   })));
 
   return feats;
