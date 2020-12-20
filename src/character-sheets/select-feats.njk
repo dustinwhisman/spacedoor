@@ -1,69 +1,10 @@
 ---
-title: Level Up
+title: Select Feats
 layout: layouts/sidebar.njk
 ---
 
-<style>
-  .dice, .total {
-    border: 1px solid var(--text-color);
-    width: 2rem;
-    height: 2rem;
-    text-align: center;
-    line-height: 1.8;
-  }
-
-  .total {
-    border-radius: 50%;
-  }
-
-  .not-counted {
-    border-color: red;
-    color: red;
-    opacity: 0.5;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='red' /></svg>");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%, auto;
-  }
-</style>
-
-<div class="stack">
-  <h2>Level Up</h2>
-  <p>
-    Roll for new health and stamina, then choose a feat to finish leveling up.
-  </p>
-  <form id="increaseHealthForm" class="stack">
-    <div>
-      <label for="level">Level</label>
-      <input id="level" type="text" name="level" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
-    </div>
-    <p data-describe-health>
-      Roll 2d6 and add the lower value to your Max Health. Add the higher value
-      to your Max Stamina. Add your tough modifier to whichever pool you would
-      like to.
-    </p>
-    <div>
-      <button type="button" data-roll="health">
-        Roll for Health
-      </button>
-    </div>
-    <div data-results="health" aria-live="polite"></div>
-    <div>
-      <label for="maxHealth">Max Health</label>
-      <input id="maxHealth" type="text" name="max-health" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
-    </div>
-    <div>
-      <label for="maxStamina">Max Stamina</label>
-      <input id="maxStamina" type="text" name="max-stamina" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
-    </div>
-    <div>
-      <button type="submit">
-        Save Changes
-      </button>
-    </div>
-  </form>
-
-  <h3>Take a Feat</h3>
+<div class="stack margin-block-end:3rem">
+  <h2>Select Feats</h2>
   <p>
     These are all the feats that you should be able to take, given your race,
     class, and level. If you take a generalist feat that gives you access to
@@ -88,20 +29,21 @@ layout: layouts/sidebar.njk
           {{ feat.Description }}
         </p>
         <div>
-          <button type="button" class="small" data-toggle-feat data-id="{{ feat.id }}">
+          <button type="button" class="small" data-toggle-feat data-id="{{ feat.id }}" data-name="{{ feat.Name }}">
             Take This Feat
           </button>
         </div>
       </div>
     </div>
   {% endfor %}
+  <div data-back-link></div>
 </div>
 
-<script src="/scripts/dice-roller.js"></script>
 <script type="module">
   import { getFromDb, addToDb } from '/scripts/db.mjs';
 
   let character;
+  let hasChosenFeat = false;
   const getCharacter = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const key = urlParams.has('key') && urlParams.get('key');
@@ -111,20 +53,6 @@ layout: layouts/sidebar.njk
     }
 
     character = await getFromDb('characters', key);
-
-    const levelInput = document.querySelector('#level');
-    levelInput.value = character.level;
-
-    const maxHealthInput = document.querySelector('#maxHealth');
-    maxHealthInput.value = character.maxHealth;
-
-    const maxStaminaInput = document.querySelector('#maxStamina');
-    maxStaminaInput.value = character.maxStamina;
-
-    if (character.tough > 0) {
-      const healthDescription = document.querySelector('[data-describe-health]');
-      healthDescription.textContent = `Roll 2d6 and add the lower value to your Max Health. Add the higher value to your Max Stamina. Add your tough modifier (+${character.tough}) to whichever pool you would like to${character.tough > 1 ? ', or you can split it between both pools' : ''}.`;
-    }
 
     const featElements = document.querySelectorAll('[data-feat]');
     featElements.forEach((feat) => {
@@ -160,22 +88,6 @@ layout: layouts/sidebar.njk
       console.error(error);
     }
   };
-
-  document.addEventListener('submit', (event) => {
-    if (event.target.matches('#increaseHealthForm')) {
-      event.preventDefault();
-      const health = Number(event.target.elements['max-health'].value);
-      const stamina = Number(event.target.elements['max-stamina'].value);
-
-      character.level = Number(event.target.elements['level'].value);
-      character.currentHealth += health - character.maxHealth;
-      character.currentStamina += stamina - character.maxStamina;
-      character.maxHealth = health;
-      character.maxStamina = stamina;
-
-      updateCharacter(character);
-    }
-  });
 
   document.addEventListener('change', (event) => {
     if (event.target.matches('#toggleClassFeats')) {
@@ -279,6 +191,17 @@ layout: layouts/sidebar.njk
   });
 
   document.addEventListener('item-added', () => {
+    if (!hasChosenFeat) {
+      hasChosenFeat = true;
+      const backLinkTemplate = `
+        <a href="/character-sheets/character?key=${character.key}" class="button fixed-block-inline-end">
+          Back to Character Sheet
+        </a>
+      `;
+      const backLinkWrapper = document.querySelector('[data-back-link]');
+      backLinkWrapper.innerHTML = backLinkTemplate;
+    }
+
     getCharacter();
   });
 

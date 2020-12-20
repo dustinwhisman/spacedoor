@@ -1,0 +1,121 @@
+---
+title: Edit Health & Stamina
+layout: layouts/sidebar.njk
+---
+
+<style>
+  .dice, .total {
+    border: 1px solid var(--text-color);
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .total {
+    border-radius: 50%;
+  }
+</style>
+
+<div class="stack">
+  <h2>Edit Health & Stamina</h2>
+  <form id="increaseHealthForm" class="stack">
+    <p data-describe-health>
+      Roll 2d6 and add the lower value to your Max Health. Add the higher value
+      to your Max Stamina. Add your tough modifier to whichever pool you would
+      like to.
+    </p>
+    <div>
+      <button type="button" data-roll="health">
+        Roll for Health
+      </button>
+    </div>
+    <div data-results="health" aria-live="polite"></div>
+    <p data-add-tough hidden>
+      Add your tough modifier to whichever pool you would like to, or you can
+      split it between both pools.
+    </p>
+    <div>
+      <label for="maxHealth">Max Health</label>
+      <input id="maxHealth" type="text" name="max-health" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+    </div>
+    <div>
+      <label for="maxStamina">Max Stamina</label>
+      <input id="maxStamina" type="text" name="max-stamina" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+    </div>
+    <div>
+      <button type="submit" data-submit-button>
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+
+<script src="/scripts/dice-roller.js"></script>
+<script type="module">
+  import { getFromDb, addToDb } from '/scripts/db.mjs';
+
+  let character;
+  let isLevelingUp = false;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+    if (urlParams.has('continue')) {
+      isLevelingUp = true;
+      const submitButton = document.querySelector('[data-submit-button]');
+      submitButton.innerHTML = 'Save and Continue';
+    }
+
+    if (!key) {
+      return;
+    }
+
+    character = await getFromDb('characters', key);
+
+    const maxHealthInput = document.querySelector('#maxHealth');
+    maxHealthInput.value = character.maxHealth;
+
+    const maxStaminaInput = document.querySelector('#maxStamina');
+    maxStaminaInput.value = character.maxStamina;
+
+    if (character.tough > 0) {
+      const addToughDescription = document.querySelector('[data-add-tough]');
+      addToughDescription.textContent = `Add your tough modifier (+${character.tough}) to whichever pool you would like to${character.tough > 1 ? ', or you can split it between both pools' : ''}.`;
+      addToughDescription.removeAttribute('hidden');
+    }
+  };
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    if (event.target.matches('#increaseHealthForm')) {
+      event.preventDefault();
+      const health = Number(event.target.elements['max-health'].value);
+      const stamina = Number(event.target.elements['max-stamina'].value);
+
+      character.currentHealth += health - character.maxHealth;
+      character.currentStamina += stamina - character.maxStamina;
+      character.maxHealth = health;
+      character.maxStamina = stamina;
+
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', (event) => {
+    const key = event.detail;
+    if (isLevelingUp) {
+      window.location.href = `/character-sheets/select-feats?key=${key}`;
+    } else {
+      window.location.href = `/character-sheets/character?key=${key}`;
+    }
+  });
+
+  getCharacter();
+</script>

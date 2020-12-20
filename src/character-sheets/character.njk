@@ -161,9 +161,7 @@ layout: layouts/sidebar.njk
   {% endfor %}
 
   <h3>Feats</h3>
-  <div class="cluster">
-    <div data-feat-links></div>
-  </div>
+  <div data-feat-links></div>
   {% for feat in allFeats %}
     <div data-feat data-id="{{ feat.id }}" hidden>
       <div class="stack" style="--stack-space: 0.5rem">
@@ -266,6 +264,9 @@ layout: layouts/sidebar.njk
           <a href="/character-sheets/select-subclass?key=${character.key}">
             Change Subclass
           </a>
+          <a href="/character-sheets/edit-level?key=${character.key}">
+            Edit Level
+          </a>
         </div>
       </div>
       <div>
@@ -274,7 +275,7 @@ layout: layouts/sidebar.njk
         <p>Level ${character.level}</p>
       </div>
       <div>
-        <a href="/character-sheets/level-up?key=${character.key}" data-level-up-link>Level Up</a>
+        <a href="/character-sheets/edit-health-stamina?key=${character.key}&continue=true" data-level-up-link>Level Up</a>
       </div>
       <h3>Stats</h3>
       <div class="stack" style="--stack-space: 0.5rem">
@@ -316,14 +317,21 @@ layout: layouts/sidebar.njk
       </div>
 
       <h3>Health, Experience, and Luck</h3>
-      <div>
+      <div class="stack">
         <div>
-          <label for="health">Health: ${character.currentHealth} / ${character.maxHealth}</label>
-          <meter id="health" min="0" style="max-width: calc(${character.maxHealth / character.maxStamina} * 40ch)" max="${character.maxHealth}" low="${Math.ceil(character.maxHealth / 3)}" high="${Math.ceil(character.maxHealth * 2 / 3)}" optimum="${character.maxHealth}" value="${character.currentHealth}"></meter>
-        </div>
-        <div>
-          <label for="stamina">Stamina: ${character.currentStamina} / ${character.maxStamina}</label>
-          <meter id="stamina" min="0" max="${character.maxStamina}" low="${Math.ceil(character.maxStamina / 3)}" high="${Math.ceil(character.maxStamina * 2 / 3)}" optimum="${character.maxStamina}" value="${character.currentStamina}"></meter>
+          <div>
+            <label for="health">Health: ${character.currentHealth} / ${character.maxHealth}</label>
+            <meter id="health" min="0" style="max-width: calc(${character.maxHealth / character.maxStamina} * 40ch)" max="${character.maxHealth}" low="${Math.ceil(character.maxHealth / 3)}" high="${Math.ceil(character.maxHealth * 2 / 3)}" optimum="${character.maxHealth}" value="${character.currentHealth}"></meter>
+          </div>
+          <div>
+            <label for="stamina">Stamina: ${character.currentStamina} / ${character.maxStamina}</label>
+            <meter id="stamina" min="0" max="${character.maxStamina}" low="${Math.ceil(character.maxStamina / 3)}" high="${Math.ceil(character.maxStamina * 2 / 3)}" optimum="${character.maxStamina}" value="${character.currentStamina}"></meter>
+          </div>
+          <div>
+            <a href="/character-sheets/edit-health-stamina?key=${character.key}">
+              Edit Health & Stamina
+            </a>
+          </div>
         </div>
         <div class="stack">
           <div>
@@ -379,7 +387,7 @@ layout: layouts/sidebar.njk
           </div>
         </fieldset>
       </div>
-      ${character.experience === 5 ? `<div><a href="/character-sheets/level-up?key=${character.key}" data-level-up-link>Level Up!</a></div>`: ''}
+      ${character.experience === 5 ? `<div><a href="/character-sheets/edit-health-stamina?key=${character.key}&continue=true" data-level-up-link>Level Up!</a></div>`: ''}
       <div>
         <fieldset>
           <legend id="luckLabel">Luck Points</legend>
@@ -398,15 +406,7 @@ layout: layouts/sidebar.njk
     sheetElement.innerHTML = characterSheetTemplate;
 
     const featLinksTemplate = `
-      <div>
-        <a href="/races/${character.race.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Add Race Feats</a>
-      </div>
-      <div>
-        <a href="/classes/${character.class.toLowerCase().replace(/\s/g, '-')}?key=${character.key}">Add Class Feats</a>
-      </div>
-      <div>
-        <a href="/feats?key=${character.key}">Add General Feats</a>
-      </div>
+      <a href="/character-sheets/select-feats?key=${character.key}">Select Feats</a>
     `;
 
     const featLinksElement = document.querySelector('[data-feat-links]');

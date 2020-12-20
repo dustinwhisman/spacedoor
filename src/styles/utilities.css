@@ -24,6 +24,10 @@
   margin-block-start: 0.5rem;
 }
 
+.margin-block-end\:3rem {
+  margin-block-end: 3rem;
+}
+
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -32,4 +36,10 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+.fixed-block-inline-end {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
 }

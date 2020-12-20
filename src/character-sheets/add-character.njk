@@ -37,6 +37,7 @@ layout: layouts/sidebar.njk
     existingCharacter = await getFromDb('characters', key);
     const heading = document.querySelector('[data-heading]');
     heading.innerHTML = 'Change Character Name';
+    document.title = 'Change Character Name';
     const nameInput = document.querySelector('#name');
     nameInput.value = existingCharacter.name;
     const submitButton = document.querySelector('[data-submit-button]');

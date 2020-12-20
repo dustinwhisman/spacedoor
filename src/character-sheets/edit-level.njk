@@ -1,0 +1,62 @@
+---
+title: Edit Level
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2>Edit Level</h2>
+  <form id="increaseHealthForm" class="stack">
+    <div>
+      <label for="level">Level</label>
+      <input id="level" type="text" name="level" pattern="^[0-9]+$" inputmode="numeric" autocomplete="off" autofill="false" style="max-width: 6ch">
+    </div>
+    <div>
+      <button type="submit">
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+
+<script type="module">
+  import { getFromDb, addToDb } from '/scripts/db.mjs';
+
+  let character;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      return;
+    }
+
+    character = await getFromDb('characters', key);
+
+    const levelInput = document.querySelector('#level');
+    levelInput.value = character.level;
+  };
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    if (event.target.matches('#increaseHealthForm')) {
+      event.preventDefault();
+      character.level = Number(event.target.elements['level'].value);
+
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', () => {
+    const key = event.detail;
+    window.location.href = `/character-sheets/character?key=${key}`;
+  });
+
+  getCharacter();
+</script>
