@@ -17,9 +17,12 @@ layout: layouts/sidebar.njk
         <div class="stack">
           {% for class in classes %}
             <div>
-              <input id="{{ class.Name }}" type="radio" name="class" value="{{ class.Name }}" required>
-              <label for="{{ class.Name }}">
-                {{ class.Name }}
+              <label class="custom-checkbox">
+                <input id="{{ class.Name }}" type="radio" name="class" value="{{ class.Name }}" required>
+                {% include "radio-svg.njk" %}
+                <span>
+                  {{ class.Name }}
+                </span>
               </label>
               <ul class="margin-block:0">
                 <li class="small">

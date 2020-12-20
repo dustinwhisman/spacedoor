@@ -43,3 +43,7 @@
   bottom: 1rem;
   right: 1rem;
 }
+
+.indented {
+  padding-inline-start: 1.35rem;
+}

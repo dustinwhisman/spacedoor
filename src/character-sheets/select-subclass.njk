@@ -18,14 +18,16 @@ layout: layouts/sidebar.njk
         <div class="stack">
           {% for subclass in class.subclasses %}
             <div>
-              <input id="{{ subclass.Name }}" type="radio" name="subclass" value="{{ subclass.Name }}" required>
-              <label for="{{ subclass.Name }}">
-                {{ subclass.Name }}
-                <br>
-                <small>
-                  {{ subclass.Description }}
-                </small>
+              <label class="custom-checkbox">
+                <input id="{{ subclass.Name }}" type="radio" name="subclass" value="{{ subclass.Name }}" required>
+                {% include "radio-svg.njk" %}
+                <span>
+                  {{ subclass.Name }}
+                </span>
               </label>
+              <p class="small indented">
+                {{ subclass.Description }}
+              </p>
             </div>
           {% endfor %}
         </div>

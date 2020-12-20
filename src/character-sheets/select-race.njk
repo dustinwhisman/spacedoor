@@ -17,14 +17,16 @@ layout: layouts/sidebar.njk
         <div class="stack">
           {% for race in races %}
             <div>
-              <input id="{{ race.Name }}" type="radio" name="race" value="{{ race.Name }}" required>
-              <label for="{{ race.Name }}">
-                {{ race.Name }}
-                <br>
-                <small>
-                  {{ race.Description }}
-                </small>
+              <label class="custom-checkbox">
+                <input id="{{ race.Name }}" type="radio" name="race" value="{{ race.Name }}" required>
+                {% include "radio-svg.njk" %}
+                <span>
+                  {{ race.Name }}
+                </span>
               </label>
+              <p class="small indented">
+                {{ race.Description }}
+              </p>
             </div>
           {% endfor %}
         </div>
