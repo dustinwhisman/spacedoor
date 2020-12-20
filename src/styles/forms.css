@@ -31,6 +31,65 @@ legend {
   font-weight: var(--font-weight);
 }
 
+.custom-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox span {
+  line-height: 1;
+  margin-inline-start: 0.35em;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  opacity: 0;
+}
+
+.custom-checkbox input[type="checkbox"]:focus + svg {
+  outline: 1px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.custom-checkbox input[type="checkbox"]:focus:not(:focus-visible) + svg {
+  outline: none;
+}
+
+.custom-checkbox svg {
+  width: 1em;
+  height: 1em;
+}
+
+.custom-checkbox svg * {
+  transition: all 0.1s linear;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + svg .checkbox__bg {
+  fill: var(--bg-color);
+}
+
+.custom-checkbox input[type="checkbox"]:checked + svg .checkbox__checkmark {
+  stroke: var(--text-color);
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .custom-checkbox svg .checkbox__bg {
+    stroke: windowText;
+  }
+
+  .custom-checkbox input[type="checkbox"]:checked + svg .checkbox__bg {
+    fill: windowText;
+  }
+
+  .custom-checkbox input[type="checkbox"]:checked + svg .checkbox__checkmark {
+    stroke: highlight;
+  }
+}
+
+/*
 input[type='radio'],
 input[type='checkbox'] {
   display: inline-block;
@@ -42,4 +101,4 @@ input[type='checkbox'] {
 input[type='radio'] + label,
 input[type='checkbox'] + label {
   display: inline;
-}
+} */

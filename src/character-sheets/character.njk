@@ -53,12 +53,6 @@ layout: layouts/sidebar.njk
     background: var(--sub-sub-optimum);
   }
 
-  [data-toggle-experience],
-  [data-toggle-luck] {
-    width: 2rem;
-    height: 2rem;
-  }
-
   .stat-bubble {
     display: inline-block;
     margin-inline-end: 0.5rem;
@@ -379,9 +373,14 @@ layout: layouts/sidebar.njk
         <fieldset>
           <legend id="experienceLabel">Experience</legend>
           <div class="cluster">
-            <div style="--cluster-space: 0">
+            <div style="--cluster-space: 0.5em">
               ${Array.apply(null, Array(5)).map((a, index) => {
-                return `<input type="checkbox" aria-describedby="experienceLabel" data-toggle-experience${index < character.experience ? ' checked' : ''}>`;
+                return `
+                  <label class="custom-checkbox">
+                    <input type="checkbox" aria-describedby="experienceLabel" data-toggle-experience${index < character.experience ? ' checked' : ''}>
+                    {% include "checkbox-svg.njk" %}
+                  </label>
+                `;
               }).join('')}
             </div>
           </div>
@@ -392,9 +391,14 @@ layout: layouts/sidebar.njk
         <fieldset>
           <legend id="luckLabel">Luck Points</legend>
           <div class="cluster">
-            <div style="--cluster-space: 0">
+            <div style="--cluster-space: 0.5em">
               ${Array.apply(null, Array(7)).map((a, index) => {
-                return `<input type="checkbox" aria-describedby="luckLabel" data-toggle-luck${index < (7 - character.luck) ? ' checked' : ''}>`;
+                return `
+                <label class="custom-checkbox">
+                  <input type="checkbox" aria-describedby="luckLabel" data-toggle-luck${index < (7 - character.luck) ? ' checked' : ''}>
+                  {% include "checkbox-svg.njk" %}
+                </label>
+                `;
               }).join('')}
             </div>
           </div>

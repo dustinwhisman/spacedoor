@@ -18,8 +18,11 @@ layout: layouts/sidebar.njk
     be able to view your full character sheet.
   </p>
   <div>
-    <input id="toggleClassFeats" type="checkbox">
-    <label for="toggleClassFeats">Show All Class Feats</label>
+    <label class="custom-checkbox">
+      <input id="toggleClassFeats" type="checkbox">
+      {% include "checkbox-svg.njk" %}
+      <span>Show All Class Feats</span>
+    </label>
   </div>
   {% for feat in allFeats %}
     <div data-feat data-id="{{ feat.id }}" data-race="{{ feat.race }}" data-feat-class="{{ feat.class }}" data-level="{{ feat.Level }}" hidden>
