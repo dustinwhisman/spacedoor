@@ -39,31 +39,47 @@ const rollDice = (numberOfDice, numberOfSides) => {
   });
 };
 
-const commonRoll = (numberOfDice, numberOfSides, type) => {
+const addBonus = (bonus) => {
+  if (bonus == null) {
+    return '';
+  }
+
+  if (bonus > 0) {
+    return ` + ${bonus}`;
+  }
+
+  if (bonus < 0) {
+    return ` - ${Math.abs(bonus)}`;
+  }
+
+  return ' + 0';
+};
+
+const commonRoll = (numberOfDice, numberOfSides, type, bonus) => {
   const results = rollDice(numberOfDice, numberOfSides);
   const total = results.reduce((sum, dice) => {
     return sum + dice.value;
   }, 0);
 
-  const resultsDiv = document.querySelector(`[data-results="${type}"]`);
   if (type !== 'health') {
-    resultsDiv.innerHTML = `
+    return `
       <div class="cluster">
         <div>
           ${results.map((dice) => {
             return `<div class="dice">${dice.value}</div>`;
           }).join('+')}
+          ${addBonus(bonus)}
           <div>
             =
           </div>
           <div class="total">
-            ${total}
+            ${total + (bonus || 0)}
           </div>
         </div>
       </div>
     `;
   } else {
-    resultsDiv.innerHTML = `
+    return `
       <div class="cluster">
         <div>
           ${results.map((dice) => {
@@ -75,7 +91,7 @@ const commonRoll = (numberOfDice, numberOfSides, type) => {
   }
 };
 
-const rollWithAdvantage = () => {
+const rollWithAdvantage = (bonus) => {
   const results = rollDice(3, 6);
   const total = results.reduce((sum, dice) => {
     if (dice.isMin) {
@@ -85,25 +101,25 @@ const rollWithAdvantage = () => {
     return sum + dice.value;
   }, 0);
 
-  const resultsDiv = document.querySelector('[data-results=advantage]');
-  resultsDiv.innerHTML = `
+  return `
     <div class="cluster">
       <div>
         ${results.map((dice) => {
           return `<div class="dice${dice.isMin ? ' not-counted' : ''}">${dice.value}</div>`;
         }).join('+')}
+        ${addBonus(bonus)}
         <div>
           =
         </div>
         <div class="total">
-          ${total}
+          ${total + (bonus || 0)}
         </div>
       </div>
     </div>
   `;
 };
 
-const rollWithDisadvantage = () => {
+const rollWithDisadvantage = (bonus) => {
   const results = rollDice(3, 6);
   const total = results.reduce((sum, dice) => {
     if (dice.isMax) {
@@ -113,18 +129,18 @@ const rollWithDisadvantage = () => {
     return sum + dice.value;
   }, 0);
 
-  const resultsDiv = document.querySelector('[data-results=disadvantage]');
-  resultsDiv.innerHTML = `
+  return `
     <div class="cluster">
       <div>
         ${results.map((dice) => {
           return `<div class="dice${dice.isMax ? ' not-counted' : ''}">${dice.value}</div>`;
         }).join('+')}
+        ${addBonus(bonus)}
         <div>
           =
         </div>
         <div class="total">
-          ${total}
+          ${total + (bonus || 0)}
         </div>
       </div>
     </div>
@@ -134,23 +150,56 @@ const rollWithDisadvantage = () => {
 document.addEventListener('click', (event) => {
   if (event.target.matches('[data-roll]')) {
     const type = event.target.dataset.roll;
+    let resultsDiv = document.querySelector(`[data-results="${type}"]`);
+    let results;
 
     if (type === 'normal' || type === 'health') {
-      commonRoll(2, 6, type);
+      results = commonRoll(2, 6, type);
+      resultsDiv.innerHTML = results;
       return;
     }
 
     if (type === 'advantage') {
-      rollWithAdvantage();
+      resultsDiv = document.querySelector('[data-results=advantage]');
+      results = rollWithAdvantage();
+      resultsDiv.innerHTML = results;
       return;
     }
 
     if (type === 'disadvantage') {
-      rollWithDisadvantage();
+      resultsDiv = document.querySelector('[data-results=disadvantage]');
+      results = rollWithDisadvantage();
+      resultsDiv.innerHTML = results;
       return;
     }
 
     const [ numberOfDice, numberOfSides ] = type.split('d');
-    commonRoll(Number(numberOfDice), Number(numberOfSides), type);
+    results = commonRoll(Number(numberOfDice), Number(numberOfSides), type);
+    resultsDiv.innerHTML = results;
+  }
+
+  if (event.target.matches('[data-custom-roll]')) {
+    const type = event.target.dataset.customRoll;
+    const bonus = Number(event.target.dataset.bonus);
+    let resultsDiv = document.querySelector(`[data-results=${event.target.dataset.stat}]`);
+    let results;
+
+    if (type === 'normal') {
+      results = commonRoll(2, 6, type, bonus);
+      resultsDiv.innerHTML = results;
+      return;
+    }
+
+    if (type === 'advantage') {
+      results = rollWithAdvantage(bonus);
+      resultsDiv.innerHTML = results;
+      return;
+    }
+
+    if (type === 'disadvantage') {
+      results = rollWithDisadvantage(bonus);
+      resultsDiv.innerHTML = results;
+      return;
+    }
   }
 });

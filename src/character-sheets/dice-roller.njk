@@ -1,0 +1,238 @@
+---
+title: Dice Roller
+layout: layouts/sidebar.njk
+---
+
+<style>
+  .dice, .total {
+    border: 1px solid var(--text-color);
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .total {
+    border-radius: 50%;
+  }
+
+  .not-counted {
+    border-color: var(--red);
+    color: var(--red);
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='%23dc143c' /></svg>");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%, auto;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .not-counted {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='%23f9463b' /></svg>");
+    }
+  }
+
+  .stat-bubble {
+    display: inline-block;
+    margin-inline-end: 0.5rem;
+    border: 1px solid var(--text-color);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+</style>
+
+<div class="stack">
+  <h2>
+    Dice Roller
+    <span data-character-name></span>
+  </h2>
+
+  <h3>
+    Stats
+  </h3>
+  <div class="stack" style="--stack-space: 2.5rem">
+    <div>
+      <div class="stack" style="--stack-space: 1rem">
+        <p class="h4">
+          <span class="stat-bubble" data-charm-indicator>
+            0
+          </span>
+          Charm
+        </p>
+        <div class="cluster">
+          <div>
+            <button type="button" class="small" data-charm-roller data-stat="charm" data-custom-roll="normal" data-bonus="0">
+              Normal Roll
+            </button>
+            <button type="button" class="small" data-charm-roller data-stat="charm" data-custom-roll="advantage" data-bonus="0">
+              Roll with Advantage
+            </button>
+            <button type="button" class="small" data-charm-roller data-stat="charm" data-custom-roll="disadvantage" data-bonus="0">
+              Roll with Disadvantage
+            </button>
+          </div>
+        </div>
+        <div data-results="charm" aria-live="polite"></div>
+      </div>
+    </div>
+    <div>
+      <div class="stack" style="--stack-space: 1rem">
+        <p class="h4">
+          <span class="stat-bubble" data-cool-indicator>
+            0
+          </span>
+          Cool
+        </p>
+        <div class="cluster">
+          <div>
+            <button type="button" class="small" data-cool-roller data-stat="cool" data-custom-roll="normal" data-bonus="0">
+              Normal Roll
+            </button>
+            <button type="button" class="small" data-cool-roller data-stat="cool" data-custom-roll="advantage" data-bonus="0">
+              Roll with Advantage
+            </button>
+            <button type="button" class="small" data-cool-roller data-stat="cool" data-custom-roll="disadvantage" data-bonus="0">
+              Roll with Disadvantage
+            </button>
+          </div>
+        </div>
+        <div data-results="cool" aria-live="polite"></div>
+      </div>
+    </div>
+    <div>
+      <div class="stack" style="--stack-space: 1rem">
+        <p class="h4">
+          <span class="stat-bubble" data-sharp-indicator>
+            0
+          </span>
+          Sharp
+        </p>
+        <div class="cluster">
+          <div>
+            <button type="button" class="small" data-sharp-roller data-stat="sharp" data-custom-roll="normal" data-bonus="0">
+              Normal Roll
+            </button>
+            <button type="button" class="small" data-sharp-roller data-stat="sharp" data-custom-roll="advantage" data-bonus="0">
+              Roll with Advantage
+            </button>
+            <button type="button" class="small" data-sharp-roller data-stat="sharp" data-custom-roll="disadvantage" data-bonus="0">
+              Roll with Disadvantage
+            </button>
+          </div>
+        </div>
+        <div data-results="sharp" aria-live="polite"></div>
+      </div>
+    </div>
+    <div>
+      <div class="stack" style="--stack-space: 1rem">
+        <p class="h4">
+          <span class="stat-bubble" data-tough-indicator>
+            0
+          </span>
+          Tough
+        </p>
+        <div class="cluster">
+          <div>
+            <button type="button" class="small" data-tough-roller data-stat="tough" data-custom-roll="normal" data-bonus="0">
+              Normal Roll
+            </button>
+            <button type="button" class="small" data-tough-roller data-stat="tough" data-custom-roll="advantage" data-bonus="0">
+              Roll with Advantage
+            </button>
+            <button type="button" class="small" data-tough-roller data-stat="tough" data-custom-roll="disadvantage" data-bonus="0">
+              Roll with Disadvantage
+            </button>
+          </div>
+        </div>
+        <div data-results="tough" aria-live="polite"></div>
+      </div>
+    </div>
+    <div>
+      <div class="stack" style="--stack-space: 1rem">
+        <p class="h4">
+          <span class="stat-bubble" data-technobabble-indicator>
+            0
+          </span>
+          Technobabble
+        </p>
+        <div class="cluster">
+          <div>
+            <button type="button" class="small" data-technobabble-roller data-stat="technobabble" data-custom-roll="normal" data-bonus="0">
+              Normal Roll
+            </button>
+            <button type="button" class="small" data-technobabble-roller data-stat="technobabble" data-custom-roll="advantage" data-bonus="0">
+              Roll with Advantage
+            </button>
+            <button type="button" class="small" data-technobabble-roller data-stat="technobabble" data-custom-roll="disadvantage" data-bonus="0">
+              Roll with Disadvantage
+            </button>
+          </div>
+        </div>
+        <div data-results="technobabble" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/scripts/dice-roller.js"></script>
+<script type="module">
+  import { getFromDb } from '/scripts/db.mjs';
+
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const key = urlParams.has('key') && urlParams.get('key');
+
+    if (!key) {
+      window.location.href = '/character-sheets';
+    }
+
+    const character = await getFromDb('characters', key);
+
+    const heading = document.querySelector('[data-character-name]');
+    heading.innerHTML = `– ${character.name}`;
+    document.title = `${character.name} | Spacedoor`;
+
+    const charmIndicator = document.querySelector('[data-charm-indicator]');
+    charmIndicator.innerHTML = `${character.charm}`;
+    const charmRollers = document.querySelectorAll('[data-charm-roller]');
+    charmRollers.forEach((roller) => {
+      roller.dataset.bonus = `${character.charm}`;
+    });
+
+    const coolIndicator = document.querySelector('[data-cool-indicator]');
+    coolIndicator.innerHTML = `${character.cool}`;
+    const coolRollers = document.querySelectorAll('[data-cool-roller]');
+    coolRollers.forEach((roller) => {
+      roller.dataset.bonus = `${character.cool}`;
+    });
+
+
+    const sharpIndicator = document.querySelector('[data-sharp-indicator]');
+    sharpIndicator.innerHTML = `${character.sharp}`;
+    const sharpRollers = document.querySelectorAll('[data-sharp-roller]');
+    sharpRollers.forEach((roller) => {
+      roller.dataset.bonus = `${character.sharp}`;
+    });
+
+
+    const toughIndicator = document.querySelector('[data-tough-indicator]');
+    toughIndicator.innerHTML = `${character.tough}`;
+    const toughRollers = document.querySelectorAll('[data-tough-roller]');
+    toughRollers.forEach((roller) => {
+      roller.dataset.bonus = `${character.tough}`;
+    });
+
+
+    const technobabbleIndicator = document.querySelector('[data-technobabble-indicator]');
+    technobabbleIndicator.innerHTML = `${character.technobabble}`;
+    const technobabbleRollers = document.querySelectorAll('[data-technobabble-roller]');
+    technobabbleRollers.forEach((roller) => {
+      roller.dataset.bonus = `${character.technobabble}`;
+    });
+
+  };
+
+  getCharacter();
+</script>

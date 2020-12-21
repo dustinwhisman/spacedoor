@@ -356,10 +356,15 @@ layout: layouts/sidebar.njk
           Technobabble
         </p>
       </div>
-      <div>
-        <a href="/character-sheets/finalize-stats?key=${character.key}">
-          Edit Stats
-        </a>
+      <div class="cluster">
+        <div>
+          <a href="/character-sheets/finalize-stats?key=${character.key}">
+            Edit Stats
+          </a>
+          <a href="/character-sheets/dice-roller?key=${character.key}">
+            Dice Roller
+          </a>
+        </div>
       </div>
 
       <h3>Health, Experience, and Luck</h3>
