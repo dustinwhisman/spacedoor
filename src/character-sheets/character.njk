@@ -494,10 +494,12 @@ layout: layouts/sidebar.njk
     }
 
     if (event.target.matches('[data-delete-character]')) {
-      try {
-        await deleteFromDb('characters', character.key);
-      } catch (error) {
-        console.error(error);
+      if (window.confirm(`Are you sure you want to delete ${character.name}?`)) {
+        try {
+          await deleteFromDb('characters', character.key);
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
 
