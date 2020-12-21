@@ -1,0 +1,30 @@
+<div class="cluster">
+  <div>
+    <a href="#0" role="button" data-brightness-mode="light-mode">
+      Light Mode
+    </a>
+    <a href="#0" role="button" data-brightness-mode="dark-mode">
+      Dark Mode
+    </a>
+    <a href="#0" role="button" data-brightness-mode="">
+      Use System Settings
+    </a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('[data-brightness-mode]')) {
+      event.preventDefault();
+      const rootElement = document.documentElement;
+      const preference = event.target.dataset.brightnessMode;
+      rootElement.classList.remove(...rootElement.classList);
+      if (preference) {
+        rootElement.classList.add(preference);
+        localStorage.setItem('brightness-mode', preference);
+      } else {
+        localStorage.removeItem('brightness-mode');
+      }
+    }
+  });
+</script>

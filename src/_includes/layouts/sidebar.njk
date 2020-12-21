@@ -14,6 +14,7 @@ description: Rules for playing Spacedoor, a sci-fi space exploration tabletop RP
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#202020"/>
     <link rel="apple-touch-icon" href="/icons/icon_192.png">
+    {% include "set-dark-mode.njk" %}
     <style>
       {% include "styles.css" %}
     </style>
@@ -54,6 +55,12 @@ description: Rules for playing Spacedoor, a sci-fi space exploration tabletop RP
           </article>
         </div>
       </main>
+
+      <footer>
+        <div class="container" style="--max-width: 1200px">
+          {% include "dark-mode-toggle.njk" %}
+        </div>
+      </footer>
     </div>
 
     {% if env.environment == 'production' %}
