@@ -202,4 +202,12 @@ document.addEventListener('click', (event) => {
       return;
     }
   }
+
+  if (event.target.matches('[data-damage-roll]')) {
+    const type = event.target.dataset.damageRoll;
+    const resultsDiv = document.querySelector(`[data-results=${event.target.dataset.weaponId}]`);
+    const [ numberOfDice, numberOfSides ] = type.split('d');
+    const results = commonRoll(Number(numberOfDice), Number(numberOfSides), type);
+    resultsDiv.innerHTML = results;
+  }
 });
