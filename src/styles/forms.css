@@ -50,6 +50,12 @@ legend {
   opacity: 0;
 }
 
+.custom-checkbox.double-size input[type="checkbox"],
+.custom-checkbox.double-size input[type="radio"] {
+  width: 1.625em;
+  height: 1.625em;
+}
+
 .custom-checkbox input[type="checkbox"]:focus + svg,
 .custom-checkbox input[type="radio"]:focus + svg {
   outline: 1px solid var(--blue);
@@ -64,6 +70,11 @@ legend {
 .custom-checkbox svg {
   width: 1em;
   height: 1em;
+}
+
+.custom-checkbox.double-size svg {
+  width: 1.625em;
+  height: 1.625em;
 }
 
 .custom-checkbox svg * {

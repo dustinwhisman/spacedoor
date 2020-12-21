@@ -424,7 +424,7 @@ layout: layouts/sidebar.njk
             <div style="--cluster-space: 0.5em">
               ${Array.apply(null, Array(5)).map((a, index) => {
                 return `
-                  <label class="custom-checkbox">
+                  <label class="custom-checkbox double-size">
                     <input type="checkbox" aria-describedby="experienceLabel" data-toggle-experience${index < character.experience ? ' checked' : ''}>
                     {% include "checkbox-svg.njk" %}
                   </label>
@@ -442,7 +442,7 @@ layout: layouts/sidebar.njk
             <div style="--cluster-space: 0.5em">
               ${Array.apply(null, Array(7)).map((a, index) => {
                 return `
-                <label class="custom-checkbox">
+                <label class="custom-checkbox double-size">
                   <input type="checkbox" aria-describedby="luckLabel" data-toggle-luck${index < (7 - character.luck) ? ' checked' : ''}>
                   {% include "checkbox-svg.njk" %}
                 </label>
