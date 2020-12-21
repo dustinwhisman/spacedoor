@@ -101,6 +101,15 @@ layout: layouts/sidebar.njk
   {% endfor %}
 
   <h3>Weapons</h3>
+  <div>
+    <label class="custom-checkbox">
+      <input id="toggleUnequippedWeapons" type="checkbox">
+      {% include "checkbox-svg.njk" %}
+      <span>
+        Show Unequipped Weapons
+      </span>
+    </label>
+  </div>
   {% for weapon in weapons %}
     <div data-weapon data-id="{{ weapon.id }}" data-stat="{{ weapon.Modifier }}" data-required-bonus="{{ weapon['Required Bonus'] }}" hidden>
       <label class="custom-checkbox">
@@ -201,6 +210,7 @@ layout: layouts/sidebar.njk
   import { getFromDb, getAllFromDb, addToDb, deleteFromDb } from '/scripts/db.mjs';
 
   let character;
+  let showUnequippedWeapons = false;
   const getCharacter = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const key = urlParams.has('key') && urlParams.get('key');
@@ -231,20 +241,31 @@ layout: layouts/sidebar.njk
       selectedEquipment.checked = true;
     }
 
+    if (!character.weapons?.length) {
+      showUnequippedWeapons = true;
+      const toggleWeaponsCheckbox = document.querySelector('#toggleUnequippedWeapons');
+      toggleWeaponsCheckbox.checked = true;
+    }
+
     const weapons = document.querySelectorAll('[data-weapon]');
     weapons.forEach((weapon) => {
-      let canEquip = false;
       const id = weapon.dataset.id;
+      if (character.weapons?.includes(id)) {
+        weapon.removeAttribute('hidden');
+        return;
+      }
+
+      if (!showUnequippedWeapons) {
+        weapon.setAttribute('hidden', true);
+        return;
+      }
 
       if (!weapon.dataset.stat) {
-        canEquip = true;
+        weapon.removeAttribute('hidden');
+        return;
       }
 
       if (character[weapon.dataset.stat.toLowerCase()] >= Number(weapon.dataset.requiredBonus)) {
-        canEquip = true;
-      }
-
-      if (canEquip) {
         weapon.removeAttribute('hidden');
       }
     });
@@ -593,6 +614,11 @@ layout: layouts/sidebar.njk
       }
 
       updateCharacter(character);
+    }
+
+    if (event.target.matches('#toggleUnequippedWeapons')) {
+      showUnequippedWeapons = !showUnequippedWeapons;
+      getCharacter();
     }
   });
 
