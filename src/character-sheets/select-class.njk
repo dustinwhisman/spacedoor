@@ -66,6 +66,8 @@ layout: layouts/sidebar.njk
     character = await getFromDb('characters', key);
     const heading = document.querySelector('[data-character-name]');
     heading.innerHTML = `– ${character.name}`;
+    document.title = `Select Class – ${character.name} | Spacedoor`;
+
     if (document.referrer.includes('/character-sheets/character')) {
       const radioButton = document.querySelector(`input[value="${character.class}"]`);
       radioButton.checked = true;

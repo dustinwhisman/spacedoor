@@ -71,6 +71,7 @@ layout: layouts/sidebar.njk
 
     const heading = document.querySelector('[data-character-name]');
     heading.innerHTML = `– ${character.name}`;
+    document.title = `Select Feats – ${character.name} | Spacedoor`;
 
     const featElements = document.querySelectorAll('[data-feat]');
     featElements.forEach((feat) => {

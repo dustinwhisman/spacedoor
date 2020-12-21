@@ -37,6 +37,7 @@ layout: layouts/sidebar.njk
 
     const heading = document.querySelector('[data-character-name]');
     heading.innerHTML = `– ${character.name}`;
+    document.title = `Edit Level – ${character.name} | Spacedoor`;
 
     const levelInput = document.querySelector('#level');
     levelInput.value = character.level;

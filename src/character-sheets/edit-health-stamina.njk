@@ -77,6 +77,7 @@ layout: layouts/sidebar.njk
 
     const heading = document.querySelector('[data-character-name]');
     heading.innerHTML = `– ${character.name}`;
+    document.title = `Edit Health & Stamina – ${character.name} | Spacedoor`;
 
     const maxHealthInput = document.querySelector('#maxHealth');
     maxHealthInput.value = character.maxHealth;

@@ -56,6 +56,7 @@ layout: layouts/sidebar.njk
     const fieldset = document.querySelector(`[data-class="${character.class}"]`);
     fieldset.removeAttribute('hidden');
     const heading = document.querySelector('[data-character-name]');
+    document.title = `Select Subclass – ${character.name} | Spacedoor`;
     heading.innerHTML = `– ${character.name}`;
     if (document.referrer.includes('/character-sheets/character')) {
       const radioButton = document.querySelector(`input[value="${character.subclass}"]`);
