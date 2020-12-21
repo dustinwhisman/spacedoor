@@ -47,7 +47,7 @@ layout: layouts/sidebar.njk
 </div>
 
 <script>
-  if (document.referrer.includes('/character-sheets/character')) {
+  if (document.referrer.includes('/character-sheets/character') || document.referrer.includes('/character-sheets/edit-health-stamina')) {
     const initialDescription = document.querySelectorAll('[data-initial-description]');
     initialDescription.forEach((node) => {
       node.setAttribute('hidden', true);
