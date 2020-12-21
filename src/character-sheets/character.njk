@@ -112,40 +112,42 @@ layout: layouts/sidebar.njk
   </div>
   {% for weapon in weapons %}
     <div data-weapon data-id="{{ weapon.id }}" data-stat="{{ weapon.Modifier }}" data-required-bonus="{{ weapon['Required Bonus'] }}" hidden>
-      <label class="custom-checkbox">
-        <input id="weapon-{{ weapon.id }}" type="checkbox" name="weapons" value="{{ weapon.id }}">
-        {% include "checkbox-svg.njk" %}
-        <span>
-          {{ weapon.Name }}
-        </span>
-      </label>
-      {% if weapon.Modifier %}
-      <p class="small indented">
-        +{{ weapon['Required Bonus'] }} {{ weapon.Modifier }}{% if weapon.Restrictions %}, {{ weapon.Restrictions }}{% endif %}
-      </p>
-      {% elseif weapon.Restrictions %}
-      <p class="small indented">
-        {{ weapon.Restrictions }}
-      </p>
-      {% endif %}
-      <p class="indented">
-        {{ weapon.Description }}
-      </p>
-      {% if weapon['Mixed Success Damage'] %}
-        <div class="indented">
-          <ul class="indented">
-            <li>
-              Mixed Success Damage: {{ weapon['Mixed Success Damage'] }}
-            </li>
-            <li>
-              Success Damage: {{ weapon['Success Damage'] }}
-            </li>
-            <li>
-              Critical Success Damage: {{ weapon['Critical Success Damage'] }}
-            </li>
-          </ul>
-        </div>
-      {% endif %}
+      <div class="stack" style="--stack-space: 0.5rem">
+        <label class="custom-checkbox">
+          <input id="weapon-{{ weapon.id }}" type="checkbox" name="weapons" value="{{ weapon.id }}">
+          {% include "checkbox-svg.njk" %}
+          <span>
+            {{ weapon.Name }}
+          </span>
+        </label>
+        {% if weapon.Modifier %}
+        <p class="small indented">
+          +{{ weapon['Required Bonus'] }} {{ weapon.Modifier }}{% if weapon.Restrictions %}, {{ weapon.Restrictions }}{% endif %}
+        </p>
+        {% elseif weapon.Restrictions %}
+        <p class="small indented">
+          {{ weapon.Restrictions }}
+        </p>
+        {% endif %}
+        <p class="indented">
+          {{ weapon.Description }}
+        </p>
+        {% if weapon['Mixed Success Damage'] %}
+          <div class="indented">
+            <ul class="indented">
+              <li>
+                Mixed Success Damage: {{ weapon['Mixed Success Damage'] }}
+              </li>
+              <li>
+                Success Damage: {{ weapon['Success Damage'] }}
+              </li>
+              <li>
+                Critical Success Damage: {{ weapon['Critical Success Damage'] }}
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+      </div>
     </div>
   {% endfor %}
 
@@ -180,7 +182,7 @@ layout: layouts/sidebar.njk
         </h4>
         <p>
           <small>
-            Level {{ feat.Level }}
+            Level {{ feat.Level }}, {{ feat.type }}
           </small>
         </p>
         <p>

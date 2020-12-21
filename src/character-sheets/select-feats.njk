@@ -27,22 +27,19 @@ layout: layouts/sidebar.njk
   {% for feat in allFeats %}
     <div data-feat data-id="{{ feat.id }}" data-race="{{ feat.race }}" data-feat-class="{{ feat.class }}" data-level="{{ feat.Level }}" hidden>
       <div class="stack" style="--stack-space: 0.5rem">
-        <h4>
-          {{ feat.Name }}
-        </h4>
-        <p>
-          <small>
-            Level {{ feat.Level }}, {{ feat.type }}
-          </small>
+        <label class="custom-checkbox">
+          <input id="feat-{{ feat.id }}" type="checkbox" name="feats" value="{{ feat.id }}" data-name="{{ feat.Name }}">
+          {% include "checkbox-svg.njk" %}
+          <span>
+            {{ feat.Name }}
+          </span>
+        </label>
+        <p class="small indented">
+          Level {{ feat.Level }}, {{ feat.type }}
         </p>
-        <p>
+        <p class="indented">
           {{ feat.Description }}
         </p>
-        <div>
-          <button type="button" class="small" data-toggle-feat data-id="{{ feat.id }}" data-name="{{ feat.Name }}">
-            Take This Feat
-          </button>
-        </div>
       </div>
     </div>
   {% endfor %}
@@ -91,13 +88,9 @@ layout: layouts/sidebar.njk
       }
 
       feat.removeAttribute('hidden');
-      const featButton = feat.querySelector('[data-toggle-feat]');
-      if (character.feats && character.feats.length && character.feats.includes(id)) {
-        featButton.textContent = 'Remove This Feat';
-        featButton.setAttribute('data-is-taken', true);
-      } else {
-        featButton.textContent = 'Take This Feat';
-        featButton.removeAttribute('data-is-taken');
+      const featCheckbox = feat.querySelector('input[type="checkbox"]');
+      if (character.feats?.includes(id)) {
+        featCheckbox.checked = true;
       }
     });
   };
@@ -141,25 +134,21 @@ layout: layouts/sidebar.njk
         }
       });
     }
-  });
 
-  document.addEventListener('click', async (event) => {
-    if (event.target.matches('[data-toggle-feat]')) {
-      const id = event.target.dataset.id;
-      const isTaken = !!event.target.dataset.isTaken;
-      const name = event.target.dataset.name;
-
-      if (isTaken) {
-        const index = character.feats.findIndex(feat => feat === id);
-        character.feats.splice(index, 1);
-      } else {
+    if (event.target.matches('[name="feats"]')) {
+      if (event.target.checked) {
         if (!character.feats) {
-          character.feats = [id];
+          character.feats = [event.target.value];
         } else {
-          character.feats.push(id);
+          character.feats.push(event.target.value);
         }
+      } else {
+        const index = character.feats.findIndex(feat => feat === event.target.value);
+        character.feats.splice(index, 1);
       }
 
+      const name = event.target.dataset.name;
+      const isTaken = !event.target.checked;
       if (name === 'Charm Boost' || name === 'Expert Charm') {
         if (isTaken) {
           character.charm -= 1;
@@ -208,7 +197,7 @@ layout: layouts/sidebar.njk
         }
       }
 
-      await updateCharacter(character);
+      updateCharacter(character);
     }
   });
 

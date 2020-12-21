@@ -75,7 +75,7 @@ module.exports = async () => {
     id: r.id,
     ...r.fields,
     class: r.fields.Class?.map((i) => classes[i]).join(','),
-    type: `${r.fields.Class?.map((i) => classes[i]).join(',')} Feat`,
+    type: `${r.fields.Class?.map((i) => classes[i]).join(',')} Feat`.replace(/^The\s/, ''),
   })))
   .concat(generalFeats.map(r => ({
     id: r.id,
