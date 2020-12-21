@@ -243,10 +243,14 @@ layout: layouts/sidebar.njk
       selectedEquipment.checked = true;
     }
 
+    const toggleWeaponsCheckbox = document.querySelector('#toggleUnequippedWeapons');
     if (!character.weapons?.length) {
       showUnequippedWeapons = true;
-      const toggleWeaponsCheckbox = document.querySelector('#toggleUnequippedWeapons');
       toggleWeaponsCheckbox.checked = true;
+    }
+
+    if (!showUnequippedWeapons) {
+      toggleWeaponsCheckbox.checked = false;
     }
 
     const weapons = document.querySelectorAll('[data-weapon]');
@@ -619,7 +623,7 @@ layout: layouts/sidebar.njk
     }
 
     if (event.target.matches('#toggleUnequippedWeapons')) {
-      showUnequippedWeapons = !showUnequippedWeapons;
+      showUnequippedWeapons = event.target.checked;
       getCharacter();
     }
   });
