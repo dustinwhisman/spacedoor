@@ -101,25 +101,30 @@ layout: layouts/sidebar.njk
   {% endfor %}
 
   <h3>Weapons</h3>
-  <div data-change-weapons></div>
   {% for weapon in weapons %}
-    <div data-weapon data-id="{{ weapon.id }}" hidden>
-      <div class="stack" style="--stack-space: 0.5rem">
-        <h4>
+    <div data-weapon data-id="{{ weapon.id }}" data-stat="{{ weapon.Modifier }}" data-required-bonus="{{ weapon['Required Bonus'] }}" hidden>
+      <label class="custom-checkbox">
+        <input id="weapon-{{ weapon.id }}" type="checkbox" name="weapons" value="{{ weapon.id }}">
+        {% include "checkbox-svg.njk" %}
+        <span>
           {{ weapon.Name }}
-        </h4>
-        {% if weapon.Modifier %}
-          <p>
-            <small>
-              +{{ weapon['Required Bonus'] }} {{ weapon.Modifier }}{% if weapon.Restrictions %}, {{ weapon.Restrictions }}{% endif %}
-            </small>
-          </p>
-        {% endif %}
-        <p>
-          {{ weapon.Description }}
-        </p>
-        {% if weapon['Mixed Success Damage'] %}
-          <ul>
+        </span>
+      </label>
+      {% if weapon.Modifier %}
+      <p class="small indented">
+        +{{ weapon['Required Bonus'] }} {{ weapon.Modifier }}{% if weapon.Restrictions %}, {{ weapon.Restrictions }}{% endif %}
+      </p>
+      {% elseif weapon.Restrictions %}
+      <p class="small indented">
+        {{ weapon.Restrictions }}
+      </p>
+      {% endif %}
+      <p class="indented">
+        {{ weapon.Description }}
+      </p>
+      {% if weapon['Mixed Success Damage'] %}
+        <div class="indented">
+          <ul class="indented">
             <li>
               Mixed Success Damage: {{ weapon['Mixed Success Damage'] }}
             </li>
@@ -130,8 +135,8 @@ layout: layouts/sidebar.njk
               Critical Success Damage: {{ weapon['Critical Success Damage'] }}
             </li>
           </ul>
-        {% endif %}
-      </div>
+        </div>
+      {% endif %}
     </div>
   {% endfor %}
 
@@ -226,13 +231,28 @@ layout: layouts/sidebar.njk
       selectedEquipment.checked = true;
     }
 
-    const changeWeaponsElement = document.querySelector('[data-change-weapons]');
-    changeWeaponsElement.innerHTML = `<a href="/weapons?key=${character.key}">Change Weapons</a>`;
-
     const weapons = document.querySelectorAll('[data-weapon]');
     weapons.forEach((weapon) => {
-      if (character.weapons && character.weapons.length && character.weapons.includes(weapon.dataset.id)) {
+      let canEquip = false;
+      const id = weapon.dataset.id;
+
+      if (!weapon.dataset.stat) {
+        canEquip = true;
+      }
+
+      if (character[weapon.dataset.stat.toLowerCase()] >= Number(weapon.dataset.requiredBonus)) {
+        canEquip = true;
+      }
+
+      if (canEquip) {
         weapon.removeAttribute('hidden');
+      }
+    });
+
+    character.weapons?.forEach((weapon) => {
+      const weaponCheckbox = document.querySelector(`#weapon-${weapon}`);
+      if (weaponCheckbox) {
+        weaponCheckbox.checked = true;
       }
     });
 
@@ -554,6 +574,23 @@ layout: layouts/sidebar.njk
 
     if (event.target.matches('[name="special-equipment"]')) {
       character.equipment = event.target.value;
+
+      updateCharacter(character);
+    }
+
+    if (event.target.matches('[name="weapons"]')) {
+      if (event.target.checked) {
+        if (character.weapons) {
+          character.weapons.push(event.target.value);
+        } else {
+          character.weapons = [event.target.value];
+        }
+      } else {
+        const index = character.weapons?.findIndex((id) => id === event.target.value);
+        if (index > -1) {
+          character.weapons.splice(index, 1);
+        }
+      }
 
       updateCharacter(character);
     }
