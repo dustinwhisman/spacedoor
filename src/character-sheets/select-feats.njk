@@ -76,6 +76,13 @@ layout: layouts/sidebar.njk
     const featElements = document.querySelectorAll('[data-feat]');
     featElements.forEach((feat) => {
       const { id, race, featClass, level } = feat.dataset;
+      if (character.feats?.includes(id)) {
+        feat.removeAttribute('hidden');
+        const featCheckbox = feat.querySelector('input[type="checkbox"]');
+        featCheckbox.checked = true;
+        return;
+      }
+
       if (race && race !== character.race) {
         return;
       }
@@ -89,10 +96,6 @@ layout: layouts/sidebar.njk
       }
 
       feat.removeAttribute('hidden');
-      const featCheckbox = feat.querySelector('input[type="checkbox"]');
-      if (character.feats?.includes(id)) {
-        featCheckbox.checked = true;
-      }
     });
   };
 
@@ -109,6 +112,13 @@ layout: layouts/sidebar.njk
       const featElements = document.querySelectorAll('[data-feat]');
       featElements.forEach((feat) => {
         const { id, race, featClass, level } = feat.dataset;
+        if (character.feats?.includes(id)) {
+          feat.removeAttribute('hidden');
+          const featCheckbox = feat.querySelector('input[type="checkbox"]');
+          featCheckbox.checked = true;
+          return;
+        }
+
         if (race && race !== character.race) {
           return;
         }
@@ -125,14 +135,6 @@ layout: layouts/sidebar.njk
         }
 
         feat.removeAttribute('hidden');
-        const featButton = feat.querySelector('[data-toggle-feat]');
-        if (character.feats && character.feats.length && character.feats.includes(id)) {
-          featButton.textContent = 'Remove This Feat';
-          featButton.setAttribute('data-is-taken', true);
-        } else {
-          featButton.textContent = 'Take This Feat';
-          featButton.removeAttribute('data-is-taken');
-        }
       });
     }
 
