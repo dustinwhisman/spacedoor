@@ -1,0 +1,104 @@
+---
+title: Edit Item
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2>
+    Edit Item
+    <span data-character-name></span>
+  </h2>
+  <div>
+    <button type="button" class="danger" data-delete-item>
+      Delete Item
+    </button>
+  </div>
+  <form id="editItemForm" class="stack">
+    <div>
+      <label for="item-name">Item Name</label>
+      <input id="item-name" type="text" name="item-name" autocapitalize="on" autofill="false" autocomplete="off" style="max-width: 30ch" required>
+    </div>
+    <div>
+      <label for="item-description">Description</label>
+      <textarea id="item-description" name="item-description" autocapitalize="on" autofill="false" autocomplete="off" required></textarea>
+    </div>
+    <div>
+      <button type="submit" data-submit-button>
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+
+<script type="module">
+  import { getFromDb, addToDb } from '/scripts/db.mjs';
+  import { uuid } from '/scripts/db-utilities.mjs';
+
+  let character;
+  let itemKey;
+  const getCharacter = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const characterKey = urlParams.has('characterKey') && urlParams.get('characterKey');
+    itemKey = urlParams.has('itemKey') && urlParams.get('itemKey');
+
+    if (!characterKey || !itemKey) {
+      return;
+    }
+
+    character = await getFromDb('characters', characterKey);
+    const item = character.inventory.find(i => i.key === itemKey);
+    if (!item) {
+      return;
+    }
+
+    const heading = document.querySelector('[data-character-name]');
+    heading.innerHTML = `– ${character.name}`;
+    document.title = `Edit Item – ${character.name} | Spacedoor`;
+
+    const nameInput = document.querySelector('[name=item-name]');
+    const descriptionInput = document.querySelector('[name=item-description]');
+
+    nameInput.value = item.name;
+    descriptionInput.value = item.description;
+  };
+
+  const updateCharacter = async (character) => {
+    try {
+      await addToDb('characters', character);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    if (event.target.matches('#editItemForm')) {
+      event.preventDefault();
+      const name = event.target.elements['item-name'].value;
+      const description = event.target.elements['item-description'].value;
+
+      character.inventory.forEach((item) => {
+        if (item.key === itemKey) {
+          item.name = name;
+          item.description = description;
+        }
+      });
+
+      updateCharacter(character);
+    }
+  });
+
+  document.addEventListener('item-added', (event) => {
+    const key = event.detail;
+    window.location.href = `/character-sheets/character?key=${key}`;
+  });
+
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('[data-delete-item]')) {
+      character.inventory = character.inventory.filter(item => item.key !== itemKey);
+
+      updateCharacter(character);
+    }
+  });
+
+  getCharacter();
+</script>
