@@ -8,6 +8,7 @@
   justify-content: flex-start;
   align-items: baseline;
   margin: calc(var(--cluster-space) / 2 * -1);
+  padding-block: 0.5rem;
 }
 
 .cluster > * > * {

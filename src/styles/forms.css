@@ -9,15 +9,13 @@ input[type='email'],
 input[type='number'],
 textarea,
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 1px solid #555555;
-  border-radius: 0.25em;
-  padding: 0.25em 0.35em;
-  line-height: 1.5;
-  width: 100%;
-  max-width: 60ch;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 0.125em solid var(--text-color);
+  padding: 0.25em 0.5em;
+  width: 30ch;
+  max-width: 100%;
+  font-size: calc(var(--h6));
 }
 
 fieldset {
@@ -58,7 +56,7 @@ legend {
 
 .custom-checkbox input[type="checkbox"]:focus + svg,
 .custom-checkbox input[type="radio"]:focus + svg {
-  outline: 1px solid var(--blue);
+  outline: 1px solid var(--text-color);
   outline-offset: 2px;
 }
 

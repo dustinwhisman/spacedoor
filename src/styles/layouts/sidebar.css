@@ -19,7 +19,7 @@
   min-width: calc(60% - 2rem);
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1184px) {
   .nav-sidebar {
     display: none;
   }
@@ -29,7 +29,7 @@
   }
 }
 
-@media screen and (min-width: 951px) {
+@media screen and (min-width: 1185px) {
   .nav-sidebar {
     display: flex;
   }
