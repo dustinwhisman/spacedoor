@@ -1,10 +1,6 @@
 :root {
   --red: #dc143c;
   --red-hover: #a51a35;
-  --blue: #2B6CB0;
-  --blue-hover: #2C5282;
-  --purple: #6B46C1;
-  --purple-hover: #553C9A;
   --yellow: #FBBF24;
   --green: #059669;
   --bg-color: #FAFAFA;
@@ -37,10 +33,6 @@
   :root {
     --red: #f9463b;
     --red-hover:#EF4444;
-    --blue: #60A5FA;
-    --blue-hover: #93C5FD;
-    --purple: #9F7AEA;
-    --purple-hover: #B794F4;
     --yellow: #FBBF24;
     --green: #059669;
     --bg-color: #202020;
@@ -56,10 +48,6 @@
 .light-mode {
   --red: #dc143c;
   --red-hover: #a51a35;
-  --blue: #2B6CB0;
-  --blue-hover: #2C5282;
-  --purple: #6B46C1;
-  --purple-hover: #553C9A;
   --yellow: #FBBF24;
   --green: #059669;
   --bg-color: #FAFAFA;
@@ -74,10 +62,6 @@
 .dark-mode {
   --red: #f9463b;
   --red-hover:#EF4444;
-  --blue: #60A5FA;
-  --blue-hover: #93C5FD;
-  --purple: #9F7AEA;
-  --purple-hover: #B794F4;
   --yellow: #FBBF24;
   --green: #059669;
   --bg-color: #202020;
