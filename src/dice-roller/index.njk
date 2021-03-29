@@ -3,35 +3,6 @@ title: Dice Roller
 layout: layouts/sidebar.njk
 ---
 
-<style>
-  .dice, .total {
-    border: 1px solid var(--text-color);
-    width: 2rem;
-    height: 2rem;
-    text-align: center;
-    line-height: 1.8;
-  }
-
-  .total {
-    border-radius: 50%;
-  }
-
-  .not-counted {
-    border-color: var(--red);
-    color: var(--red);
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='%23dc143c' /></svg>");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%, auto;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .not-counted {
-      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 25 25'> <path d='M0 25 L25 0' stroke='%23f9463b' /></svg>");
-    }
-  }
-</style>
-
 <div class="stack">
   <h2>
     Dice Roller
