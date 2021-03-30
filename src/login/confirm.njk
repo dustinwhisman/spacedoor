@@ -44,7 +44,10 @@ layout: layouts/sidebar.njk
   </div>
 </div>
 
-<script>
+<script type="module">
+  import { getAllFromDb, addToDb } from '/scripts/db.mjs';
+
+  let characterLength = 0;
   (async () => {
     if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
       const email = localStorage.getItem('emailForSignIn');
@@ -55,9 +58,12 @@ layout: layouts/sidebar.njk
       }
 
       firebase.auth().signInWithEmailLink(email, window.location.href)
-        .then(() => {
-          localStorage.removeItem('emailForSignIn');
-          window.location.href = '/';
+        .then(async () => {
+          const characters = await getAllFromDb('characters');
+          characterLength = characters.length;
+          characters.forEach((character) => {
+            addToDb('characters', character);
+          });
         })
         .catch((error) => {
           const errorMessage = document.querySelector('[data-login-error]');
@@ -74,14 +80,28 @@ layout: layouts/sidebar.njk
         const email = event.target.elements.email.value;
 
         firebase.auth().signInWithEmailLink(email, window.location.href)
-          .then(() => {
-            window.location.href = '/';
+          .then(async () => {
+            const characters = await getAllFromDb('characters');
+            characterLength = characters.length;
+            characters.forEach((character) => {
+              addToDb('characters', character);
+            });
           })
           .catch((error) => {
             const errorMessage = document.querySelector('[data-login-error]');
             errorMessage.removeAttribute('hidden');
           });
       }
+    }
+  });
+
+  document.addEventListener('item-added', () => {
+    characterLength -= 1;
+    console.log(characterLength);
+
+    if (characterLength <= 0) {
+      localStorage.removeItem('emailForSignIn');
+      window.location.href = '/';
     }
   });
 </script>
