@@ -13,7 +13,7 @@ select {
   color: var(--text-color);
   border: 0.125em solid var(--text-color);
   padding: 0.25em 0.5em;
-  width: 30ch;
+  width: 40ch;
   max-width: 100%;
   font-size: calc(var(--h6));
 }
