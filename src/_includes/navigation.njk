@@ -105,13 +105,25 @@
 
     const navElement = document.querySelector('[data-navigation-list=characters]');
 
-    const listItems = characters.map((character) => {
-      return `
-        <li>
-          <a href="/character-sheets/character?key=${character.key}">${character.name}</a>
-        </li>
-      `;
-    }).join('');
+    const listItems = characters
+      .sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+
+        if (a.name > b.name) {
+          return 1;
+        }
+
+        return 0;
+      })
+      .map((character) => {
+        return `
+          <li>
+            <a href="/character-sheets/character?key=${character.key}">${character.name}</a>
+          </li>
+        `;
+      }).join('');
     navElement.innerHTML = listItems;
   };
 

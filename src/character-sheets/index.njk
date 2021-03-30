@@ -30,7 +30,7 @@ layout: layouts/sidebar.njk
     You haven't added any characters yet. When you do, they'll show up both here
     and in the main navigation of the site.
   </p>
-  <ul class="stack list-style:none" data-character-list></ul>
+  <ul class="stack list-style:none" style="--stack-space: 0.5rem" data-character-list></ul>
 </div>
 
 <script type="module">
@@ -51,13 +51,25 @@ layout: layouts/sidebar.njk
 
     const navElement = document.querySelector('[data-character-list]');
 
-    const listItems = characters.map((character) => {
-      return `
-        <li>
-          <a href="/character-sheets/character?key=${character.key}">${character.name}</a>
-        </li>
-      `;
-    }).join('');
+    const listItems = characters
+      .sort((a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+
+        if (a.name > b.name) {
+          return 1;
+        }
+
+        return 0;
+      })
+      .map((character) => {
+        return `
+          <li>
+            <a href="/character-sheets/character?key=${character.key}">${character.name}</a>
+          </li>
+        `;
+      }).join('');
     navElement.innerHTML = listItems;
   };
 
