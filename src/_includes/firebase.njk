@@ -14,9 +14,9 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  const loginLink = document.querySelector('[data-login-link]');
-  const accountLink = document.querySelector('[data-account-link]');
   firebase.auth().onAuthStateChanged((user) => {
+    const loginLink = document.querySelector('[data-login-link]');
+    const accountLink = document.querySelector('[data-account-link]');
     if (user) {
       console.log(user);
       loginLink.setAttribute('hidden', true);
