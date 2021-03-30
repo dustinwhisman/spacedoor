@@ -1,0 +1,30 @@
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBwocquwKAK1Xy8MSxYehaxiSk1hOyJnig",
+    authDomain: "spacedoor-96fe2.firebaseapp.com",
+    projectId: "spacedoor-96fe2",
+    storageBucket: "spacedoor-96fe2.appspot.com",
+    messagingSenderId: "1006879371833",
+    appId: "1:1006879371833:web:5f61a4d7e591e4843113e8"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const loginLink = document.querySelector('[data-login-link]');
+  const accountLink = document.querySelector('[data-account-link]');
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      console.log(user);
+      loginLink.setAttribute('hidden', true);
+      accountLink.removeAttribute('hidden');
+    } else {
+      console.log('No user');
+      loginLink.removeAttribute('hidden');
+      accountLink.setAttribute('hidden', true);
+    }
+  });
+</script>

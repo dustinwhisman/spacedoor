@@ -32,9 +32,15 @@ description: Rules for playing Spacedoor, a sci-fi space exploration tabletop RP
             </a>
           </h1>
           <!-- Anything added to the header should go in a nav > li element -->
-          <nav class="cluster menu-link">
+          <nav class="cluster">
             <ul class="list-style:none">
-              <li>
+              <li data-login-link>
+                <a href="/login" class="nav-link">Log In</a>
+              </li>
+              <li data-account-link hidden>
+                <a href="/account" class="nav-link">Account</a>
+              </li>
+              <li class="menu-link">
                 <a href="#0" role="button" class="nav-link" onclick="history.back()">Close</a>
               </li>
             </ul>
@@ -58,6 +64,7 @@ description: Rules for playing Spacedoor, a sci-fi space exploration tabletop RP
     </footer>
   </div>
 
+  {% include "firebase.njk" %}
   {% if env.environment == 'production' %}
   <script>
     if ('serviceWorker' in navigator) {
