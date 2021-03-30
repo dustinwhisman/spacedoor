@@ -105,12 +105,17 @@
 
     const navElement = document.querySelector('[data-navigation-list=characters]');
 
-    characters.forEach((character) => {
-      const li = document.createElement('li');
-      li.innerHTML = `<a href="/character-sheets/character?key=${character.key}">${character.name}</a>`;
-      navElement.appendChild(li);
-    });
+    const listItems = characters.map((character) => {
+      return `
+        <li>
+          <a href="/character-sheets/character?key=${character.key}">${character.name}</a>
+        </li>
+      `;
+    }).join('');
+    navElement.innerHTML = listItems;
   };
 
   initialize();
+
+  document.addEventListener('user-logged-in', initialize);
 </script>

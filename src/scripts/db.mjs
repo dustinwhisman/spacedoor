@@ -44,7 +44,32 @@ export const getAllFromDb = (storeName) => {
       const objectStore = transaction.objectStore(storeName);
       const result = objectStore.getAll();
       result.onsuccess = (event) => {
-        resolve(event.target.result);
+        if (user) {
+          firestore
+            .collection('character-sheets')
+            .where('uid', '==', user.uid)
+            .get()
+            .then((querySnapshot) => {
+              const characters = [];
+              querySnapshot.forEach((doc) => {
+                characters.push(doc.data());
+              });
+
+              event.target.result.forEach((character) => {
+                if (!characters.some((c) => c.key === character.key)) {
+                  characters.push(character);
+                }
+              });
+
+              resolve(characters);
+            })
+            .catch((error) => {
+              console.error(error);
+              reject();
+            });
+        } else {
+          resolve(event.target.result);
+        }
       };
     }
   });
