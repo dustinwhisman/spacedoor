@@ -1,5 +1,11 @@
 import { schemaVersion, updateSchema, uuid } from './db-utilities.mjs';
 
+const firestore = firebase.firestore();
+let user = null;
+document.addEventListener('user-logged-in', ({ detail }) => {
+  user = detail;
+});
+
 export const getFromDb = (storeName, key) => {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open('character-sheets', schemaVersion);
@@ -68,8 +74,20 @@ export const addToDb = (storeName, thingToAdd) => {
 
       const result = objectStore.put(thingToAdd);
       result.onsuccess = () => {
-        const successEvent = new CustomEvent('item-added', { detail: thingToAdd.key });
-        document.dispatchEvent(successEvent);
+        if (user) {
+          firestore
+            .collection('character-sheets')
+            .doc(thingToAdd.key)
+            .set({ ...thingToAdd, uid: user.uid })
+            .then(() => {
+              const successEvent = new CustomEvent('item-added', { detail: thingToAdd.key });
+              document.dispatchEvent(successEvent);
+            })
+            .catch(console.error);
+        } else {
+          const successEvent = new CustomEvent('item-added', { detail: thingToAdd.key });
+          document.dispatchEvent(successEvent);
+        }
       };
     };
   }
