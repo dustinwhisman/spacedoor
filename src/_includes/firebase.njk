@@ -18,11 +18,9 @@
     const loginLink = document.querySelector('[data-login-link]');
     const accountLink = document.querySelector('[data-account-link]');
     if (user) {
-      console.log(user);
       loginLink.setAttribute('hidden', true);
       accountLink.removeAttribute('hidden');
     } else {
-      console.log('No user');
       loginLink.removeAttribute('hidden');
       accountLink.setAttribute('hidden', true);
     }
