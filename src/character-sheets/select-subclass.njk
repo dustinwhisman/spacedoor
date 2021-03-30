@@ -39,6 +39,7 @@ layout: layouts/sidebar.njk
       </button>
     </div>
   </form>
+</div>
 
 <script type="module">
   import { getFromDb, addToDb } from '/scripts/db.mjs';
@@ -96,4 +97,6 @@ layout: layouts/sidebar.njk
   });
 
   getCharacter();
+
+  document.addEventListener('user-logged-in', getCharacter);
 </script>

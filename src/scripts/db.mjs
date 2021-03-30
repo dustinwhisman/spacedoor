@@ -22,7 +22,25 @@ export const getFromDb = (storeName, key) => {
       const objectStore = transaction.objectStore(storeName);
       const result = objectStore.get(key);
       result.onsuccess = (event) => {
-        resolve(event.target.result);
+        if (user) {
+          firestore
+            .collection('character-sheets')
+            .doc(key)
+            .get()
+            .then((doc) => {
+              if (doc.exists) {
+                resolve(doc.data());
+              } else {
+                throw new Error(`We couldn't find this character sheet.`);
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+              reject(error);
+            });
+        } else {
+          resolve(event.target.result);
+        }
       }
     }
   });
@@ -65,7 +83,7 @@ export const getAllFromDb = (storeName) => {
             })
             .catch((error) => {
               console.error(error);
-              reject();
+              reject(error);
             });
         } else {
           resolve(event.target.result);
@@ -146,7 +164,10 @@ export const deleteFromDb = (storeName, key) => {
                 document.dispatchEvent(successEvent);
                 resolve();
               })
-              .catch(console.error);
+              .catch((error) => {
+                console.error(error);
+                reject();
+              });
           } else {
             const successEvent = new CustomEvent('item-deleted');
             document.dispatchEvent(successEvent);
