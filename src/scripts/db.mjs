@@ -111,9 +111,22 @@ export const deleteFromDb = (storeName, key) => {
       result.onsuccess = (event) => {
         const endResult = objectStore.delete(key);
         endResult.onsuccess = () => {
-          const successEvent = new CustomEvent('item-deleted');
-          document.dispatchEvent(successEvent);
-          resolve();
+          if (user) {
+            firestore
+              .collection('character-sheets')
+              .doc(key)
+              .delete()
+              .then(() => {
+                const successEvent = new CustomEvent('item-deleted');
+                document.dispatchEvent(successEvent);
+                resolve();
+              })
+              .catch(console.error);
+          } else {
+            const successEvent = new CustomEvent('item-deleted');
+            document.dispatchEvent(successEvent);
+            resolve();
+          }
         }
       };
     }
