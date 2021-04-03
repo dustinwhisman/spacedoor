@@ -397,6 +397,15 @@ layout: layouts/sidebar.njk
 
       <h3>Health, Experience, and Luck</h3>
       <div class="stack">
+        <p id="new-mission-explanation">
+          Reset your health, stamina, and "once per mission" abilities when you
+          start a new mission.
+        </p>
+        <div>
+          <button type="button" aria-describedby="new-mission-explanation" data-start-fresh>
+            Start New Mission
+          </button>
+        </div>
         <div>
           <div>
             <label for="health">Health: ${character.currentHealth} / ${character.maxHealth}</label>
@@ -572,6 +581,14 @@ layout: layouts/sidebar.njk
       document.body.appendChild(anchor);
       anchor.click();
       anchor.remove();
+    }
+
+    if (event.target.matches('[data-start-fresh]')) {
+      character.currentHealth = character.maxHealth;
+      character.currentStamina = character.maxStamina;
+      character.usedAbilities = [];
+
+      updateCharacter(character);
     }
   });
 
