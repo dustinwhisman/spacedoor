@@ -96,6 +96,15 @@ layout: layouts/sidebar.njk
         <p class="small indented">
           {{ item.Description }}
         </p>
+        {% if item.IsOncePer %}
+          <label class="custom-checkbox margin-block-start:halfrem">
+            <input id="item-{{ item.id }}" type="checkbox" name="has-been-used" value="{{ item.id }}">
+            {% include "checkbox-svg.njk" %}
+            <span>
+              Used this mission
+            </span>
+          </label>
+        {% endif %}
       </div>
     {% endfor %}
   {% endfor %}
@@ -191,6 +200,15 @@ layout: layouts/sidebar.njk
         <p>
           {{ feat.Description }}
         </p>
+        {% if feat.IsOncePer %}
+          <label class="custom-checkbox">
+            <input id="feat-{{ feat.id }}" type="checkbox" name="has-been-used" value="{{ feat.id }}">
+            {% include "checkbox-svg.njk" %}
+            <span>
+              Used this mission
+            </span>
+          </label>
+        {% endif %}
       </div>
     </div>
   {% endfor %}
@@ -294,6 +312,13 @@ layout: layouts/sidebar.njk
 
       if (character[armor.dataset.stat.toLowerCase()] >= Number(armor.dataset.requiredBonus)) {
         armor.removeAttribute('hidden');
+      }
+    });
+
+    const abilities = document.querySelectorAll('[name=has-been-used]');
+    abilities.forEach((ability) => {
+      if (character.usedAbilities?.some((id) => id === ability.value)) {
+        ability.checked = true;
       }
     });
 
@@ -663,6 +688,23 @@ layout: layouts/sidebar.njk
     if (event.target.matches('#toggleUnequippedWeapons')) {
       showUnequippedWeapons = event.target.checked;
       getCharacter();
+    }
+
+    if (event.target.matches('[name=has-been-used]')) {
+      if (event.target.checked) {
+        if (character.usedAbilities != null) {
+          character.usedAbilities.push(event.target.value);
+        } else {
+          character.usedAbilities = [event.target.value];
+        }
+      } else {
+        const index = character.usedAbilities?.findIndex((id) => id === event.target.value);
+        if (index > -1) {
+          character.usedAbilities.splice(index, 1);
+        }
+      }
+
+      updateCharacter(character);
     }
   });
 

@@ -6,7 +6,7 @@ const base = new Airtable({
 
 module.exports = async () => {
   const raceFeats = await base('Race Feats').select({
-    fields: ['Name', 'Level', 'Description', 'Race'],
+    fields: ['Name', 'Level', 'Description', 'Race', 'IsOncePer'],
     sort: [
       {
         field: 'Level',
@@ -29,7 +29,7 @@ module.exports = async () => {
   }), {});
 
   const classFeats = await base('Class Feats').select({
-    fields: ['Name', 'Level', 'Description', 'Class'],
+    fields: ['Name', 'Level', 'Description', 'Class', 'IsOncePer'],
     sort: [
       {
         field: 'Level',
@@ -52,7 +52,7 @@ module.exports = async () => {
   }), {});
 
   const generalFeats = await base('General Feats').select({
-    fields: ['Name', 'Level', 'Description'],
+    fields: ['Name', 'Level', 'Description', 'IsOncePer'],
     sort: [
       {
         field: 'Order',

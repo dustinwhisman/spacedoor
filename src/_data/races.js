@@ -19,7 +19,7 @@ module.exports = async () => {
     let feats = [];
     if (record.fields['Race Feats'] != null) {
       feats = await base('Race Feats').select({
-        fields: ['Name', 'Level', 'Description'],
+        fields: ['Name', 'Level', 'Description', 'IsOncePer'],
         sort: [
           {
             field: 'Level',

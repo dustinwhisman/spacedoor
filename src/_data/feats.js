@@ -6,7 +6,7 @@ const base = new Airtable({
 
 module.exports = async () => {
   const featRecords = await base('General Feats').select({
-    fields: ['Name', 'Level', 'Description'],
+    fields: ['Name', 'Level', 'Description', 'IsOncePer'],
     sort: [
       {
         field: 'Level',

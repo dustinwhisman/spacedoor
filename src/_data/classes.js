@@ -24,14 +24,14 @@ module.exports = async () => {
     }).all();
 
     const equipment = await base('Special Equipment').select({
-      fields: ['Name', 'Description'],
+      fields: ['Name', 'Description', 'IsOncePer'],
       filterByFormula: `OR(${record.fields['Special Equipment'].map(r => `RECORD_ID()='${r}'`)})`,
     }).all();
 
     let feats = [];
     if (record.fields['Class Feats'] != null) {
       feats = await base('Class Feats').select({
-        fields: ['Name', 'Level', 'Description'],
+        fields: ['Name', 'Level', 'Description', 'IsOncePer'],
         sort: [
           {
             field: 'Level',
