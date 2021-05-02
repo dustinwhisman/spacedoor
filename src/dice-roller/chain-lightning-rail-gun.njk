@@ -1,0 +1,50 @@
+---
+title: Chain Lightning Rail Gun
+layout: layouts/sidebar.njk
+---
+
+<div class="stack">
+  <h2>
+    Chain Lightning Rail Gun
+  </h2>
+  <p>
+    Math is hard, so use this to roll for Chain Lightning Rail Gun damage. Each
+    target takes less damage than the one before it, so read off the results in
+    order from most damage to least damage.
+  </p>
+
+  <div class="stack">
+    <div>
+      <button data-roll="mixed-success">
+        Mixed Success Damage
+      </button>
+    </div>
+    <div data-results="mixed-success" aria-live="polite"></div>
+    <div>
+      <button data-roll="success">
+        Success Damage
+      </button>
+    </div>
+    <div data-results="success" aria-live="polite"></div>
+    <div>
+      <button data-roll="critical-success">
+        Critical Success Damage
+      </button>
+    </div>
+    <div data-results="critical-success" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+  let mixedSuccessDamage = '3d6';
+  let successDamage = '6d6';
+  let criticalSuccessDamage = '12d6';
+  {% for weapon in weapons %}
+    {% if weapon.Name === 'Chain Lightning Rail Gun' %}
+      mixedSuccessDamage = `{{ weapon['Mixed Success Damage'] }}`;
+      successDamage = `{{ weapon['Success Damage'] }}`;
+      criticalSuccessDamage = `{{ weapon['Critical Success Damage'] }}`;
+    {% endif %}
+  {% endfor %}
+</script>
+<script src="/scripts/chain-lightning-rail-gun.js"></script>
