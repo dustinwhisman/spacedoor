@@ -6,7 +6,7 @@ const base = new Airtable({
 
 module.exports = async () => {
   const weaponRecords = await base('Weapons').select({
-    fields: ['Name', 'Modifier', 'Required Bonus', 'Description', 'Restrictions', 'Mixed Success Damage', 'Success Damage', 'Critical Success Damage'],
+    fields: ['Name', 'Modifier', 'Required Bonus', 'Description', 'Restrictions', 'Mixed Success Damage', 'Success Damage', 'Critical Success Damage', 'Custom Dice Roller Link'],
     sort: [
       {
         field: 'Modifier',

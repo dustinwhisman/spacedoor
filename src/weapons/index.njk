@@ -29,6 +29,13 @@ layout: layouts/sidebar.njk
         <p>
           {{ weapon.Description }}
         </p>
+        {% if weapon['Custom Dice Roller Link'] %}
+        <p class="small indented">
+          <a href="{{ weapon['Custom Dice Roller Link'] }}">
+            Dice Roller for this weapon
+          </a>
+        </p>
+        {% endif %}
         {% if weapon['Mixed Success Damage'] %}
           <ul>
             <li>
