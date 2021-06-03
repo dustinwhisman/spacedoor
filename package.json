@@ -4,18 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"postcss src/styles/index.css -o src/_includes/styles.css -w\" \"NODE_ENV=development npx @11ty/eleventy --serve\"",
-    "build": "postcss src/styles/index.css -o src/_includes/styles.css && NODE_ENV=production npx @11ty/eleventy"
+    "dev": "concurrently \"postcss src/styles/index.css -o dist/styles.css -w\" \"NODE_ENV=development npx @11ty/eleventy --serve\"",
+    "build": "postcss src/styles/index.css -o dist/styles.css && NODE_ENV=production npx @11ty/eleventy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^0.11.0",
+    "@11ty/eleventy": "^0.12.1",
     "concurrently": "^5.2.0",
-    "cssnano": "^4.1.10",
-    "postcss-cli": "^7.1.1",
-    "postcss-import": "^12.0.1",
-    "postcss-preset-env": "^6.7.0"
+    "cssnano": "^5.0.5",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.2",
+    "postcss-preset-env": "^5.3.0"
   }
 }
